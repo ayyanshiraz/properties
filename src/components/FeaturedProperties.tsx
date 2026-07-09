@@ -15,7 +15,7 @@ const properties = [
     price: `100 Crore`,
     beds: `Commercial`,
     area: `2 Kanal (59x150)`,
-    image: `/buy/3.3.webp`,
+    image: `/buy/1.webp`,
     badges: [`FEATURED`, `FOR SALE`],
     link: `/buy/1`
   },
@@ -26,7 +26,7 @@ const properties = [
     price: `90 Crore`,
     beds: `5 BR`,
     area: `2 Kanal (59x150)`,
-    image: `/buy/4.4.webp`,
+    image: `/buy/2.webp`,
     badges: [`FEATURED`, `FOR SALE`],
     link: `/buy/2`
   },
@@ -37,7 +37,7 @@ const properties = [
     price: `Contact For Price`,
     beds: `Residential`,
     area: `3.5 Marla (26 ft front)`,
-    image: `/buy/5.webp`,
+    image: `/buy/9.webp`,
     badges: [`FEATURED`, `FOR SALE`],
     link: `/buy/3`
   },
@@ -48,7 +48,7 @@ const properties = [
     price: `3 Crore`,
     beds: `Residential`,
     area: `6 Marla (25 ft front)`,
-    image: `/buy/6.webp`,
+    image: `/buy/8.webp`,
     badges: [`FEATURED`, `FOR SALE`],
     link: `/buy/4`
   },
@@ -59,7 +59,7 @@ const properties = [
     price: `90 Crore`,
     beds: `Commercial`,
     area: `1 Kanal 3 Marla`,
-    image: `/buy/7.webp`,
+    image: `/buy/1.webp`,
     badges: [`FEATURED`, `FOR SALE`],
     link: `/buy/5`
   }

@@ -15,7 +15,7 @@ const rentalProperties = [
     price: `PKR 160,000 / Month`,
     beds: `2 BR`,
     area: `1100 Sq.Ft`,
-    image: `/rent/26.webp`,
+    image: `/rent/6.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/1`
   },
@@ -26,7 +26,7 @@ const rentalProperties = [
     price: `PKR 150,000 / Month`,
     beds: `2 BR`,
     area: `1200 Sq.Ft`,
-    image: `/rent/27.webp`,
+    image: `/rent/14.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/2`
   },
@@ -37,7 +37,7 @@ const rentalProperties = [
     price: `PKR 520,000 / Month`,
     beds: `2 BR`,
     area: `1300 Sq.Ft`,
-    image: `/rent/28.webp`,
+    image: `/rent/8.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/3`
   },
@@ -48,7 +48,7 @@ const rentalProperties = [
     price: `PKR 250,000 / Month`,
     beds: `Portion`,
     area: `2250 Sq.Ft`,
-    image: `/rent/29.webp`,
+    image: `/rent/22.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/4`
   }

@@ -816,9 +816,9 @@ export default function HomeClient() {
       )}
       
       <FeaturedProperties />
-      <WhyChooseUs />
-      <MarketReport />
       <FeaturedRentals />
+      <MarketReport />
+      <WhyChooseUs />
       <Reviews />
     </>
   );
