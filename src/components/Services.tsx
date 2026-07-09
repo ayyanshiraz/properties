@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -13,6 +13,11 @@ export default function Services() {
   const introRef = useRef<HTMLDivElement>(null);
   const servicesContainerRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+
+  // Form State
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [resultMessage, setResultMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     // 1. Quantum Hologram Assembly (Hero Animation)
@@ -147,6 +152,51 @@ export default function Services() {
       );
     }
   }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResultMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Append Web3Forms access key
+    formData.append("access_key", "aa704be0-d1e0-4db0-b375-de47c9d583db");
+    formData.append("from_name", "Qeemat.com Services Page");
+    // Ensure subject is set if not explicitly filled
+    if (!formData.get("subject")) {
+        formData.append("subject", "New Inquiry from Services Page");
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSuccess(true);
+        setResultMessage("Message sent successfully! We will get back to you soon.");
+        form.reset();
+      } else {
+        setIsSuccess(false);
+        setResultMessage(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setIsSuccess(false);
+      setResultMessage("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+      
+      // Clear message after 5 seconds
+      setTimeout(() => {
+        setResultMessage("");
+      }, 5000);
+    }
+  };
 
   return (
     <div className="w-full bg-white overflow-hidden pb-32">
@@ -289,30 +339,41 @@ export default function Services() {
           <h2 className="text-4xl md:text-5xl font-bold text-[#013220] mb-4">Contact Us</h2>
         </div>
         
-        <form className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input type="text" placeholder="First Name" className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
-            <input type="text" placeholder="Last Name" className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
+            <input type="text" name="First Name" placeholder="First Name" required className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
+            <input type="text" name="Last Name" placeholder="Last Name" required className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input type="email" placeholder="Email" className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
-            <input type="text" placeholder="Phone" className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
+            <input type="email" name="email" placeholder="Email" required className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
+            <input type="text" name="phone" placeholder="Phone" required className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400 w-full" />
           </div>
 
-          <select className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black w-full appearance-none">
-            <option value="">Select a service</option>
-            <option value="buy">Buy Property</option>
-            <option value="sell">Sell Property</option>
-            <option value="manage">Property Management</option>
-            <option value="concierge">Concierge Services</option>
-            <option value="general">General Inquiry</option>
+          <select name="service" required className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black w-full appearance-none">
+            <option value="" disabled selected>Select a service</option>
+            <option value="Buy Property">Buy Property</option>
+            <option value="Sell Property">Sell Property</option>
+            <option value="Property Management">Property Management</option>
+            <option value="Concierge Services">Concierge Services</option>
+            <option value="General Inquiry">General Inquiry</option>
           </select>
 
-          <textarea rows={6} placeholder="Your Message" className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors resize-none text-black placeholder:text-gray-400 w-full"></textarea>
+          <textarea name="message" rows={6} placeholder="Your Message" required className="px-6 py-4 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors resize-none text-black placeholder:text-gray-400 w-full"></textarea>
 
-          <button type="button" className="mt-2 px-8 py-5 bg-[#013220] text-white font-bold tracking-wider uppercase rounded hover:bg-[#013220] hover:opacity-90 transition-all duration-300 w-full text-lg shadow-lg">
-            Submit
+          {/* Status Message */}
+          {resultMessage && (
+            <div className={`p-4 rounded-md text-sm font-medium text-center ${isSuccess ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+              {resultMessage}
+            </div>
+          )}
+
+          <button 
+            type="submit" 
+            disabled={isSubmitting}
+            className="mt-2 px-8 py-5 bg-[#013220] text-white font-bold tracking-wider uppercase rounded hover:bg-[#013220] hover:opacity-90 transition-all duration-300 w-full text-lg shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Submitting..." : "SUBMIT"}
           </button>
         </form>
 

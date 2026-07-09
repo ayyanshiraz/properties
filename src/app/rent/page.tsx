@@ -1,7 +1,7 @@
 import RentClient from "../../components/RentClient";
 
 export const metadata = {
-  title: "Properties For Rent | PakProperty",
+  title: "Properties For Rent | Qeemat.com",
   description: "Browse our exclusive properties for rent and discover luxury living today.",
 };
 

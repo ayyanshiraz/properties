@@ -10,25 +10,58 @@ gsap.registerPlugin(ScrollTrigger);
 const properties = [
   {
     id: 1,
-    title: "2 Kanal Commercial Building",
-    location: "Mehmood Kasuri Road, Gulberg, Lahore",
-    price: "100 Crore",
-    beds: "Commercial",
-    area: "2 Kanal",
-    image: "/buy/3.3.webp",
-    badges: ["FEATURED", "FOR SALE"],
-    link: "/buy/commercial/1"
+    title: `2 Kanal Commercial Building`,
+    location: `Mehmood Kasuri Road, Gulberg, Lahore`,
+    price: `100 Crore`,
+    beds: `Commercial`,
+    area: `2 Kanal (59x150)`,
+    image: `/buy/3.3.webp`,
+    badges: [`FEATURED`, `FOR SALE`],
+    link: `/buy/1`
   },
   {
     id: 2,
-    title: "2 Kanal Commercial House Kothi",
-    location: "Mehmood Kasuri Road, Gulberg, Lahore",
-    price: "90 Crore",
-    beds: "5 BR",
-    area: "2 Kanal",
-    image: "/buy/4.4.webp",
-    badges: ["FEATURED", "FOR SALE"],
-    link: "/buy/homes/2"
+    title: `2 Kanal Commercial House Kothi`,
+    location: `Mehmood Kasuri Road, Gulberg, Lahore`,
+    price: `90 Crore`,
+    beds: `5 BR`,
+    area: `2 Kanal (59x150)`,
+    image: `/buy/4.4.webp`,
+    badges: [`FEATURED`, `FOR SALE`],
+    link: `/buy/2`
+  },
+  {
+    id: 3,
+    title: `3.5 Marla House`,
+    location: `Main Ferozpur Road, Lahore`,
+    price: `Contact For Price`,
+    beds: `Residential`,
+    area: `3.5 Marla (26 ft front)`,
+    image: `/buy/5.webp`,
+    badges: [`FEATURED`, `FOR SALE`],
+    link: `/buy/3`
+  },
+  {
+    id: 4,
+    title: `6 Marla Shiraz Villas House`,
+    location: `Shiraz Villas, Main Walton Road, Lahore`,
+    price: `3 Crore`,
+    beds: `Residential`,
+    area: `6 Marla (25 ft front)`,
+    image: `/buy/6.webp`,
+    badges: [`FEATURED`, `FOR SALE`],
+    link: `/buy/4`
+  },
+  {
+    id: 5,
+    title: `1 Kanal 3 Marla Commercial Building`,
+    location: `Mehmood Kasuri Road, Gulberg, Lahore`,
+    price: `90 Crore`,
+    beds: `Commercial`,
+    area: `1 Kanal 3 Marla`,
+    image: `/buy/7.webp`,
+    badges: [`FEATURED`, `FOR SALE`],
+    link: `/buy/5`
   }
 ];
 

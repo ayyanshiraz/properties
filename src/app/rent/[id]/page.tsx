@@ -1,7 +1,7 @@
 import PropertyDetailClient from "../../../components/PropertyDetailClient";
 
 export const metadata = {
-  title: "Property Details | PakProperty",
+  title: "Property Details | Qeemat.com",
   description: "View complete property details, features, and contact our agents today.",
 };
 

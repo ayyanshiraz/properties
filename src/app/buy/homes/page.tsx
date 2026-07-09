@@ -1,7 +1,7 @@
 import HomesClient from "../../../components/HomesClient";
 
 export const metadata = {
-  title: "Homes For Sale | Qeemat",
+  title: "Homes For Sale | Qeemat.com",
   description: "Discover premium residential homes for sale.",
 };
 

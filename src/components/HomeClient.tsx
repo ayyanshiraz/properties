@@ -59,9 +59,9 @@ export default function HomeClient() {
   ];
 
   const subCategories: Record<MainTab, string[]> = {
-    Homes: ["House", "Flat", "Upper Portion", "Lower Portion", "Farm House", "Room", "Penthouse"],
-    Plots: ["Residential Plot", "Commercial Plot", "Agricultural Land", "Industrial Land", "Plot File", "Plot Form"],
-    Commercial: ["Office", "Shop", "Warehouse", "Factory", "Building", "Other"]
+    Homes: [`House`, `Flat`, `Apartment`, `Upper Portion`, `Lower Portion`, `Portion`, `Farm House`, `Room`, `Penthouse`],
+    Plots: [`Residential Plot`, `Commercial Plot`, `Agricultural Land`, `Industrial Land`, `Plot File`, `Plot Form`],
+    Commercial: [`Office`, `Shop`, `Warehouse`, `Factory`, `Building`, `Commercial Building`, `Commercial House Kothi`, `Other`]
   };
 
   const currencyPricingData: Record<string, { min: string[], max: string[] }> = {
@@ -251,35 +251,54 @@ export default function HomeClient() {
   const handleSearch = () => {
     const trimmedLocation = location.trim().toLowerCase();
     
-    if (trimmedLocation.includes("gulberg")) {
-      router.push("/rent");
+    if (trimmedLocation.includes(`mm alam`) || trimmedLocation.includes(`zameen aurum`)) {
+      router.push(`/rent`);
       return;
     }
     
-    if (trimmedLocation.includes("mehmood kasuri road")) {
-      router.push("/buy/homes");
+    if (trimmedLocation.includes(`ferozpur`) || trimmedLocation.includes(`walton`) || trimmedLocation.includes(`shiraz`)) {
+      router.push(`/buy/homes`);
       return;
     }
     
-    if (activePropTab === "Homes" && selectedSubCategory === "House") {
-      router.push("/buy/homes");
+    if (trimmedLocation.includes(`mehmood kasuri`)) {
+      if (activePropTab === `Commercial`) {
+        router.push(`/buy/commercial`);
+      } else {
+        router.push(`/buy`);
+      }
       return;
     }
     
-    if (activePropTab === "Homes" && selectedSubCategory === "Flat") {
-      router.push("/rent");
+    if (trimmedLocation.includes(`gulberg`)) {
+      if (purpose === `rent`) {
+        router.push(`/rent`);
+      } else {
+        router.push(`/buy`);
+      }
+      return;
+    }
+
+    if (activePropTab === `Commercial`) {
+      router.push(`/buy/commercial`);
       return;
     }
     
-    if (activePropTab === "Commercial") {
-      router.push("/buy/commercial");
-      return;
+    if (activePropTab === `Homes`) {
+      if (selectedSubCategory === `Apartment` || selectedSubCategory === `Flat` || selectedSubCategory === `Portion` || selectedSubCategory === `Upper Portion` || selectedSubCategory === `Lower Portion`) {
+        router.push(`/rent`);
+        return;
+      }
+      if (selectedSubCategory === `House`) {
+        router.push(`/buy/homes`);
+        return;
+      }
     }
     
-    if (purpose === "rent") {
-      router.push("/rent");
+    if (purpose === `rent`) {
+      router.push(`/rent`);
     } else {
-      router.push("/buy");
+      router.push(`/buy`);
     }
   };
 

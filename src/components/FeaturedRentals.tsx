@@ -10,36 +10,47 @@ gsap.registerPlugin(ScrollTrigger);
 const rentalProperties = [
   {
     id: 1,
-    title: "Furnished 2 Bed Apartment (Without Bills)",
-    location: "Gulberg, Lahore",
-    price: "PKR 160,000 / Month",
-    beds: "2 BR",
-    area: "1,100 Sq.Ft",
-    image: "/rent/26.webp",
-    badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/1"
+    title: `Furnished 2 Bed Apartment (Without Bills)`,
+    location: `Gulberg, Lahore`,
+    price: `PKR 160,000 / Month`,
+    beds: `2 BR`,
+    area: `1100 Sq.Ft`,
+    image: `/rent/26.webp`,
+    badges: [`FEATURED`, `FOR RENT`],
+    link: `/rent/1`
   },
   {
     id: 2,
-    title: "Non Furnished Apartment (Without Bills)",
-    location: "Gulberg, Lahore",
-    price: "PKR 150,000 / Month",
-    beds: "2 BR",
-    area: "1,200 Sq.Ft",
-    image: "/rent/27.webp",
-    badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/2"
+    title: `Non Furnished Apartment (Without Bills)`,
+    location: `Gulberg, Lahore`,
+    price: `PKR 150,000 / Month`,
+    beds: `2 BR`,
+    area: `1200 Sq.Ft`,
+    image: `/rent/27.webp`,
+    badges: [`FEATURED`, `FOR RENT`],
+    link: `/rent/2`
   },
   {
     id: 3,
-    title: "2 Bed Apartment in Zameen Aurum",
-    location: "Gulberg, Lahore",
-    price: "PKR 520,000 / Month",
-    beds: "2 BR",
-    area: "1,300 Sq.Ft",
-    image: "/rent/28.webp",
-    badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/3"
+    title: `2 Bed Apartment in Zameen Aurum`,
+    location: `Gulberg, Lahore`,
+    price: `PKR 520,000 / Month`,
+    beds: `2 BR`,
+    area: `1300 Sq.Ft`,
+    image: `/rent/28.webp`,
+    badges: [`FEATURED`, `FOR RENT`],
+    link: `/rent/3`
+  },
+  {
+    id: 4,
+    title: `1 Kanal Portion on MM Alam Road`,
+    location: `MM Alam Road, Gulberg, Lahore`,
+    price: `PKR 250,000 / Month`,
+    beds: `Portion`,
+    area: `2250 Sq.Ft`,
+    image: `/rent/29.webp`,
+    badges: [`FEATURED`, `FOR RENT`],
+    link: `/rent/4`
   }
 ];
 

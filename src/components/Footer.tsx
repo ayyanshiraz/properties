@@ -104,18 +104,18 @@ export default function Footer() {
               <div>
                 <span className="font-bold block mb-1">Address:</span>
                 <p className="text-white leading-relaxed">
-                  602 Bays Water Tower,<br />
-                  Business Bay Dubai<br />
-                  United Arab Emirates
+                  Hotel MayFair 4th floor,<br />
+                  50-52, E - III, Commercial Zone,<br />
+                  Gulberg III, 54660, Lahore, Punjab.
                 </p>
               </div>
               <div>
                 <span className="font-bold block mb-1">Email:</span>
-                <Link href="/" className="hover:text-gray-300 transition-colors cursor-pointer">info@pakproperties.com</Link>
+                <Link href="/" className="hover:text-gray-300 transition-colors cursor-pointer">qeematdotcom@gmail.com</Link>
               </div>
               <div>
                 <span className="font-bold block mb-1">Call:</span>
-                <span className="hover:text-gray-300 transition-colors cursor-pointer">+92 54 201 9999</span>
+                <span className="hover:text-gray-300 transition-colors cursor-pointer">+92 333 488832</span>
               </div>
             </div>
           </div>
@@ -149,14 +149,6 @@ export default function Footer() {
           <div className="flex flex-col items-start">
             <h4 className="text-white font-bold text-lg mb-6">COMPANY</h4>
             <div className="flex flex-col gap-4">
-              <Link href="/about" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="text-white hover:text-gray-300 text-sm transition-colors cursor-pointer inline-flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                About Us
-              </Link>
-              <Link href="/team" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="text-white hover:text-gray-300 text-sm transition-colors cursor-pointer inline-flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                Our Team
-              </Link>
               <Link href="/services" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="text-white hover:text-gray-300 text-sm transition-colors cursor-pointer inline-flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                 Services
@@ -165,13 +157,17 @@ export default function Footer() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                 Plot Finder
               </Link>
-              <Link href="/privacy-policy" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="text-white hover:text-gray-300 text-sm transition-colors cursor-pointer inline-flex items-center gap-2">
+              <Link href="/contact" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="text-white hover:text-gray-300 text-sm transition-colors cursor-pointer inline-flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                Privacy Policy
+                Contact
               </Link>
               <Link href="/blogs" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="text-white hover:text-gray-300 text-sm transition-colors cursor-pointer inline-flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                Blogs
+                Blogs 
+              </Link>
+              <Link href="/privacy-policy" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="text-white hover:text-gray-300 text-sm transition-colors cursor-pointer inline-flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+                Privacy Policy
               </Link>
             </div>
           </div>

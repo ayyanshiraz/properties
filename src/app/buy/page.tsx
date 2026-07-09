@@ -1,7 +1,7 @@
 import BuyClient from "../../components/BuyClient";
 
 export const metadata = {
-  title: "Properties For Sale | Qeemat",
+  title: "Properties For Sale | Qeemat.com",
   description: "Discover real estate opportunities with our exclusive properties for sale.",
 };
 

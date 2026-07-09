@@ -1,7 +1,7 @@
 import CommercialClient from "../../../components/CommercialClient";
 
 export const metadata = {
-  title: "Commercial Properties For Sale | Qeemat",
+  title: "Commercial Properties For Sale | Qeemat.com",
   description: "Discover exclusive commercial properties for sale.",
 };
 

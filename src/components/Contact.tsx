@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,6 +12,11 @@ export default function Contact() {
   const infoCardsRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
+
+  // Form State
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [resultMessage, setResultMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     // Hero Reveal Animation
@@ -83,6 +88,47 @@ export default function Contact() {
     }
   }, []);
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResultMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Append Web3Forms access key
+    formData.append("access_key", "aa704be0-d1e0-4db0-b375-de47c9d583db");
+    formData.append("from_name", "Qeemat.com Website Contact");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSuccess(true);
+        setResultMessage("Message sent successfully! We will get back to you soon.");
+        form.reset();
+      } else {
+        setIsSuccess(false);
+        setResultMessage(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setIsSuccess(false);
+      setResultMessage("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+      
+      // Clear message after 5 seconds
+      setTimeout(() => {
+        setResultMessage("");
+      }, 5000);
+    }
+  };
+
   return (
     <div className="w-full bg-gray-50 overflow-hidden pb-32">
       
@@ -125,9 +171,9 @@ export default function Contact() {
                 <div>
                   <h4 className="text-lg font-bold mb-1">Office Address</h4>
                   <p className="text-gray-300 leading-relaxed text-sm">
-                    602 Bays Water Tower<br />
-                    Business Bay Dubai<br />
-                    United Arab Emirates
+                    Hotel MayFair 4th floor,<br />
+                    50-52, E - III, Commercial Zone,<br />
+                    Gulberg III, 54660, Lahore, Punjab.
                   </p>
                 </div>
               </div>
@@ -140,7 +186,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold mb-1">Phone Number</h4>
-                  <p className="text-gray-300 text-sm">+92 54 201 9999</p>
+                  <p className="text-gray-300 text-sm">+92 333 4888324</p>
                 </div>
               </div>
 
@@ -152,7 +198,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold mb-1">Email Address</h4>
-                  <p className="text-gray-300 text-sm">info@pakproperties.com</p>
+                  <p className="text-gray-300 text-sm">qeematdotcom@gmail.com</p>
                 </div>
               </div>
 
@@ -163,36 +209,47 @@ export default function Contact() {
           <div className="w-full lg:w-[60%] p-10 md:p-16 bg-white">
             <h2 className="text-3xl font-bold text-[#013220] mb-8">Send Us A Message</h2>
             
-            <form ref={formRef} className="flex flex-col gap-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6">
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col">
                   <label htmlFor="name" className="text-sm font-bold text-black mb-2">Full Name</label>
-                  <input type="text" id="name" placeholder="John Doe" className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
+                  <input type="text" id="name" name="name" placeholder="John Doe" required className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="phone" className="text-sm font-bold text-black mb-2">Phone Number</label>
-                  <input type="text" id="phone" placeholder="+92 000 0000000" className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
+                  <input type="text" id="phone" name="phone" placeholder="+92 000 0000000" required className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
                 </div>
               </div>
 
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-sm font-bold text-black mb-2">Email Address</label>
-                <input type="email" id="email" placeholder="john@example.com" className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
+                <input type="email" id="email" name="email" placeholder="john@example.com" required className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
               </div>
 
               <div className="flex flex-col">
                 <label htmlFor="subject" className="text-sm font-bold text-black mb-2">Subject</label>
-                <input type="text" id="subject" placeholder="How can we help you?" className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
+                <input type="text" id="subject" name="subject" placeholder="How can we help you?" required className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors text-black placeholder:text-gray-400" />
               </div>
 
               <div className="flex flex-col">
                 <label htmlFor="message" className="text-sm font-bold text-black mb-2">Message</label>
-                <textarea id="message" rows={5} placeholder="Write your message here..." className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors resize-none text-black placeholder:text-gray-400"></textarea>
+                <textarea id="message" name="message" rows={5} placeholder="Write your message here..." required className="px-4 py-3 bg-gray-50 border border-gray-200 rounded outline-none focus:border-[#013220] transition-colors resize-none text-black placeholder:text-gray-400"></textarea>
               </div>
 
-              <button type="button" className="mt-4 px-8 py-4 bg-[#013220] text-white font-bold tracking-wider uppercase rounded hover:bg-[#013220] hover:opacity-90 transition-all duration-300 w-full md:w-auto self-start">
-                Send Message
+              {/* Status Message */}
+              {resultMessage && (
+                <div className={`p-4 rounded-md text-sm font-medium ${isSuccess ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+                  {resultMessage}
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="mt-4 px-8 py-4 bg-[#013220] text-white font-bold tracking-wider uppercase rounded hover:bg-[#013220] hover:opacity-90 transition-all duration-300 w-full md:w-auto self-start disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
 
             </form>
@@ -205,7 +262,7 @@ export default function Contact() {
       <div ref={mapRef} className="max-w-[1400px] mx-auto px-4 mt-12 relative z-20">
         <div className="w-full h-[450px] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-gray-100 bg-gray-200">
           <iframe
-            src="https://maps.google.com/maps?q=Bayswater%20Tower%20Business%20Bay%20Dubai&t=&z=14&ie=UTF8&iwloc=&output=embed"
+            src="https://maps.google.com/maps?q=Hotel%20MayFair%20Lahore&t=&z=14&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}
