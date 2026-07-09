@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useRouter } from "next/navigation";
-import BrowseProperties from "./BrowseProperties";
 import WhyChooseUs from "./WhyChooseUs";
 import MarketReport from "../components/MarketReport";
 import FeaturedProperties from "../components/FeaturedProperties";
@@ -819,7 +818,7 @@ export default function HomeClient() {
       )}
 
       {/* Added BrowseProperties component below hero */}
-      <BrowseProperties />
+      
       <FeaturedProperties />
       <WhyChooseUs />
       <MarketReport />
