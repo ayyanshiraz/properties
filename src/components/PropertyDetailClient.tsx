@@ -34,7 +34,7 @@ export default function PropertyDetailClient({ property: fallbackProperty }: Pro
   let currentLocation = "Gulberg, Lahore";
   let currentImage = "/rent/3.webp";
   let currentDesc = "This stunning non furnished apartment offers a blank canvas to create your perfect home right in the heart of Gulberg. Features spacious living areas and easy access to local amenities. Enjoy the vibrant city life with complete peace of mind. Just steps away from the main commercial zones and premium facilities.";
-  let currentImages = ["/rent/3.webp", "/rent/video2.mp4"]; 
+  let currentImages = ["/rent/3.webp", "/rent/4.webp", "/rent/5.webp", "/rent/6.webp", "/rent/19.webp", "/rent/video2.mp4" ]; 
 
   if (routeId === "1") {
     currentTitle = "Furnished 2 Bed Apartment (Without Bills)";
@@ -43,7 +43,7 @@ export default function PropertyDetailClient({ property: fallbackProperty }: Pro
     currentLocation = "Gulberg, Lahore";
     currentImage = "/rent/2.webp";
     currentDesc = "This stunning furnished apartment offers a luxurious lifestyle right in the heart of Gulberg. Complete with premium fittings, spacious living areas, and easy access to local amenities. Ready for immediate transfer with multiple spacious balconies and bright airy interiors.";
-    currentImages = ["/rent/4.webp", "/rent/video1.mp4",]; 
+    currentImages = ["/rent/4.webp", "/rent/8.webp",  "/rent/9.webp", "/rent/10.webp", "/rent/11.webp", "/rent/12.webp",  "/rent/video1.mp4"]; 
   } else if (routeId === "3") {
     currentTitle = "2 Bed Apartment in Zameen Aurum (Modern Furnished | Prime Location)";
     currentPrice = "PKR 520,000";
@@ -59,7 +59,7 @@ export default function PropertyDetailClient({ property: fallbackProperty }: Pro
     currentLocation = "MM Alam Road, Gulberg, Lahore";
     currentImage = "/rent/6.webp";
     currentDesc = "This exceptional one kanal portion is situated on the highly sought after MM Alam Road. It provides a premium living experience with expansive rooms and sophisticated finishes. The prime location ensures immediate access to top tier commercial areas and dining options.";
-    currentImages = ["/rent/6.webp", "/rent/video3.mp4"]; 
+    currentImages = ["/rent/6.webp", "/rent/13.webp",  "/rent/14.webp", "/rent/15.webp", "/rent/16.webp", "/rent/17.webp", "/rent/video3.mp4"]; 
   }
 
   const property = {

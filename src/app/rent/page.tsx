@@ -14,7 +14,7 @@ export default function RentPage() {
       price: 160000,
       priceStr: "PKR 160,000",
       area: "1100 Sq.Ft",
-      image: "/rent/26.webp"
+      image: "/rent/6.webp"
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ export default function RentPage() {
       price: 150000,
       priceStr: "PKR 150,000",
       area: "1200 Sq.Ft",
-      image: "/rent/27.webp"
+      image: "/rent/14.webp"
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ export default function RentPage() {
       price: 520000,
       priceStr: "PKR 520,000",
       area: "1300 Sq.Ft",
-      image: "/rent/28.webp"
+      image: "/rent/8.webp"
     },
     {
       id: 4,
@@ -41,7 +41,7 @@ export default function RentPage() {
       price: 250000,
       priceStr: "PKR 250,000",
       area: "2250 Sq.Ft",
-      image: "/rent/29.webp"
+      image: "/rent/22.webp"
     }
   ];
 

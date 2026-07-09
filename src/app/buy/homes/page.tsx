@@ -14,16 +14,16 @@ export default function HomesPage() {
       price: 900000000,
       priceStr: "PKR 90 Crore",
       area: "2 Kanal (59x150)",
-      image: "/buy/4.4.webp"
+      image: "/buy/2.webp"
     },
     {
       id: 3,
       title: `3.5 Marla House`,
       location: `Main Ferozpur Road, Lahore`,
-      price: 0,
-      priceStr: `Contact For Price +92 333 4888324`,
+      price: 12500000,
+      priceStr: `PKR 1.25 crore`,
       area: `3.5 Marla (26 ft front)`,
-      image: `/buy/5.webp`
+      image: `/buy/9.webp`
     },
     {
       id: 4,
@@ -32,7 +32,7 @@ export default function HomesPage() {
       price: 30000000,
       priceStr: `PKR 3 Crore`,
       area: `6 Marla (25 ft front)`,
-      image: `/buy/6.webp`
+      image: `/buy/8.webp`
     }
   ];
 

@@ -16,7 +16,7 @@ export default function BuyDetailClient({ propertyId: fallbackId }: BuyDetailCli
   let currentTitle = `2 Kanal Commercial Building`;
   let currentPrice = `PKR 100 Crore`;
   let currentArea = `2 Kanal (59x150)`;
-  let currentImage = `/buy/3.3.webp`;
+  let currentImage = `/buy/1.webp`;
   let currentImages = [`/buy/1.webp`];
   let currentDesc = `Premium commercial building available for sale on the highly sought after Mehmood Kasuri Road. This property spans exactly 2 Kanal with a front of 59 square feet and a depth of 150. An exceptional investment opportunity in the heart of the commercial district.`;
   let currentLocation = `Mehmood Kasuri Road, Gulberg, Lahore`;
@@ -27,15 +27,15 @@ export default function BuyDetailClient({ propertyId: fallbackId }: BuyDetailCli
     currentTitle = `2 Kanal Commercial House Kothi`;
     currentPrice = `PKR 90 Crore`;
     currentArea = `2 Kanal (59x150)`;
-    currentImage = `/buy/4.4.webp`;
+    currentImage = `/buy/2.webp`;
     currentImages = [`/buy/2.webp`];
     currentDesc = `Luxurious commercial house kothi located directly on Mehmood Kasuri Road. Features a solid structure with a 59 square feet front and 150 feet length. Ideal for corporate offices or high end retail transformations.`;
   } else if (routeId === `3`) {
     currentTitle = `3.5 Marla House`;
-    currentPrice = `Contact For Price +92 333 4888324`;
+    currentPrice = `1.25 crore`;
     currentArea = `3.5 Marla (26 ft front)`;
-    currentImage = `/buy/5.webp`;
-    currentImages = [`/buy/5.webp`, `/buy/5-side.webp`, `/buy/5-back.webp`];
+    currentImage = `/buy/9.webp`;
+    currentImages = [`/buy/9.webp`, `/buy/10.webp`];
     currentDesc = `An excellent investment opportunity awaits with this 3.5 Marla house located on the highly accessible Main Ferozpur Road in Lahore. This property features a prominent 26 foot front providing ample space and visibility. Please contact us directly to inquire about the pricing details for this exceptional residential asset.`;
     currentLocation = `Main Ferozpur Road, Lahore`;
     currentPropertyType = `House`;
@@ -52,10 +52,10 @@ export default function BuyDetailClient({ propertyId: fallbackId }: BuyDetailCli
     currentMapArea = `Walton Road`;
   } else if (routeId === `5`) {
     currentTitle = `1 Kanal 3 Marla Commercial Building`;
-    currentPrice = `PKR 90 Crore`;
+    currentPrice = `PKR 65 Crore`;
     currentArea = `1 Kanal 3 Marla`;
-    currentImage = `/buy/7.webp`;
-    currentImages = [`/buy/7.webp`];
+    currentImage = `/buy/1.webp`;
+    currentImages = [`/buy/1.webp`];
     currentDesc = `Presenting a prime commercial building spanning 1 Kanal and 3 Marla located on the bustling Mehmood Kasuri Road. With an asking price of PKR 90 Crore this expansive property offers unparalleled potential for corporate headquarters or high end retail spaces in one of Lahores most coveted commercial hubs.`;
     currentLocation = `Mehmood Kasuri Road, Gulberg, Lahore`;
     currentPropertyType = `Commercial`;

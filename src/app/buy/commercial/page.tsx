@@ -14,7 +14,7 @@ export default function CommercialPage() {
       price: 1000000000,
       priceStr: `PKR 100 Crore`,
       area: `2 Kanal (59x150)`,
-      image: `/buy/3.3.webp`,
+      image: `/buy/1.webp`,
       description: `Premium commercial building available for sale on the highly sought after Mehmood Kasuri Road. This property spans exactly 2 Kanal with a front of 59 square feet and a depth of 150. An exceptional investment opportunity in the heart of the commercial district.`
     },
     {
@@ -24,7 +24,7 @@ export default function CommercialPage() {
       price: 900000000,
       priceStr: `PKR 90 Crore`,
       area: `2 Kanal (59x150)`,
-      image: `/buy/4.4.webp`,
+      image: `/buy/2.webp`,
       description: `Luxurious commercial house kothi located directly on Mehmood Kasuri Road. Features a solid structure with a 59 square feet front and 150 feet length. Ideal for corporate offices or high end retail transformations.`
     },
     {
@@ -32,9 +32,9 @@ export default function CommercialPage() {
       title: `1 Kanal 3 Marla Commercial Building`,
       location: `Mehmood Kasuri Road, Gulberg, Lahore`,
       price: 900000000,
-      priceStr: `PKR 90 Crore`,
+      priceStr: `PKR 65 Crore`,
       area: `1 Kanal 3 Marla`,
-      image: `/buy/7.webp`,
+      image: `/buy/1.webp`,
       description: `Presenting a prime commercial building spanning 1.1 Kanal and 3 Marla located on the bustling Mehmood Kasuri Road. With an asking price of PKR 90 Crore this expansive property offers unparalleled potential for corporate headquarters or high end retail spaces in one of Lahores most coveted commercial hubs.`
     }
   ];

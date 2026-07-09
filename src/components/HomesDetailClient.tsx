@@ -16,7 +16,7 @@ export default function HomesDetailClient({ propertyId: fallbackId }: BuyDetailC
   let currentTitle = `2 Kanal Commercial House Kothi`;
   let currentPrice = `PKR 90 Crore`;
   let currentArea = `2 Kanal (59x150)`;
-  let currentImage = `/buy/4.4.webp`;
+  let currentImage = `/buy/2.webp`;
   let currentImages = [`/buy/2.webp`];
   let currentDesc = `Luxurious commercial house kothi located directly on Mehmood Kasuri Road. Features a solid structure with a 59 square feet front and 150 feet length. Ideal for corporate offices or high end retail transformations.`;
   let currentLocation = `Mehmood Kasuri Road, Gulberg, Lahore`;
@@ -25,10 +25,10 @@ export default function HomesDetailClient({ propertyId: fallbackId }: BuyDetailC
 
   if (routeId === `3`) {
     currentTitle = `3.5 Marla House`;
-    currentPrice = `Contact For Price +92 333 4888324`;
+    currentPrice = `PKR 1.25 Crore`;
     currentArea = `3.5 Marla (26 ft front)`;
-    currentImage = `/buy/5.webp`;
-    currentImages = [`/buy/5.webp`];
+    currentImage = `/buy/9.webp`;
+    currentImages = [`/buy/9.webp`, `/buy/10.webp`];
     currentDesc = `An excellent investment opportunity awaits with this 3.5 Marla house located on the highly accessible Main Ferozpur Road in Lahore. This property features a prominent 26 foot front providing ample space and visibility. Please contact us directly to inquire about the pricing details for this exceptional residential asset.`;
     currentLocation = `Main Ferozpur Road, Lahore`;
     currentPropertyType = `House`;
@@ -37,7 +37,7 @@ export default function HomesDetailClient({ propertyId: fallbackId }: BuyDetailC
     currentTitle = `6 Marla Shiraz Villas House`;
     currentPrice = `PKR 3 Crore`;
     currentArea = `6 Marla (25 ft front)`;
-    currentImage = `/buy/6.webp`;
+    currentImage = `/buy/8.webp`;
     currentImages = [`/buy/8.webp`, `/buy/video1.mp4`, `/buy/video2.mp4`];
     currentDesc = `Discover luxury living in this brand new double story house situated in the prestigious Shiraz Villas community. Spanning 6 Marla with a 25 foot front this residence boasts immediate access to wide roads and is conveniently located just a one minute drive from the Main Walton Road boulevard. An asking price of PKR 3 Crore makes this a highly desirable property.`;
     currentLocation = `Shiraz Villas, Main Walton Road, Lahore`;
