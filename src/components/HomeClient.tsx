@@ -58,9 +58,9 @@ export default function HomeClient() {
   ];
 
   const subCategories: Record<MainTab, string[]> = {
-    Homes: [`House`, `Flat`, `Apartment`, `Upper Portion`, `Lower Portion`, `Portion`, `Farm House`, `Room`, `Penthouse`],
-    Plots: [`Residential Plot`, `Commercial Plot`, `Agricultural Land`, `Industrial Land`, `Plot File`, `Plot Form`],
-    Commercial: [`Office`, `Shop`, `Warehouse`, `Factory`, `Building`, `Commercial Building`, `Commercial House Kothi`, `Other`]
+    Homes: ["House", "Flat", "Apartment", "Upper Portion", "Lower Portion", "Portion", "Farm House", "Room", "Penthouse"],
+    Plots: ["Residential Plot", "Commercial Plot", "Agricultural Land", "Industrial Land", "Plot File", "Plot Form"],
+    Commercial: ["Office", "Shop", "Warehouse", "Factory", "Building", "Commercial Building", "Commercial House Kothi", "Other"]
   };
 
   const currencyPricingData: Record<string, { min: string[], max: string[] }> = {
@@ -250,60 +250,60 @@ export default function HomeClient() {
   const handleSearch = () => {
     const trimmedLocation = location.trim().toLowerCase();
     
-    if (trimmedLocation.includes(`mm alam`) || trimmedLocation.includes(`zameen aurum`)) {
-      router.push(`/rent`);
+    if (trimmedLocation.includes("mm alam") || trimmedLocation.includes("zameen aurum")) {
+      router.push("/rent");
       return;
     }
     
-    if (trimmedLocation.includes(`ferozpur`) || trimmedLocation.includes(`walton`) || trimmedLocation.includes(`shiraz`)) {
-      router.push(`/buy/homes`);
+    if (trimmedLocation.includes("ferozpur") || trimmedLocation.includes("walton") || trimmedLocation.includes("shiraz")) {
+      router.push("/buy/homes");
       return;
     }
     
-    if (trimmedLocation.includes(`mehmood kasuri`)) {
-      if (activePropTab === `Commercial`) {
-        router.push(`/buy/commercial`);
+    if (trimmedLocation.includes("mehmood kasuri")) {
+      if (activePropTab === "Commercial") {
+        router.push("/buy/commercial");
       } else {
-        router.push(`/buy`);
+        router.push("/buy");
       }
       return;
     }
     
-    if (trimmedLocation.includes(`gulberg`)) {
-      if (purpose === `rent`) {
-        router.push(`/rent`);
+    if (trimmedLocation.includes("gulberg")) {
+      if (purpose === "rent") {
+        router.push("/rent");
       } else {
-        router.push(`/buy`);
+        router.push("/buy");
       }
       return;
     }
 
-    if (activePropTab === `Commercial`) {
-      router.push(`/buy/commercial`);
+    if (activePropTab === "Commercial") {
+      router.push("/buy/commercial");
       return;
     }
     
-    if (activePropTab === `Homes`) {
-      if (selectedSubCategory === `Apartment` || selectedSubCategory === `Flat` || selectedSubCategory === `Portion` || selectedSubCategory === `Upper Portion` || selectedSubCategory === `Lower Portion`) {
-        router.push(`/rent`);
+    if (activePropTab === "Homes") {
+      if (selectedSubCategory === "Apartment" || selectedSubCategory === "Flat" || selectedSubCategory === "Portion" || selectedSubCategory === "Upper Portion" || selectedSubCategory === "Lower Portion") {
+        router.push("/rent");
         return;
       }
-      if (selectedSubCategory === `House`) {
-        router.push(`/buy/homes`);
+      if (selectedSubCategory === "House") {
+        router.push("/buy/homes");
         return;
       }
     }
     
-    if (purpose === `rent`) {
-      router.push(`/rent`);
+    if (purpose === "rent") {
+      router.push("/rent");
     } else {
-      router.push(`/buy`);
+      router.push("/buy");
     }
   };
 
   return (
     <>
-      <section ref={heroRef} className="relative h-[650px] w-full flex items-center justify-center bg-gray-950">
+      <section ref={heroRef} className="relative h-auto min-h-[750px] pb-12 md:min-h-[650px] md:pb-0 md:h-[650px] w-full flex items-start pt-32 md:items-center md:pt-0 justify-center bg-gray-950">
         
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div 
@@ -317,7 +317,7 @@ export default function HomeClient() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-[#1e2329]"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center mt-10">
+        <div className="relative z-10 w-full max-w-5xl px-4 flex flex-col items-center mt-4 md:mt-10">
           
           <h1 ref={titleRef} className="text-4xl md:text-5xl font-light text-white text-center mb-10 tracking-wide drop-shadow-xl">
             Search properties {purpose === "rent" ? "to rent" : "for sale"} in <span className="font-bold text-[#013220] drop-shadow-[0_0_15px_rgba(255,255,255,0.7)] bg-white px-2 py-1 rounded">Lahore</span>
@@ -328,7 +328,7 @@ export default function HomeClient() {
               <button
                 key={tab}
                 onClick={() => setPurpose(tab)}
-                className={"px-8 py-2 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 " + (purpose === tab ? "bg-[#013220] text-white shadow-[0_0_20px_rgba(1,50,32,0.8)]" : "bg-transparent text-gray-300 hover:text-white hover:bg-white/10")}
+                className={"px-8 py-2 rounded-full text-sm font-semibold tracking-widest uppercase transition-all duration-300 " + (purpose === tab ? "bg-[#013220] text-white shadow-[0_0_20px_rgba(1,50,32,0.8)]" : "bg-transparent text-gray-300 md:hover:text-white md:hover:bg-white/10")}
               >
                 {tab}
               </button>
@@ -342,7 +342,7 @@ export default function HomeClient() {
             
             <div className="flex flex-col md:flex-row gap-3 relative z-50">
               
-              <div className="flex-[1] bg-white/90 backdrop-blur-sm relative px-4 rounded-xl border border-white/30 hover:border-[#013220] transition-colors">
+              <div className="flex-[1] bg-white/90 backdrop-blur-sm relative px-4 rounded-xl border border-white/30 md:hover:border-[#013220] transition-colors">
                 <div className="flex flex-col w-full py-2 cursor-pointer" onClick={() => { const wasOpen = isCityOpen; closeAllDropdowns(); setIsCityOpen(!wasOpen); }}>
                   <span className="text-[10px] text-[#013220] font-bold tracking-wider mb-1">CITY</span>
                   <div className="flex justify-between items-center w-full">
@@ -358,19 +358,19 @@ export default function HomeClient() {
                     </div>
                     <ul className="max-h-56 overflow-y-auto bg-white py-1">
                       {filteredCities.map((c) => (
-                        <li key={c} onClick={() => { setCity(c); setLocation(""); setIsCityOpen(false); setCitySearch(""); }} className={"px-4 py-2 text-sm cursor-pointer " + (city === c ? "bg-[#013220] text-white" : "text-gray-700 hover:bg-gray-100")}>
+                        <li key={c} onClick={() => { setCity(c); setLocation(""); setIsCityOpen(false); setCitySearch(""); }} className={"px-4 py-2 text-sm cursor-pointer " + (city === c ? "bg-[#013220] text-white" : "text-gray-700 md:hover:bg-gray-100")}>
                           {c}
                         </li>
                       ))}
                     </ul>
                     <div className="p-2 border-t border-gray-200 flex justify-end bg-gray-50 rounded-b">
-                      <button onClick={() => setIsCityOpen(false)} className="bg-[#444] text-white text-[11px] px-3 py-1 rounded hover:bg-black transition-colors">Close</button>
+                      <button onClick={() => setIsCityOpen(false)} className="bg-[#444] text-white text-[11px] px-3 py-1 rounded md:hover:bg-black transition-colors">Close</button>
                     </div>
                   </div>
                 )}
               </div>
 
-              <div className="flex-[2] bg-white/90 backdrop-blur-sm relative flex items-center px-4 rounded-xl border border-white/30 hover:border-[#013220] transition-colors">
+              <div className="flex-[2] bg-white/90 backdrop-blur-sm relative flex items-center px-4 rounded-xl border border-white/30 md:hover:border-[#013220] transition-colors">
                  <div className="flex flex-col w-full py-2">
                    <span className="text-[10px] text-[#013220] font-bold tracking-wider mb-1">LOCATION</span>
                    <input 
@@ -385,14 +385,14 @@ export default function HomeClient() {
                  </div>
               </div>
 
-              <button onClick={handleSearch} className="md:w-40 bg-gradient-to-r from-[#013220] to-[#011a11] hover:from-[#011a11] hover:to-[#000000] text-white font-bold tracking-widest py-3 rounded-xl shadow-[0_0_20px_rgba(1,50,32,0.6)] transition-all transform hover:scale-105 active:scale-95 relative z-10">
+              <button onClick={handleSearch} className="md:w-40 bg-gradient-to-r from-[#013220] to-[#011a11] md:hover:from-[#011a11] md:hover:to-[#000000] text-white font-bold tracking-widest py-3 rounded-xl shadow-[0_0_20px_rgba(1,50,32,0.6)] transition-all transform md:hover:scale-105 active:scale-95 relative z-10">
                 FIND
               </button>
             </div>
 
             <div ref={advancedSectionRef} className="hidden flex-col md:flex-row gap-3 overflow-visible h-0 opacity-0 relative z-40">
               
-              <div className="flex-1 bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 hover:border-[#013220] transition-colors">
+              <div className="flex-1 bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 md:hover:border-[#013220] transition-colors">
                 <div className="w-full cursor-pointer" onClick={() => { const wasOpen = isPropTypeOpen; closeAllDropdowns(); setIsPropTypeOpen(!wasOpen); }}>
                   <span className="text-[10px] text-[#013220] font-bold tracking-wider mb-1 block">PROPERTY TYPE</span>
                   <div className="flex justify-between items-center w-full">
@@ -403,7 +403,7 @@ export default function HomeClient() {
 
                 {isPropTypeOpen && (
                   <div 
-                    className="absolute top-full mt-1 left-0 w-[380px] bg-white rounded-sm shadow-2xl border border-gray-200 z-[70] p-4 text-black cursor-default"
+                    className="absolute top-full mt-1 left-0 w-[320px] md:w-[380px] bg-white rounded-sm shadow-2xl border border-gray-200 z-[70] p-4 text-black cursor-default"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="flex gap-4 border-b border-gray-200 mb-4">
@@ -416,7 +416,7 @@ export default function HomeClient() {
                             setActivePropTab(tab); 
                             setDisplayPropType(tab); 
                           }}
-                          className={"text-[11px] font-bold tracking-wider uppercase pb-2 -mb-[1px] " + (activePropTab === tab ? "border-b-2 border-blue-500 text-black" : "text-gray-500 hover:text-black")}
+                          className={"text-[11px] font-bold tracking-wider uppercase pb-2 -mb-[1px] " + (activePropTab === tab ? "border-b-2 border-blue-500 text-black" : "text-gray-500 md:hover:text-black")}
                         >
                           {tab}
                         </button>
@@ -434,7 +434,7 @@ export default function HomeClient() {
                             setDisplayPropType(subCat);
                             setIsPropTypeOpen(false);
                           }}
-                          className={"text-center text-[13px] px-3 py-2 rounded-sm border transition-colors " + (selectedSubCategory === subCat && displayPropType === subCat ? "border-[#013220] text-white bg-[#013220]" : "border-[#013220] text-white bg-[#013220] hover:bg-[#011a11]")}
+                          className={"text-center text-[13px] px-3 py-2 rounded-sm border transition-colors " + (selectedSubCategory === subCat && displayPropType === subCat ? "border-[#013220] text-white bg-[#013220]" : "border-[#013220] text-white bg-[#013220] md:hover:bg-[#011a11]")}
                         >
                           {subCat}
                         </button>
@@ -450,7 +450,7 @@ export default function HomeClient() {
                           setSelectedSubCategory("House");
                           setDisplayPropType("Homes");
                         }}
-                        className="text-gray-500 hover:text-black"
+                        className="text-gray-500 md:hover:text-black"
                       >
                         Reset
                       </button>
@@ -460,7 +460,7 @@ export default function HomeClient() {
                           e.stopPropagation();
                           setIsPropTypeOpen(false);
                         }} 
-                        className="bg-[#444] text-white px-4 py-1.5 rounded-sm hover:bg-black transition-colors font-medium"
+                        className="bg-[#444] text-white px-4 py-1.5 rounded-sm md:hover:bg-black transition-colors font-medium"
                       >
                         Close
                       </button>
@@ -469,7 +469,7 @@ export default function HomeClient() {
                 )}
               </div>
 
-              <div className="flex-1 bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 hover:border-[#013220] transition-colors">
+              <div className="flex-1 bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 md:hover:border-[#013220] transition-colors">
                 <div className="w-full cursor-pointer" onClick={() => { const wasOpen = isPriceOpen; closeAllDropdowns(); setIsPriceOpen(!wasOpen); }}>
                   <span className="text-[10px] text-gray-500 font-bold tracking-wider mb-1 block uppercase">PRICE ({currencyCode})</span>
                   <div className="flex justify-between items-center w-full">
@@ -482,11 +482,11 @@ export default function HomeClient() {
 
                 {isPriceOpen && (
                   <div 
-                    className="absolute top-full mt-1 left-0 w-[300px] bg-white rounded-sm shadow-2xl border border-gray-200 z-[70] flex flex-col text-black cursor-default"
+                    className="absolute top-full mt-1 left-0 w-[280px] md:w-[300px] bg-white rounded-sm shadow-2xl border border-gray-200 z-[70] flex flex-col text-black cursor-default"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="p-3 border-b border-gray-200 text-center">
-                      <button className="text-[#008cff] text-[13px] font-semibold hover:underline">Change currency ({currencyCode})</button>
+                      <button className="text-[#008cff] text-[13px] font-semibold md:hover:underline">Change currency ({currencyCode})</button>
                     </div>
                     
                     <div className="flex p-3 gap-3">
@@ -503,7 +503,7 @@ export default function HomeClient() {
                             <li 
                               key={p} 
                               onClick={(e) => { e.stopPropagation(); setPriceMin(p); }} 
-                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (priceMin === p ? "bg-[#013220] text-white" : "text-gray-700 hover:bg-gray-100")}
+                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (priceMin === p ? "bg-[#013220] text-white" : "text-gray-700 md:hover:bg-gray-100")}
                             >
                               {p}
                             </li>
@@ -524,7 +524,7 @@ export default function HomeClient() {
                             <li 
                               key={p} 
                               onClick={(e) => { e.stopPropagation(); setPriceMax(p); }} 
-                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (priceMax === p ? "bg-[#013220] text-white" : "text-gray-700 hover:bg-gray-100")}
+                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (priceMax === p ? "bg-[#013220] text-white" : "text-gray-700 md:hover:bg-gray-100")}
                             >
                               {p}
                             </li>
@@ -536,7 +536,7 @@ export default function HomeClient() {
                     <div className="p-2 border-t border-gray-200 flex justify-end bg-gray-50 rounded-b">
                       <button 
                         onClick={(e) => { e.stopPropagation(); setIsPriceOpen(false); }} 
-                        className="bg-[#444] text-white text-[11px] px-3 py-1.5 rounded-sm hover:bg-black transition-colors font-medium"
+                        className="bg-[#444] text-white text-[11px] px-3 py-1.5 rounded-sm md:hover:bg-black transition-colors font-medium"
                       >
                         Close
                       </button>
@@ -545,7 +545,7 @@ export default function HomeClient() {
                 )}
               </div>
 
-              <div className="flex-1 bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 hover:border-[#013220] transition-colors">
+              <div className="flex-1 bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 md:hover:border-[#013220] transition-colors">
                 <div className="w-full cursor-pointer" onClick={() => { const wasOpen = isAreaOpen; closeAllDropdowns(); setIsAreaOpen(!wasOpen); }}>
                   <span className="text-[10px] text-gray-500 font-bold tracking-wider mb-1 block uppercase">AREA ({selectedAreaUnit})</span>
                   <div className="flex justify-between items-center w-full">
@@ -558,11 +558,11 @@ export default function HomeClient() {
 
                 {isAreaOpen && (
                   <div 
-                    className="absolute top-full mt-1 left-0 w-[300px] bg-white rounded-sm shadow-2xl border border-gray-200 z-[70] flex flex-col text-black cursor-default"
+                    className="absolute top-full mt-1 left-0 w-[280px] md:w-[300px] bg-white rounded-sm shadow-2xl border border-gray-200 z-[70] flex flex-col text-black cursor-default"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="p-3 border-b border-gray-200 text-center">
-                      <button className="text-[#008cff] text-[13px] font-semibold hover:underline">Change area unit ({selectedAreaUnit})</button>
+                      <button className="text-[#008cff] text-[13px] font-semibold md:hover:underline">Change area unit ({selectedAreaUnit})</button>
                     </div>
                     
                     <div className="flex p-3 gap-3">
@@ -579,7 +579,7 @@ export default function HomeClient() {
                             <li 
                               key={a} 
                               onClick={(e) => { e.stopPropagation(); setAreaMin(a); }} 
-                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (areaMin === a ? "bg-[#013220] text-white" : "text-gray-700 hover:bg-gray-100")}
+                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (areaMin === a ? "bg-[#013220] text-white" : "text-gray-700 md:hover:bg-gray-100")}
                             >
                               {a}
                             </li>
@@ -600,7 +600,7 @@ export default function HomeClient() {
                             <li 
                               key={a} 
                               onClick={(e) => { e.stopPropagation(); setAreaMax(a); }} 
-                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (areaMax === a ? "bg-[#013220] text-white" : "text-gray-700 hover:bg-gray-100")}
+                              className={"text-center py-2 px-1 text-xs cursor-pointer transition-colors " + (areaMax === a ? "bg-[#013220] text-white" : "text-gray-700 md:hover:bg-gray-100")}
                             >
                               {a}
                             </li>
@@ -612,7 +612,7 @@ export default function HomeClient() {
                     <div className="p-2 border-t border-gray-200 flex justify-end bg-gray-50 rounded-b">
                       <button 
                         onClick={(e) => { e.stopPropagation(); setIsAreaOpen(false); }} 
-                        className="bg-[#444] text-white text-[11px] px-3 py-1.5 rounded-sm hover:bg-black transition-colors font-medium"
+                        className="bg-[#444] text-white text-[11px] px-3 py-1.5 rounded-sm md:hover:bg-black transition-colors font-medium"
                       >
                         Close
                       </button>
@@ -621,7 +621,7 @@ export default function HomeClient() {
                 )}
               </div>
 
-              <div className="flex-[0.5] bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 hover:border-[#013220] transition-colors">
+              <div className="flex-[0.5] bg-white/90 relative flex flex-col px-4 py-2 rounded-xl border border-white/30 md:hover:border-[#013220] transition-colors">
                 <div className="w-full cursor-pointer" onClick={() => { const wasOpen = isBedsOpen; closeAllDropdowns(); setIsBedsOpen(!wasOpen); }}>
                   <span className="text-[10px] text-gray-500 font-bold tracking-wider mb-1 block">BEDS</span>
                   <div className="flex justify-between items-center w-full">
@@ -640,7 +640,7 @@ export default function HomeClient() {
                         <li 
                           key={b}
                           onClick={(e) => { e.stopPropagation(); setBeds(b); setIsBedsOpen(false); }}
-                          className={"text-center py-2.5 px-4 text-[13px] border-b border-gray-100 last:border-none cursor-pointer transition-colors " + (beds === b ? "bg-[#013220] text-white font-medium" : "text-gray-700 hover:bg-gray-50")}
+                          className={"text-center py-2.5 px-4 text-[13px] border-b border-gray-100 last:border-none cursor-pointer transition-colors " + (beds === b ? "bg-[#013220] text-white font-medium" : "text-gray-700 md:hover:bg-gray-50")}
                         >
                           {b}
                         </li>
@@ -650,7 +650,7 @@ export default function HomeClient() {
                     <div className="p-2 border-t border-gray-200 flex justify-end bg-gray-50 rounded-b">
                       <button 
                         onClick={(e) => { e.stopPropagation(); setIsBedsOpen(false); }} 
-                        className="bg-[#444] text-white text-[11px] px-3 py-1.5 rounded-sm hover:bg-black transition-colors font-medium"
+                        className="bg-[#444] text-white text-[11px] px-3 py-1.5 rounded-sm md:hover:bg-black transition-colors font-medium"
                       >
                         Close
                       </button>
@@ -661,40 +661,39 @@ export default function HomeClient() {
 
             </div>
 
-            <div className="w-full flex items-center gap-4 mt-2 text-xs font-medium text-gray-300 relative z-10">
+            <div className="w-full flex flex-wrap items-center justify-center md:justify-start gap-2 md:gap-4 mt-4 text-[11px] md:text-xs font-medium text-gray-300 relative z-10">
                <button 
-                  onClick={() => { closeAllDropdowns(); setIsExpanded(!isExpanded); }}
-                  className="hover:text-white transition-colors flex items-center gap-1 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/20"
+                 onClick={() => { closeAllDropdowns(); setIsExpanded(!isExpanded); }}
+                 className="md:hover:text-white transition-colors flex items-center gap-1 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 md:hover:bg-white/20"
                >
                  <svg className={"w-3 h-3 transform transition-transform duration-300 " + (isExpanded ? "rotate-180" : "")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                  {isExpanded ? "Less Options" : "More Options"}
                </button>
-               <span className="text-gray-600">|</span>
+               <span className="text-gray-600 hidden md:inline">|</span>
                <button 
                  onClick={() => setIsCurrencyModalOpen(true)} 
-                 className="hover:text-white transition-colors"
+                 className="md:hover:text-white transition-colors"
                >
                  Change Currency
                </button>
-               <span className="text-gray-600">|</span>
+               <span className="text-gray-600 hidden md:inline">|</span>
                <button 
                  onClick={() => setIsAreaModalOpen(true)}
-                 className="hover:text-white transition-colors"
+                 className="md:hover:text-white transition-colors"
                >
                  Change Area Unit
                </button>
-               <span className="text-gray-600">|</span>
-               <button onClick={handleResetSearch} className="hover:text-red-400 transition-colors">Reset Search</button>
+               <span className="text-gray-600 hidden md:inline">|</span>
+               <button onClick={handleResetSearch} className="md:hover:text-red-400 transition-colors">Reset Search</button>
             </div>
 
           </div>
         </div>
       </section>
 
-      {/* Currency Modal */}
       {isCurrencyModalOpen && (
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
           onClick={() => setIsCurrencyModalOpen(false)}
         >
           <div 
@@ -705,7 +704,7 @@ export default function HomeClient() {
               <h2 className="text-gray-800 font-bold text-[17px]">Change Currency</h2>
               <button 
                 onClick={() => setIsCurrencyModalOpen(false)}
-                className="absolute right-4 text-gray-500 hover:text-gray-800 transition-colors border border-gray-200 bg-gray-50 hover:bg-gray-100 p-1.5 rounded-sm"
+                className="absolute right-4 text-gray-500 md:hover:text-gray-800 transition-colors border border-gray-200 bg-gray-50 md:hover:bg-gray-100 p-1.5 rounded-sm"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
               </button>
@@ -713,7 +712,7 @@ export default function HomeClient() {
 
             <div className="p-6 flex flex-col gap-4 bg-white rounded-b">
               
-              <div className="relative w-full">
+              <div className="relative w-full z-50">
                 <div 
                   className="w-full border border-gray-300 bg-white rounded-sm p-3 flex justify-between items-center cursor-pointer text-[13px] text-gray-800"
                   onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
@@ -723,7 +722,7 @@ export default function HomeClient() {
                 </div>
 
                 {isCurrencyDropdownOpen && (
-                  <div className="absolute top-full left-0 w-full bg-white border border-gray-200 shadow-xl z-50 rounded-sm">
+                  <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-200 shadow-xl z-[60] rounded-sm">
                     <ul className="max-h-60 overflow-y-auto py-1">
                       {currencies.map((curr) => (
                         <li 
@@ -732,7 +731,7 @@ export default function HomeClient() {
                             setSelectedCurrency(curr);
                             setIsCurrencyDropdownOpen(false);
                           }}
-                          className="p-3 text-[13px] text-gray-800 cursor-pointer hover:bg-[#013220] hover:text-white transition-colors"
+                          className="p-3 text-[13px] text-gray-800 cursor-pointer md:hover:bg-[#013220] md:hover:text-white transition-colors"
                         >
                           {curr}
                         </li>
@@ -744,7 +743,7 @@ export default function HomeClient() {
 
               <button 
                 onClick={() => setIsCurrencyModalOpen(false)}
-                className="w-full bg-[#013220] hover:bg-[#011a11] text-white font-bold py-3 rounded-sm transition-colors"
+                className="w-full bg-[#013220] md:hover:bg-[#011a11] text-white font-bold py-3 rounded-sm transition-colors relative z-10"
               >
                 SAVE
               </button>
@@ -754,10 +753,9 @@ export default function HomeClient() {
         </div>
       )}
 
-      {/* Area Unit Modal */}
       {isAreaModalOpen && (
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
           onClick={() => setIsAreaModalOpen(false)}
         >
           <div 
@@ -768,7 +766,7 @@ export default function HomeClient() {
               <h2 className="text-gray-800 font-bold text-[17px]">Change Area</h2>
               <button 
                 onClick={() => setIsAreaModalOpen(false)}
-                className="absolute right-4 text-gray-500 hover:text-gray-800 transition-colors border border-gray-200 bg-gray-50 hover:bg-gray-100 p-1.5 rounded-sm"
+                className="absolute right-4 text-gray-500 md:hover:text-gray-800 transition-colors border border-gray-200 bg-gray-50 md:hover:bg-gray-100 p-1.5 rounded-sm"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
               </button>
@@ -776,7 +774,7 @@ export default function HomeClient() {
 
             <div className="p-6 flex flex-col gap-4 bg-white rounded-b">
               
-              <div className="relative w-full">
+              <div className="relative w-full z-50">
                 <div 
                   className="w-full border border-gray-300 bg-white rounded-sm p-3 flex justify-between items-center cursor-pointer text-[13px] text-gray-800"
                   onClick={() => setIsAreaDropdownModalOpen(!isAreaDropdownModalOpen)}
@@ -786,7 +784,7 @@ export default function HomeClient() {
                 </div>
 
                 {isAreaDropdownModalOpen && (
-                  <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-200 shadow-xl z-50 rounded-sm">
+                  <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-200 shadow-xl z-[60] rounded-sm">
                     <ul className="max-h-60 overflow-y-auto py-1">
                       {areaUnits.map((unit) => (
                         <li 
@@ -795,7 +793,7 @@ export default function HomeClient() {
                             setSelectedAreaUnit(unit);
                             setIsAreaDropdownModalOpen(false);
                           }}
-                          className="p-3 text-[13px] text-gray-800 cursor-pointer hover:bg-[#013220] hover:text-white transition-colors"
+                          className="p-3 text-[13px] text-gray-800 cursor-pointer md:hover:bg-[#013220] md:hover:text-white transition-colors"
                         >
                           {unit}
                         </li>
@@ -807,7 +805,7 @@ export default function HomeClient() {
 
               <button 
                 onClick={() => setIsAreaModalOpen(false)}
-                className="w-full bg-[#013220] hover:bg-[#011a11] text-white font-bold py-3 rounded-sm transition-colors"
+                className="w-full bg-[#013220] md:hover:bg-[#011a11] text-white font-bold py-3 rounded-sm transition-colors relative z-10"
               >
                 SAVE
               </button>
@@ -816,8 +814,6 @@ export default function HomeClient() {
           </div>
         </div>
       )}
-
-      {/* Added BrowseProperties component below hero */}
       
       <FeaturedProperties />
       <WhyChooseUs />

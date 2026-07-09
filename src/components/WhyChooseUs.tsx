@@ -3,10 +3,12 @@
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WhyChooseUs() {
+  const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
@@ -49,6 +51,7 @@ export default function WhyChooseUs() {
 
   // Simple Pop-Up Hover Effect
   const handleImageMouseEnter = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) return;
     if (!imageWrapperRef.current) return;
     
     gsap.to(imageWrapperRef.current, {
@@ -60,6 +63,7 @@ export default function WhyChooseUs() {
   };
 
   const handleImageMouseLeave = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) return;
     if (!imageWrapperRef.current) return;
     
     gsap.to(imageWrapperRef.current, {
@@ -72,6 +76,7 @@ export default function WhyChooseUs() {
 
   // Magnetic Physics Button
   const handleBtnMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) return;
     if (!btnRef.current) return;
     const { left, top, width, height } = btnRef.current.getBoundingClientRect();
     const x = (e.clientX - left - width / 2) * 0.3;
@@ -86,6 +91,7 @@ export default function WhyChooseUs() {
   };
 
   const handleBtnMouseLeave = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) return;
     if (!btnRef.current) return;
     gsap.to(btnRef.current, {
       x: 0,
@@ -104,7 +110,11 @@ export default function WhyChooseUs() {
       <div ref={contentRef} className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative z-10">
         
         {/* Interactive Image Pop Up Side */}
-        <div className="w-full lg:w-1/2 relative">
+        <div className="w-full lg:w-1/2 relative flex flex-col gap-6">
+          {/* Mobile Label Layout */}
+          <span className="lg:hidden inline-block bg-[#013220]/10 text-[#013220] px-4 py-1.5 rounded-full text-[12px] font-bold tracking-widest uppercase shadow-sm self-start">
+            Why Choose Pakistan Property Real Estate?
+          </span>
           <div 
             ref={imageWrapperRef}
             onMouseEnter={handleImageMouseEnter}
@@ -126,7 +136,8 @@ export default function WhyChooseUs() {
 
         {/* Text Content Side */}
         <div ref={textRef} className="w-full lg:w-1/2 flex flex-col items-start">
-          <span className="inline-block bg-[#013220]/10 text-[#013220] px-4 py-1.5 rounded-full text-[12px] font-bold tracking-widest uppercase mb-6 shadow-sm">
+          {/* Desktop Label Layout */}
+          <span className="hidden lg:inline-block bg-[#013220]/10 text-[#013220] px-4 py-1.5 rounded-full text-[12px] font-bold tracking-widest uppercase mb-6 shadow-sm">
             Why Choose Pakistan Property Real Estate?
           </span>
           
@@ -141,6 +152,7 @@ export default function WhyChooseUs() {
           <div className="relative inline-block">
             <button 
               ref={btnRef}
+              onClick={() => router.push("/services")}
               onMouseMove={handleBtnMouseMove}
               onMouseLeave={handleBtnMouseLeave}
               className="border-2 border-[#013220] text-[#013220] font-bold text-sm px-8 py-3.5 rounded-lg hover:bg-[#013220] hover:text-white hover:shadow-[0_10px_20px_rgba(1,50,32,0.3)] transition-all duration-300 relative z-10"

@@ -220,7 +220,7 @@ export default function Services() {
             <h1 className="text-4xl md:text-6xl font-black text-white mb-10 leading-tight">
               Our expert service offers guidance, listings, and support for a seamless experience
             </h1>
-            <Link href="#contact" className="px-8 py-4 border-2 border-white text-white font-bold text-sm tracking-wider uppercase rounded hover:bg-[#013220] hover:border-[#013220] transition-colors duration-300">
+            <Link href="#contact" className="px-8 py-4 border-2 border-white text-white font-bold text-sm tracking-wider uppercase rounded md:hover:bg-[#013220] md:hover:border-[#013220] active:bg-[#013220] active:border-[#013220] transition-colors duration-300">
               CONTACT US
             </Link>
           </div>
@@ -245,7 +245,7 @@ export default function Services() {
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               Our core mission is to cultivate lasting relationships founded on trust, ensuring every client feels valued and receives the highest standard of care in their real estate journey.
             </p>
-            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded hover:bg-[#013220] hover:text-white transition-colors duration-300">
+            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded md:hover:bg-[#013220] md:hover:text-white active:bg-[#013220] active:text-white transition-colors duration-300">
               Schedule Your Meeting NOW!
             </Link>
           </div>
@@ -265,7 +265,7 @@ export default function Services() {
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               Unlock Your new home address: Schedule a meeting with us. Join our exclusive offers community, and benefit from our top real estate developers alliance and our reputation.
             </p>
-            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded hover:bg-[#013220] hover:text-white transition-colors duration-300">
+            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded md:hover:bg-[#013220] md:hover:text-white active:bg-[#013220] active:text-white transition-colors duration-300">
               Schedule Your Meeting NOW!
             </Link>
           </div>
@@ -284,7 +284,7 @@ export default function Services() {
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               Unlock the True Value of Your Property: Schedule a valuation with us. Join our exclusive client list, and benefit from our marketing exposure.
             </p>
-            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded hover:bg-[#013220] hover:text-white transition-colors duration-300">
+            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded md:hover:bg-[#013220] md:hover:text-white active:bg-[#013220] active:text-white transition-colors duration-300">
               Schedule Your Meeting NOW!
             </Link>
           </div>
@@ -303,7 +303,7 @@ export default function Services() {
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               Unlock the True Value of Your Property: Schedule a valuation with us. Join our exclusive client list, and benefit from our marketing exposure.
             </p>
-            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded hover:bg-[#013220] hover:text-white transition-colors duration-300">
+            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded md:hover:bg-[#013220] md:hover:text-white active:bg-[#013220] active:text-white transition-colors duration-300">
               Schedule Your Meeting NOW!
             </Link>
           </div>
@@ -322,7 +322,7 @@ export default function Services() {
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               We prioritize your comfort by arranging for one of our luxurious vehicles to pick you up from your residence or workplace, ensuring a comfortable trip to your property. Following your coordinated viewing, your assigned chauffeur will efficiently transport you to your next destination, reflecting our dedication to providing the utmost convenience and sophistication in your real estate journey.
             </p>
-            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded hover:bg-[#013220] hover:text-white transition-colors duration-300">
+            <Link href="#contact" className="self-start px-8 py-4 border-2 border-[#013220] text-[#013220] font-bold text-sm tracking-wider uppercase rounded md:hover:bg-[#013220] md:hover:text-white active:bg-[#013220] active:text-white transition-colors duration-300">
               Schedule Your Meeting NOW!
             </Link>
           </div>
@@ -371,7 +371,7 @@ export default function Services() {
           <button 
             type="submit" 
             disabled={isSubmitting}
-            className="mt-2 px-8 py-5 bg-[#013220] text-white font-bold tracking-wider uppercase rounded hover:bg-[#013220] hover:opacity-90 transition-all duration-300 w-full text-lg shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+            className="mt-2 px-8 py-5 bg-[#013220] text-white font-bold tracking-wider uppercase rounded md:hover:bg-[#013220] md:hover:opacity-90 active:bg-[#013220] active:opacity-75 transition-all duration-300 w-full text-lg shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Submitting..." : "SUBMIT"}
           </button>
@@ -380,7 +380,7 @@ export default function Services() {
         <div className="text-center mt-32">
           <h2 className="text-3xl md:text-4xl font-bold text-[#013220] mb-4">Ready to Find Your Perfect Property?</h2>
           <p className="text-gray-600 mb-10 text-lg">Partner with us for expert real estate services that drive results.</p>
-          <Link href="/contact" className="inline-block px-10 py-4 bg-[#013220] text-white font-bold tracking-wider rounded hover:bg-[#013220] hover:opacity-90 transition-all duration-300 shadow-lg">
+          <Link href="/contact" className="inline-block px-10 py-4 bg-[#013220] text-white font-bold tracking-wider rounded md:hover:bg-[#013220] md:hover:opacity-90 active:bg-[#013220] active:opacity-75 transition-all duration-300 shadow-lg">
             Contact Our Team
           </Link>
         </div>
