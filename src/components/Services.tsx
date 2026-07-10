@@ -232,7 +232,7 @@ export default function Services() {
         <div className="bg-gray-50 rounded-3xl p-8 md:p-16 flex flex-col lg:flex-row items-center gap-12 border border-gray-100 shadow-xl">
           <div className="w-full lg:w-1/2 overflow-hidden rounded-2xl h-[400px]">
             <img 
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" 
+              src="/services/s5.webp" 
               alt="Real Estate Agents" 
               className="w-full h-full object-cover"
             />
@@ -270,7 +270,7 @@ export default function Services() {
             </Link>
           </div>
           <div className="w-full lg:w-1/2 overflow-hidden rounded-3xl h-[450px]">
-            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1000&q=80" alt="Buy Property" className="service-image w-full h-full object-cover" />
+            <img src="/services/s1.webp" alt="Buy Property" className="service-image w-full h-full object-cover" />
           </div>
         </div>
 
@@ -289,7 +289,7 @@ export default function Services() {
             </Link>
           </div>
           <div className="w-full lg:w-1/2 overflow-hidden rounded-3xl h-[450px]">
-            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1000&q=80" alt="Sell Property" className="service-image w-full h-full object-cover" />
+            <img src="/services/s2.webp" alt="Sell Property" className="service-image w-full h-full object-cover" />
           </div>
         </div>
 
@@ -308,7 +308,7 @@ export default function Services() {
             </Link>
           </div>
           <div className="w-full lg:w-1/2 overflow-hidden rounded-3xl h-[450px]">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000&q=80" alt="Property Management" className="service-image w-full h-full object-cover" />
+            <img src="/services/s3.webp" alt="Property Management" className="service-image w-full h-full object-cover" />
           </div>
         </div>
 
@@ -327,7 +327,7 @@ export default function Services() {
             </Link>
           </div>
           <div className="w-full lg:w-1/2 overflow-hidden rounded-3xl h-[450px]">
-            <img src="https://images.unsplash.com/photo-1556745753-b2904692b3cd?w=1000&q=80" alt="Concierge Services" className="service-image w-full h-full object-cover" />
+            <img src="/services/s4.webp" alt="Concierge Services" className="service-image w-full h-full object-cover" />
           </div>
         </div>
 

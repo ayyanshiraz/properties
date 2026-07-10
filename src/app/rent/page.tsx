@@ -13,7 +13,6 @@ export default function RentPage() {
       location: "Gulberg, Lahore",
       price: 160000,
       priceStr: "PKR 160,000",
-      area: "1100 Sq.Ft",
       image: "/rent/6.webp"
     },
     {
@@ -22,7 +21,6 @@ export default function RentPage() {
       location: "Gulberg, Lahore",
       price: 150000,
       priceStr: "PKR 150,000",
-      area: "1200 Sq.Ft",
       image: "/rent/14.webp"
     },
     {
@@ -31,7 +29,6 @@ export default function RentPage() {
       location: "Gulberg, Lahore",
       price: 520000,
       priceStr: "PKR 520,000",
-      area: "1300 Sq.Ft",
       image: "/rent/8.webp"
     },
     {
@@ -40,8 +37,15 @@ export default function RentPage() {
       location: "MM Alam Road, Gulberg, Lahore",
       price: 250000,
       priceStr: "PKR 250,000",
-      area: "2250 Sq.Ft",
       image: "/rent/22.webp"
+    },
+    {
+      id: 5,
+      title: `House for rent`,
+      location: `Cavlary ground cant Lahore`,
+      price: 150000,
+      priceStr: `PKR 150,000`,
+      image: `/rent/46.webp`
     }
   ];
 

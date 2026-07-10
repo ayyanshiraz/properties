@@ -171,7 +171,6 @@ export default function Contact() {
                 <div>
                   <h4 className="text-lg font-bold mb-1">Office Address</h4>
                   <p className="text-gray-300 leading-relaxed text-sm">
-                    Hotel MayFair 4th floor,<br />
                     50-52, E - III, Commercial Zone,<br />
                     Gulberg III, 54660, Lahore, Punjab.
                   </p>

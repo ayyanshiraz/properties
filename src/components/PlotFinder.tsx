@@ -26,8 +26,8 @@ export default function PlotFinder() {
     { top: `65%`, left: `25%`, label: `3.5 Marla House Ferozpur`, link: `/buy/homes/3` },
     { top: `80%`, left: `40%`, label: `6 Marla Shiraz Villas`, link: `/buy/homes/4` },
     { top: `35%`, left: `35%`, label: `1 Kanal 3 Marla Commercial`, link: `/buy/commercial/5` },
-    { top: `20%`, left: `50%`, label: `Johar Town Properties +12`, link: `#` },
-    { top: `55%`, left: `80%`, label: `DHA Phase 5 Listings +8`, link: `#` }
+    { top: `20%`, left: `50%`, label: `House for rent Cavalry Ground`, link: `/rent/5` },
+    { top: `55%`, left: `80%`, label: `House for rent Cavalry Ground`, link: `/rent/5` }
   ];
 
   const handleSearch = () => {

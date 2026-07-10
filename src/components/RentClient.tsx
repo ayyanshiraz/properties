@@ -10,7 +10,6 @@ interface PropertyItem {
   location: string;
   price: number;
   priceStr: string;
-  area: string;
   image: string;
 }
 

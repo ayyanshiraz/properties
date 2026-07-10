@@ -63,7 +63,7 @@ export default function AreaGuidesClient({ areas }: AreaGuidesClientProps) {
          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
            {areas.map((area, index) => (
              <Link 
-               href={"/area-guides/" + area.name.toLowerCase().replace(" ", "-")} 
+              href={`/area-guides/` + area.name.toLowerCase().replaceAll(` `, `-`)}
                key={index} 
                className="group relative block h-[450px] rounded-2xl overflow-hidden cursor-pointer shadow-lg md:hover:shadow-2xl active:shadow-2xl transition-all duration-500"
              >

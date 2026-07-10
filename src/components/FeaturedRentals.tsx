@@ -13,8 +13,6 @@ const rentalProperties = [
     title: `Furnished 2 Bed Apartment (Without Bills)`,
     location: `Gulberg, Lahore`,
     price: `PKR 160,000 / Month`,
-    beds: `2 BR`,
-    area: `1100 Sq.Ft`,
     image: `/rent/6.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/1`
@@ -24,8 +22,6 @@ const rentalProperties = [
     title: `Non Furnished Apartment (Without Bills)`,
     location: `Gulberg, Lahore`,
     price: `PKR 150,000 / Month`,
-    beds: `2 BR`,
-    area: `1200 Sq.Ft`,
     image: `/rent/14.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/2`
@@ -35,8 +31,6 @@ const rentalProperties = [
     title: `2 Bed Apartment in Zameen Aurum`,
     location: `Gulberg, Lahore`,
     price: `PKR 520,000 / Month`,
-    beds: `2 BR`,
-    area: `1300 Sq.Ft`,
     image: `/rent/8.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/3`
@@ -46,12 +40,19 @@ const rentalProperties = [
     title: `1 Kanal Portion on MM Alam Road`,
     location: `MM Alam Road, Gulberg, Lahore`,
     price: `PKR 250,000 / Month`,
-    beds: `Portion`,
-    area: `2250 Sq.Ft`,
     image: `/rent/22.webp`,
     badges: [`FEATURED`, `FOR RENT`],
     link: `/rent/4`
-  }
+  },
+   {
+      id: 5,
+      title: `House for rent`,
+      location: `Cavlary ground cant Lahore`,
+      price:  `PKR 150,000 / Month`,
+      image: `/rent/46.webp`,
+      badges: [`FEATURED`, `FOR RENT`],
+      link: `/rent/5`
+    }
 ];
 
 export default function FeaturedRentals() {
@@ -181,13 +182,13 @@ export default function FeaturedRentals() {
                         <svg className="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
-                        {property.beds}
+                        
                       </div>
                       <div className="flex items-center gap-2 text-white text-sm font-medium">
                         <svg className="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg>
-                        {property.area}
+                        
                       </div>
                     </div>
 

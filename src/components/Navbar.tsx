@@ -93,14 +93,20 @@ export default function Navbar() {
           </div>
 
           <Link href="/rent" className="text-[14px] font-bold text-gray-700 md:hover:text-[#013220] active:text-[#013220] transition-colors py-2 lg:py-3 uppercase cursor-pointer">RENT</Link>
+          <Link href="/co-working" className="text-[14px] font-bold text-gray-700 md:hover:text-[#013220] active:text-[#013220] transition-colors py-2 lg:py-3 uppercase cursor-pointer">CO Working Space</Link>
           
           <Link href="/area-guides" className="text-[14px] font-bold text-gray-700 md:hover:text-[#013220] active:text-[#013220] transition-colors py-2 lg:py-3 uppercase cursor-pointer">AREA GUIDES</Link>
 
-          <Link href="/add-property" className="text-[14px] font-bold text-gray-700 md:hover:text-[#013220] active:text-[#013220] transition-colors py-2 lg:py-3 uppercase cursor-pointer">ADD PROPERTY</Link>
-
-          <Link href="/login" className="text-[14px] font-bold text-gray-700 md:hover:text-[#013220] active:text-[#013220] transition-colors py-2 lg:py-3 uppercase cursor-pointer">LOGIN</Link>
-
           <Link href="/contact" className="text-[14px] font-bold text-gray-700 md:hover:text-[#013220] active:text-[#013220] transition-colors py-2 lg:py-3 uppercase cursor-pointer">CONTACT</Link>
+
+          <Link href="/add-property" className="flex items-center justify-center gap-2 text-[15px] font-bold text-white bg-[#013220] md:hover:bg-[#011a11] active:scale-95 transition-all px-4 py-2 rounded-md cursor-pointer">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M12 4v16m8-8H4"></path></svg>
+            Add Property
+          </Link>
+
+          <Link href="/login" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#013220] text-white md:hover:bg-[#011a11] active:scale-95 transition-all cursor-pointer lg:-ml-4">
+             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+          </Link>
           
         </div>
 

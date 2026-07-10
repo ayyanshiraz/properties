@@ -104,7 +104,7 @@ export default function Footer() {
               <div>
                 <span className="font-bold block mb-1">Address:</span>
                 <p className="text-white leading-relaxed">
-                  Hotel MayFair 4th floor,<br />
+                 
                   50-52, E - III, Commercial Zone,<br />
                   Gulberg III, 54660, Lahore, Punjab.
                 </p>

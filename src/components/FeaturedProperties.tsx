@@ -24,7 +24,7 @@ const properties = [
     title: `2 Kanal Commercial House Kothi`,
     location: `Mehmood Kasuri Road, Gulberg, Lahore`,
     price: `90 Crore`,
-    beds: `5 BR`,
+    beds: `Commercial`,
     area: `2 Kanal (59x150)`,
     image: `/buy/2.webp`,
     badges: [`FEATURED`, `FOR SALE`],

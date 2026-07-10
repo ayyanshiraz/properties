@@ -254,6 +254,10 @@ export default function HomeClient() {
       router.push("/rent");
       return;
     }
+    if (purpose === `rent` && trimmedLocation.includes(`cavalry`)) {
+      router.push(`/rent/5`);
+      return;
+    }
     
     if (trimmedLocation.includes("ferozpur") || trimmedLocation.includes("walton") || trimmedLocation.includes("shiraz")) {
       router.push("/buy/homes");

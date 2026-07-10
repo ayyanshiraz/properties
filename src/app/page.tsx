@@ -3,9 +3,9 @@ import HomeClient from "../components/HomeClient";
 
 // SEO Metadata for Search Engines
 export const metadata = {
-  title: `Pakistan Property Real Estate - Sell Buy Rent Homes`,
-  description: `Find the best residential and commercial properties across Lahore, Karachi, and Islamabad. Your trusted real estate portal.`,
-  keywords: `properties in pakistan, buy house lahore, rent apartment karachi, real estate`,
+  title: `Qeemat.com - Sell Buy Rent Homes`,
+  description: `Find the best residential and commercial properties across Lahore. Your trusted real estate portal.`,
+  keywords: `properties in pakistan, buy house lahore, rent apartment lahore, real estate`,
 };
 
 export default function HomePage() {

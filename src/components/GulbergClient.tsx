@@ -40,14 +40,9 @@ export default function GulbergClient() {
     <main className="w-full min-h-screen bg-white flex flex-col pt-[70px]">
       
       {/* Hero Section */}
-      <section ref={heroRef} className="relative w-full h-[60vh] flex items-end justify-start overflow-hidden pb-12">
-        <div className="absolute inset-0 z-0">
-          <img src="/areaguides/gulberg.webp" alt="Gulberg Lahore" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-0"></div>
-
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-8">
-          <h1 ref={titleRef} className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight drop-shadow-2xl">
+      <section ref={heroRef} className={`w-full pt-20 pb-8 flex justify-center`}>
+        <div className={`w-full max-w-[1200px] mx-auto px-4 md:px-8 flex justify-center`}>
+          <h1 ref={titleRef} className={`text-5xl md:text-7xl lg:text-8xl font-extrabold text-gray-900 tracking-tight text-center`}>
             Gulberg Lahore
           </h1>
         </div>
