@@ -34,7 +34,7 @@ const properties = [
     id: 3,
     title: `3.5 Marla House`,
     location: `Main Ferozpur Road, Lahore`,
-    price: `Contact For Price`,
+    price: `1.25 Crore`,
     beds: `Residential`,
     area: `3.5 Marla (26 ft front)`,
     image: `/buy/9.webp`,
