@@ -1,0 +1,18 @@
+import React from "react";
+import HomeClient from "../components/HomeClient";
+
+// SEO Metadata for Search Engines
+export const metadata = {
+  title: `Qeemat.com - Sell Buy Rent Homes`,
+  description: `Find the best residential and commercial properties across Lahore. Your trusted real estate portal.`,
+  keywords: `properties in pakistan, buy house lahore, rent apartment lahore, real estate`,
+};
+
+export default function HomePage() {
+  return (
+    <main className={`min-h-screen bg-gray-50 overflow-x-hidden`}>
+      {/* Interactive Client Side Search Block */}
+      <HomeClient />
+    </main>
+  );
+}
