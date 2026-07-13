@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = `https://www.qeemat.com`;
+  const baseUrl = `https://www.qemaat.com`;
 
   return [
     {

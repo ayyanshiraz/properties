@@ -4,6 +4,6 @@ export default function robots() {
       userAgent: `*`,
       allow: `/`,
     },
-    sitemap: `https://www.qeemat.com/sitemap.xml`,
+    sitemap: `https://www.qemaat.com/sitemap.xml`,
   };
 }
