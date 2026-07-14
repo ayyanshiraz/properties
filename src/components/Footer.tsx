@@ -13,7 +13,6 @@ export default function Footer() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 3D Staggered Reveal on Scroll
     if (contentRef.current && contentRef.current.children) {
       gsap.fromTo(
         Array.from(contentRef.current.children),
@@ -35,7 +34,6 @@ export default function Footer() {
     }
   }, []);
 
-  // Spotlight Effect following the mouse
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!footerRef.current || !glowRef.current) return;
     const { left, top } = footerRef.current.getBoundingClientRect();
@@ -50,7 +48,6 @@ export default function Footer() {
     });
   };
 
-  // Magnetic Physics for links and icons
   const handleMagneticMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const target = e.currentTarget;
     const { left, top, width, height } = target.getBoundingClientRect();
@@ -71,7 +68,6 @@ export default function Footer() {
       onMouseMove={handleMouseMove} 
       className="relative w-full bg-[#013220] overflow-hidden pt-24 pb-12"
     >
-      {/* Interactive Spotlight Glow */}
       <div 
         ref={glowRef} 
         className="absolute top-0 left-0 w-[600px] h-[600px] bg-white rounded-full blur-[180px] opacity-10 pointer-events-none -z-0"
@@ -80,16 +76,11 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-4 relative z-10">
         <div ref={contentRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-16">
           
-          {/* Column 1: Brand Section */}
           <div className="flex flex-col items-start">
             <Link href="/" className="flex items-center gap-2 mb-6 cursor-pointer">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg">
-                <svg className="w-6 h-6 text-[#013220]" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                </svg>
-              </div>
+              <img src={`/logo2.png`} alt={`Qemaat Logo`} className="w-10 h-10 object-contain bg-white rounded-lg shadow-lg" />
               <span className="text-2xl font-black text-white tracking-tight">
-                Qeemat<span className="text-gray-400">.com</span>
+                Qemaat<span className="text-gray-400"></span>
               </span>
             </Link>
             <p className="text-gray-300 text-sm leading-relaxed mb-8">
@@ -97,7 +88,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Column 2: CONTACT US */}
           <div className="flex flex-col items-start">
             <h4 className="text-white font-bold text-lg mb-6">CONTACT US</h4>
             <div className="flex flex-col gap-5 text-sm text-white">
@@ -111,7 +101,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="font-bold block mb-1">Email:</span>
-                <Link href="/" className="hover:text-gray-300 transition-colors cursor-pointer">qeematdotcom@gmail.com</Link>
+                <Link href="/" className="hover:text-gray-300 transition-colors cursor-pointer">Qemaatdotcom@gmail.com</Link>
               </div>
               <div>
                 <span className="font-bold block mb-1">Call:</span>
@@ -120,7 +110,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3: SERVICES */}
           <div className="flex flex-col items-start">
             <h4 className="text-white font-bold text-lg mb-6">SERVICES</h4>
             <div className="flex flex-col gap-4">
@@ -141,7 +130,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4: COMPANY */}
           <div className="flex flex-col items-start">
             <h4 className="text-white font-bold text-lg mb-6">COMPANY</h4>
             <div className="flex flex-col gap-4">
@@ -172,10 +160,9 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8">
           <p className="text-white text-sm font-medium mb-6 md:mb-0">
-            Copyright 2026 Qemaat.com. All rights reserved.
+            Copyright 2026 Qemaat. All rights reserved.
           </p>
           
-          {/* Magnetic Social Media Icons */}
           <div className="flex gap-4">
             <Link href="/" onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-[#013220] transition-colors cursor-pointer">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

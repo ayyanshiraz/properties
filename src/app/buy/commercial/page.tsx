@@ -1,14 +1,17 @@
 import CommercialClient from "../../../components/CommercialClient";
+import { prisma } from "../../../lib/prisma";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Commercial Properties For Sale | Qeemat.com",
-  description: "Discover exclusive commercial properties for sale.",
+  title: `Commercial Properties For Sale | Qemaat`,
+  description: `Discover exclusive commercial properties for sale.`,
 };
 
-export default function CommercialPage() {
-  const propertyData = [
+export default async function CommercialPage() {
+  const staticData = [
     {
-      id: 1,
+      id: 2001,
       title: `2 Kanal Commercial Building`,
       location: `Mehmood Kasuri Road, Gulberg, Lahore`,
       price: 1000000000,
@@ -18,7 +21,7 @@ export default function CommercialPage() {
       description: `Premium commercial building available for sale on the highly sought after Mehmood Kasuri Road. This property spans exactly 2 Kanal with a front of 59 square feet and a depth of 150. An exceptional investment opportunity in the heart of the commercial district.`
     },
     {
-      id: 2,
+      id: 2002,
       title: `2 Kanal Commercial House Kothi`,
       location: `Mehmood Kasuri Road, Gulberg, Lahore`,
       price: 900000000,
@@ -28,7 +31,7 @@ export default function CommercialPage() {
       description: `Luxurious commercial house kothi located directly on Mehmood Kasuri Road. Features a solid structure with a 59 square feet front and 150 feet length. Ideal for corporate offices or high end retail transformations.`
     },
     {
-      id: 5,
+      id: 2005,
       title: `1 Kanal 3 Marla Commercial Building`,
       location: `Mehmood Kasuri Road, Gulberg, Lahore`,
       price: 900000000,
@@ -39,5 +42,31 @@ export default function CommercialPage() {
     }
   ];
 
-  return <CommercialClient properties={propertyData} />;
+  let dbProperties: any[] = [];
+  try {
+    dbProperties = await prisma.property.findMany({
+      where: { 
+        type: `For Sale`,
+        category: `Commercial` 
+      },
+      orderBy: { createdAt: `desc` }
+    });
+  } catch (error) {
+    console.error(`Failed to fetch commercial properties:`, error);
+  }
+
+  const formattedDbData = dbProperties.map((prop: any) => ({
+    id: prop.id,
+    title: prop.title,
+    location: prop.location,
+    price: Number(prop.price.toString().replace(/[^0-9]/g, ``) || 0),
+    priceStr: `PKR ` + prop.price,
+    area: prop.area || prop.category || `Not Specified`,
+    image: prop.images && prop.images.length > 0 ? prop.images[0] : `/buy/1.webp`,
+    description: prop.description
+  }));
+
+  const combinedData = [...staticData, ...formattedDbData];
+
+  return <CommercialClient properties={combinedData} />;
 }

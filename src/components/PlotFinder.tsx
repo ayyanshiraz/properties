@@ -27,7 +27,8 @@ export default function PlotFinder() {
     { top: `80%`, left: `40%`, label: `6 Marla Shiraz Villas`, link: `/buy/homes/4` },
     { top: `35%`, left: `35%`, label: `1 Kanal 3 Marla Commercial`, link: `/buy/commercial/5` },
     { top: `20%`, left: `50%`, label: `House for rent Cavalry Ground`, link: `/rent/5` },
-    { top: `55%`, left: `80%`, label: `House for rent Cavalry Ground`, link: `/rent/5` }
+    { top: `85%`, left: `20%`, label: `Commercial property Valencia`, link: `/rent/1006` },
+    { top: `55%`, left: `80%`, label: `34 Marla Home Gulberg`, link: `/buy/homes/2006` }
   ];
 
   const handleSearch = () => {

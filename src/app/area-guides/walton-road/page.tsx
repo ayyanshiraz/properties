@@ -1,7 +1,7 @@
 import WaltonRoadClient from "../../../components/WaltonRoadClient";
 
 export const metadata = {
-  title: "Walton Road Area Guide | Qeemat.com",
+  title: "Walton Road Area Guide | Qemaat",
   description: "Explore the bustling markets, residential communities, and prime connectivity of Walton Road Lahore.",
 };
 

@@ -163,7 +163,7 @@ export default function Services() {
 
     // Append Web3Forms access key
     formData.append("access_key", "aa704be0-d1e0-4db0-b375-de47c9d583db");
-    formData.append("from_name", "Qeemat.com Services Page");
+    formData.append("from_name", "Qemaat Services Page");
     // Ensure subject is set if not explicitly filled
     if (!formData.get("subject")) {
         formData.append("subject", "New Inquiry from Services Page");
@@ -260,7 +260,7 @@ export default function Services() {
           <div className="w-full lg:w-1/2 service-text flex flex-col justify-center">
             <h2 className="text-4xl md:text-5xl font-bold text-[#013220] mb-6">Buy Property</h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              Your new home address is here: Qemaat.com expert will guide you to bespoke property investments that perfectly match your needs.
+              Your new home address is here: Qemaat expert will guide you to bespoke property investments that perfectly match your needs.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               Unlock Your new home address: Schedule a meeting with us. Join our exclusive offers community, and benefit from our top real estate developers alliance and our reputation.
@@ -317,7 +317,7 @@ export default function Services() {
           <div className="w-full lg:w-1/2 service-text flex flex-col justify-center">
             <h2 className="text-4xl md:text-5xl font-bold text-[#013220] mb-6">Concierge Services</h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              At Qemaat.com, our concierge services are designed to meet your expectations in every aspect of your real estate experience with us.
+              At Qemaat, our concierge services are designed to meet your expectations in every aspect of your real estate experience with us.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
               We prioritize your comfort by arranging for one of our luxurious vehicles to pick you up from your residence or workplace, ensuring a comfortable trip to your property. Following your coordinated viewing, your assigned chauffeur will efficiently transport you to your next destination, reflecting our dedication to providing the utmost convenience and sophistication in your real estate journey.

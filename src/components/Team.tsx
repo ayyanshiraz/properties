@@ -157,7 +157,7 @@ export default function Team() {
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80" 
-            alt="Qemaat.com Team" 
+            alt="Qemaat Team" 
             className="object-cover w-full h-full"
           />
           {/* Dark overlay for text contrast */}
@@ -171,7 +171,7 @@ export default function Team() {
               OUR TEAM
             </span>
             <h1 className="text-4xl md:text-6xl font-black text-white mb-10 leading-tight">
-              Meet The People Behind Qemaat.com
+              Meet The People Behind Qemaat
             </h1>
             <Link href="#contact" className="px-8 py-4 bg-white text-[#013220] font-bold text-sm tracking-wider uppercase rounded hover:bg-[#013220] hover:text-white transition-colors duration-300">
               Get started today
@@ -210,7 +210,7 @@ export default function Team() {
             
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Yasir Irshad</h2>
-              <p className="text-[#10b981] text-lg font-medium mb-8">Director, Qemaat.com</p>
+              <p className="text-[#10b981] text-lg font-medium mb-8">Director, Qemaat</p>
               
               <div className="flex items-center gap-3 text-white/90">
                 <svg className="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

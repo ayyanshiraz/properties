@@ -12,7 +12,7 @@ const reviewsData = [
     name: "Fatima Al Salem",
     avatar: "F",
     bgColor: "bg-purple-700",
-    text: "Their knowledge of off-plan projects is impressive. The team provided a clear and honest assessment of various opportunities, helping us make a confident and profitable investment. Thank you, Qemaat.com!",
+    text: "Their knowledge of off-plan projects is impressive. The team provided a clear and honest assessment of various opportunities, helping us make a confident and profitable investment. Thank you, Qemaat!",
     stars: 5
   },
   {
@@ -147,7 +147,7 @@ export default function Reviews() {
             {/* Content Top */}
             <div className="relative z-10 max-w-md">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Why Choose <span className="text-[#10b981]">Qemaat.com?</span>
+                Why Choose <span className="text-[#10b981]">Qemaat?</span>
               </h2>
               <p className="text-gray-200 text-lg leading-relaxed">
                 Introducing to you an exceptional luxury residence- among the finest and most contemporary real estate offerings to date.

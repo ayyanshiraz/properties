@@ -98,7 +98,7 @@ export default function Contact() {
 
     // Append Web3Forms access key
     formData.append("access_key", "aa704be0-d1e0-4db0-b375-de47c9d583db");
-    formData.append("from_name", "Qeemat.com Website Contact");
+    formData.append("from_name", "Qemaat Website Contact");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -140,7 +140,7 @@ export default function Contact() {
             GET IN TOUCH
           </span>
           <h1 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
-            Contact Qemaat.com
+            Contact Qemaat
           </h1>
           <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
             We are ready to assist you with all your real estate needs. Reach out to our dedicated team of experts today.
@@ -197,7 +197,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold mb-1">Email Address</h4>
-                  <p className="text-gray-300 text-sm">qeematdotcom@gmail.com</p>
+                  <p className="text-gray-300 text-sm">Qemaatdotcom@gmail.com</p>
                 </div>
               </div>
 

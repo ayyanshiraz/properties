@@ -1,7 +1,7 @@
 import BlogsClient from "../../components/BlogsClient";
 
 export const metadata = {
-  title: "Real Estate Blogs & News | Qeemat.com",
+  title: "Real Estate Blogs & News | Qemaat",
   description: "Stay updated with the latest real estate market trends, investment tips, and property news.",
 };
 

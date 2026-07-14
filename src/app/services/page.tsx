@@ -1,8 +1,8 @@
 import Services from "../../components/Services";
 
 export const metadata = {
-  title: "Our Services | Qemaat.com",
-  description: "Explore the extraordinary real estate services offered by Qemaat.com, including buying, selling, leasing, property management, and concierge services."
+  title: "Our Services | Qemaat",
+  description: "Explore the extraordinary real estate services offered by Qemaat, including buying, selling, leasing, property management, and concierge services."
 };
 
 export default function ServicesPage() {

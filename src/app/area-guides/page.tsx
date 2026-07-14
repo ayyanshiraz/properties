@@ -1,7 +1,7 @@
 import AreaGuidesClient from "../../components/AreaGuidesClient";
 
 export const metadata = {
-  title: `Area Guides | Qeemat.com`,
+  title: `Area Guides | Qemaat`,
   description: `Explore the best neighborhoods in Lahore with our comprehensive area guides.`
 };
 

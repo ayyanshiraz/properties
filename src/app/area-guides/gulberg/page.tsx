@@ -1,7 +1,7 @@
 import GulbergClient from "../../../components/GulbergClient";
 
 export const metadata = {
-  title: "Gulberg Area Guide | Qeemat.com",
+  title: "Gulberg Area Guide | Qemaat",
   description: "Explore the premium lifestyle, commercial hubs, and luxury residences of Gulberg Lahore.",
 };
 

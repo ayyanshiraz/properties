@@ -1,7 +1,7 @@
 import BlogDetailClient from "../../../components/BlogDetailClient";
 
 export const metadata = {
-  title: "Blog Details | Qeemat.com",
+  title: "Blog Details | Qemaat",
   description: "Read the full article and stay updated with real estate news.",
 };
 

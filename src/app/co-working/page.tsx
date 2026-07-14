@@ -1,7 +1,7 @@
 import CoWorkingClient from "../../components/CoWorkingClient";
 
 export const metadata = {
-  title: `Co-Working Space | Qeemat.com`,
+  title: `Co-Working Space | Qemaat`,
   description: `Discover premium co-working office spaces and shared desks tailored for your business needs.`,
 };
 

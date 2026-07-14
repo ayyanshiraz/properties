@@ -71,13 +71,9 @@ export default function Navbar() {
       <div className={`max-w-[1400px] mx-auto px-4 flex justify-between items-center`}>
         
         <Link href={`/`} className={`flex items-center gap-2 cursor-pointer`}>
-          <div className={`w-9 h-9 bg-[#013220] rounded-lg flex items-center justify-center shadow-lg`}>
-            <svg className={`w-5 h-5 text-white`} fill={`currentColor`} viewBox={`0 0 20 20`}>
-              <path d={`M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z`} />
-            </svg>
-          </div>
+          <img src={`/logo2.png`} alt={`Qemaat Logo`} className={`w-9 h-9 object-contain rounded-lg shadow-lg`} />
           <span className={`text-xl font-black text-gray-900 tracking-tight`}>
-            Qeemat<span className={`text-[#013220]`}>.com</span>
+            Qemaat<span className={`text-[#013220]`}></span>
           </span>
         </Link>
 

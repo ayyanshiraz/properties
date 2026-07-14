@@ -157,7 +157,7 @@ export default function About() {
             Real Estate Agency In Pakistan
           </span>
           <h1 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tight">
-            Qemaat.com
+            Qemaat
           </h1>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="#team" className="px-8 py-3 border-2 border-white text-white font-bold text-sm tracking-wider uppercase hover:bg-white hover:text-[#013220] transition-colors duration-300">
@@ -179,7 +179,7 @@ export default function About() {
               Our Story
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              Founded in 2024, Qemaat.com has quickly established itself as a leader in the Pakistan real estate market. Since our inception, we have consistently upheld a standard of excellence and a commitment to providing our clients with unparalleled service.
+              Founded in 2024, Qemaat has quickly established itself as a leader in the Pakistan real estate market. Since our inception, we have consistently upheld a standard of excellence and a commitment to providing our clients with unparalleled service.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed">
               Our committed team is dedicated to meeting client needs with innovative solutions, and extensive knowledge of Pakistan Real Estate facilitates seamless transactions that align with their pace and requirements.
@@ -224,7 +224,7 @@ export default function About() {
           <div className="lg:col-span-7 flex flex-col justify-center">
             <div className="text-6xl text-[#10b981] font-serif leading-none mb-6"></div>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              At Qemaat.com, we believe that real estate is more than just a transaction; it is the foundation upon which dreams are built and ambitions are realized. We bring over a decade of market leadership in Pakistan, having proudly served this dynamic region since our beginning.
+              At Qemaat, we believe that real estate is more than just a transaction; it is the foundation upon which dreams are built and ambitions are realized. We bring over a decade of market leadership in Pakistan, having proudly served this dynamic region since our beginning.
             </p>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
               In today fast paced and ever evolving real estate landscape, a one size fits all approach is no longer enough. We recognize that every client journey is unique, which is why our mission is to provide a truly personalized and consultative experience. Whether you are buying, selling, or investing, our commitment is to understand your vision first, then meticulously tailor our services to achieve a successful outcome.
@@ -235,7 +235,7 @@ export default function About() {
             
             <div>
               <h4 className="text-2xl font-bold text-[#013220] mb-1">Yasir Irshad</h4>
-              <p className="text-[#10b981] font-medium uppercase tracking-wider text-sm">Director, Qemaat.com</p>
+              <p className="text-[#10b981] font-medium uppercase tracking-wider text-sm">Director, Qemaat</p>
             </div>
           </div>
 
@@ -259,7 +259,7 @@ export default function About() {
               </div>
               <h3 className="text-2xl font-bold mb-6">Our Approach</h3>
               <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-                We deliver unparalleled services to clients looking to buy, sell, rent, or manage their properties. At Qemaat.com, we are sure to guide you toward the right Real Estate investment opportunity.
+                We deliver unparalleled services to clients looking to buy, sell, rent, or manage their properties. At Qemaat, we are sure to guide you toward the right Real Estate investment opportunity.
               </p>
             </div>
 

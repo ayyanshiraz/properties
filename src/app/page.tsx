@@ -3,7 +3,7 @@ import HomeClient from "../components/HomeClient";
 
 // SEO Metadata for Search Engines
 export const metadata = {
-  title: `Qeemat.com - Sell Buy Rent Homes`,
+  title: `Qemaat - Sell Buy Rent Homes`,
   description: `Find the best residential and commercial properties across Lahore. Your trusted real estate portal.`,
   keywords: `properties in pakistan, buy house lahore, rent apartment lahore, real estate`,
 };
