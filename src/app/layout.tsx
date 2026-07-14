@@ -30,6 +30,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="google-site-verification" content="FOAVItenv04tncfquMBw3P5Us7gfyuBPV2pnnKvhiIU" />
+      </head>
       <body className="min-h-full flex flex-col">
         
         {/* ConditionalUI khud decide karega kahan Navbar/Footer dikhana hai */}
