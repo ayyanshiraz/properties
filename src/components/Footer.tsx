@@ -78,7 +78,7 @@ export default function Footer() {
           
           <div className="flex flex-col items-start">
             <Link href="/" className="flex items-center gap-2 mb-6 cursor-pointer">
-              <img src={`/logo2.png`} alt={`Qemaat Logo`} className="w-10 h-10 object-contain bg-white rounded-lg shadow-lg" />
+              <img src={`/logo3.png`} alt={`Qemaat Logo`} className="w-10 h-10 object-contain bg-white rounded-lg shadow-lg" />
               <span className="text-2xl font-black text-white tracking-tight">
                 Qemaat<span className="text-gray-400"></span>
               </span>

@@ -1,4 +1,4 @@
-"use client";
+`use client`;
 
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
@@ -70,10 +70,10 @@ export default function Navbar() {
     <nav ref={navRef} className={navClass}>
       <div className={`max-w-[1400px] mx-auto px-4 flex justify-between items-center`}>
         
-        <Link href={`/`} className={`flex items-center gap-2 cursor-pointer`}>
-          <img src={`/logo2.png`} alt={`Qemaat Logo`} className={`w-9 h-9 object-contain rounded-lg shadow-lg`} />
-          <span className={`text-xl font-black text-gray-900 tracking-tight`}>
-            Qemaat<span className={`text-[#013220]`}></span>
+        <Link href={`/`} className={`flex items-center gap-1 cursor-pointer`}>
+          <img src={`/logo3.png`} alt={`Qemaat Logo`} className={`w-9 h-9 object-contain rounded-lg shadow-lg`} />
+          <span className={`text-2xl font-black text-gray-900 tracking-tight`}>
+            Qemaat
           </span>
         </Link>
 
