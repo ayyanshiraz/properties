@@ -105,7 +105,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="font-bold block mb-1">Call:</span>
-                <span className="hover:text-gray-300 transition-colors cursor-pointer">+92 333 488832</span>
+                <span className="hover:text-gray-300 transition-colors cursor-pointer">+92 333 4888324</span>
               </div>
             </div>
           </div>
