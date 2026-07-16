@@ -97,7 +97,7 @@ export default function Contact() {
     const formData = new FormData(form);
 
     // Append Web3Forms access key
-    formData.append("access_key", "aa704be0-d1e0-4db0-b375-de47c9d583db");
+    formData.append("access_key", "59b06ade-7408-49fb-91a0-846fe3cc2519");
     formData.append("from_name", "Qemaat Website Contact");
 
     try {
@@ -197,7 +197,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold mb-1">Email Address</h4>
-                  <p className="text-gray-300 text-sm">Qemaatdotcom@gmail.com</p>
+                  <p className="text-gray-300 text-sm">qemaat@gmail.com</p>
                 </div>
               </div>
 

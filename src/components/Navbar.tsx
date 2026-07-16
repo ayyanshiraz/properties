@@ -1,4 +1,4 @@
-`use client`;
+"use client";
 
 import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
@@ -17,6 +17,8 @@ export default function Navbar() {
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(``);
+  const [userId, setUserId] = useState<number | null>(null);
+  const [hasAlerts, setHasAlerts] = useState(false);
 
   useEffect(() => {
     gsap.fromTo(navRef.current,
@@ -36,16 +38,38 @@ export default function Navbar() {
     return () => window.removeEventListener(`scroll`, handleScroll);
   }, []);
 
+  // User Authentication Check
   useEffect(() => {
     const storedUser = localStorage.getItem(`user`);
     if (storedUser) {
       const parsed = JSON.parse(storedUser);
       setUserName(parsed.name || parsed.email || `Alishba Zia`);
+      setUserId(parsed.id);
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
     }
   }, [pathname]);
+
+  // Fetch properties to check for Approved status alerts
+  useEffect(() => {
+    const fetchAlerts = async () => {
+      if (!userId) return;
+      try {
+        const res = await fetch(`/api/properties`, { cache: `no-store` });
+        const result = await res.json();
+        if (result.success) {
+          const myProps = result.data.filter((prop: any) => prop.userId === userId);
+          // Agar koi property APPROVED ho chuki hai toh dot show karein
+          const hasApproved = myProps.some((prop: any) => prop.status === `APPROVED`);
+          setHasAlerts(hasApproved);
+        }
+      } catch (error) {
+        console.error(`Failed to fetch alerts for navbar:`, error);
+      }
+    };
+    fetchAlerts();
+  }, [userId, pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -139,33 +163,50 @@ export default function Navbar() {
             <div className={`relative lg:-ml-4`} ref={profileDropdownRef}>
               <button 
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                className={`flex items-center justify-center w-10 h-10 rounded-full bg-[#013220] text-white md:hover:bg-[#011a11] active:scale-95 transition-all cursor-pointer`}
+                className={`relative flex items-center justify-center w-10 h-10 rounded-full bg-[#013220] text-white md:hover:bg-[#011a11] active:scale-95 transition-all cursor-pointer`}
               >
                 <svg className={`w-6 h-6`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={`2`} d={`M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z`}></path></svg>
+                
+                {/* Red Dot on Profile Icon */}
+                {hasAlerts && (
+                  <span className={`absolute top-0 right-0 flex h-3 w-3`}>
+                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75`}></span>
+                    <span className={`relative inline-flex rounded-full h-3 w-3 bg-red-500 border-2 border-white`}></span>
+                  </span>
+                )}
               </button>
 
               {isProfileDropdownOpen && (
-                <div className={`absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 p-5 z-50 flex flex-col gap-3`}>
+                <div className={`absolute left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 mt-3 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 p-5 z-50 flex flex-col gap-3`}>
                   <div className={`text-center pb-3`}>
                     <span className={`text-[#013220] font-bold text-lg`}>{userName}</span>
                   </div>
                   <Link 
                     href={`/account`} 
                     onClick={() => setIsProfileDropdownOpen(false)}
-                    className={`w-full text-left px-4 py-3.5 bg-gray-50/80 border border-gray-200 rounded-lg text-sm text-[#013220] font-medium hover:bg-gray-100 transition-colors block`}
+                    className={`w-full text-left px-4 py-3.5 bg-white border border-gray-200 rounded-lg text-sm text-[#013220] font-medium hover:bg-gray-100 transition-colors block`}
                   >
                     My Account
                   </Link>
+                  
+                  {/* Manage Alerts Button in Dropdown */}
                   <Link 
                     href={`/alerts`} 
                     onClick={() => setIsProfileDropdownOpen(false)}
-                    className={`w-full text-left px-4 py-3.5 bg-gray-50/80 border border-gray-200 rounded-lg text-sm text-[#013220] font-medium hover:bg-gray-100 transition-colors block`}
+                    className={`w-full flex items-center justify-between px-4 py-3.5 bg-white border border-gray-200 rounded-lg text-sm text-[#013220] font-medium hover:bg-gray-100 transition-colors`}
                   >
-                    Manage Alerts
+                    <span>Manage Alerts</span>
+                    {hasAlerts && (
+                      <span className={`flex h-2.5 w-2.5 relative`}>
+                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75`}></span>
+                        <span className={`relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500`}></span>
+                      </span>
+                    )}
                   </Link>
+
                   <button 
                     onClick={handleLogout} 
-                    className={`w-full text-left px-4 py-3.5 bg-gray-50/80 border border-gray-200 rounded-lg text-sm text-[#013220] font-medium hover:bg-gray-100 transition-colors block`}
+                    className={`w-full text-left px-4 py-3.5 bg-white border border-gray-200 rounded-lg text-sm text-[#013220] font-medium hover:bg-gray-100 transition-colors block`}
                   >
                     Logout
                   </button>

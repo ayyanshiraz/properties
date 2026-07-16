@@ -14,7 +14,10 @@ model User {
   email      String     @unique
   phone      String
   password   String
+  role       String     @default("USER")
   properties Property[]
+  resetToken       String?
+  resetTokenExpiry DateTime?
 }
 
 model Property {
@@ -28,6 +31,7 @@ model Property {
   description String
   images      String[]
   videos      String[]
+  status      String   @default("PENDING")
   createdAt   DateTime @default(now())
   userId      Int?
   user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)

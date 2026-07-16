@@ -16,6 +16,7 @@ interface PropertyData {
   propertyType: string;
   propertyStatus: string;
   propertyId: string;
+  agentName?: string;
 }
 
 export default function HomesDetailClient({ property }: { property: PropertyData }) {
@@ -111,7 +112,7 @@ export default function HomesDetailClient({ property }: { property: PropertyData
           <div ref={sidebarRef} className={`sticky top-28 bg-white border border-gray-100 shadow-[0_20px_60px_rgba(0,0,0,0.06)] rounded-2xl p-6 flex flex-col gap-6`}>
             <div className={`flex items-center gap-4 border-b border-gray-100 pb-5`}>
               <div className={`w-16 h-16 bg-gradient-to-br from-[#013220] to-[#011a11] rounded-full flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform cursor-pointer`}><svg className={`w-8 h-8 text-white`} fill={`currentColor`} viewBox={`0 0 20 20`}><path fillRule={`evenodd`} d={`M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z`} clipRule={`evenodd`}></path></svg></div>
-              <div className={`flex flex-col gap-1`}><h3 className={`font-black text-xl text-gray-900`}>Qemaat Agent</h3><Link href={`#`} className={`text-sm text-[#013220] font-bold uppercase tracking-wider hover:underline`}>Contact Us</Link></div>
+              <div className={`flex flex-col gap-1`}><h3 className={`font-black text-xl text-gray-900`}>{property.agentName || `Qemaat Agent`}</h3><Link href={`#`} className={`text-sm text-[#013220] font-bold uppercase tracking-wider hover:underline`}>Contact Us</Link></div>
             </div>
 
             <form className={`flex flex-col gap-4`}>

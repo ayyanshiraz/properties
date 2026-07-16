@@ -68,14 +68,16 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
       description: currentDesc,
       propertyType: routeId === `1006` ? `Commercial` : (routeId === `1005` ? `House, Residential` : `Apartment, Residential`),
       propertyStatus: `For Rent`,
-      propertyId: `bizlux-` + routeId + `905972`
+      propertyId: `bizlux-` + routeId + `905972`,
+      agentName: `Qemaat Agent`
     };
   } else {
     try {
       const dbId = parseInt(routeId);
       if (!isNaN(dbId)) {
         const dbProp = await prisma.property.findUnique({
-          where: { id: dbId }
+          where: { id: dbId },
+          include: { user: true }
         }) as any;
 
         if (dbProp) {
@@ -93,7 +95,8 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             description: dbProp.description,
             propertyType: dbProp.category || `Residential`,
             propertyStatus: dbProp.type,
-            propertyId: `bizlux-` + dbProp.id + `905972`
+            propertyId: `bizlux-` + dbProp.id + `905972`,
+            agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`
           };
         }
       }
@@ -113,7 +116,8 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
       description: `This property is no longer available.`,
       propertyType: `Unknown`,
       propertyStatus: `Sold / Rented`,
-      propertyId: `N/A`
+      propertyId: `N/A`,
+      agentName: `Qemaat Agent`
     };
   }
 

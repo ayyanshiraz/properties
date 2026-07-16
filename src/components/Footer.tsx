@@ -101,7 +101,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className={`font-bold block mb-1`}>Email:</span>
-                <Link href={`/`} className={`hover:text-gray-300 transition-colors cursor-pointer`}>Qemaatdotcom@gmail.com</Link>
+                <Link href={`/`} className={`hover:text-gray-300 transition-colors cursor-pointer`}>qemaat@gmail.com</Link>
               </div>
               <div>
                 <span className={`font-bold block mb-1`}>Call:</span>

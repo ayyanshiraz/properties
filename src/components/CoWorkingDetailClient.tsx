@@ -19,7 +19,7 @@ interface PropertyData {
   agentName?: string;
 }
 
-export default function CommercialDetailClient({ property }: { property: PropertyData }) {
+export default function CoWorkingDetailClient({ property }: { property: PropertyData }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const modalImgRef = useRef<any>(null);
@@ -58,8 +58,7 @@ export default function CommercialDetailClient({ property }: { property: Propert
           <div className={`flex flex-col gap-4`}>
             <div className={`text-sm text-gray-500 font-bold uppercase tracking-wider flex flex-wrap items-center gap-3`}>
               <Link href={`/`} className={`hover:text-[#013220] transition-colors`}>Home</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
-              <Link href={`/buy`} className={`hover:text-[#013220] transition-colors`}>Buy</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
-              <Link href={`/commercial`} className={`hover:text-[#013220] transition-colors`}>Commercial</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
+              <Link href={`/co-working`} className={`hover:text-[#013220] transition-colors`}>Co-Working Space</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
               <span className={`text-[#013220] truncate`}>{property.title}</span>
             </div>
             <h1 className={`text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight`}>{property.title}</h1>
@@ -70,7 +69,7 @@ export default function CommercialDetailClient({ property }: { property: Propert
             <div className={`bg-white border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] rounded-2xl p-8 grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-6 relative overflow-hidden`}>
               <div className={`absolute top-0 right-0 w-32 h-32 bg-[#013220]/5 rounded-bl-full -z-10`}></div>
               <div className={`flex flex-col gap-2`}><span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Property ID</span><span className={`text-gray-900 font-black text-lg`}>{property.propertyId}</span></div>
-              <div className={`flex flex-col gap-2`}><span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Sale Price</span><span className={`text-[#013220] font-black text-lg`}>{property.priceStr}</span></div>
+              <div className={`flex flex-col gap-2`}><span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Pricing</span><span className={`text-[#013220] font-black text-lg`}>{property.priceStr}</span></div>
               <div className={`flex flex-col gap-2`}><span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Area Dimension</span><span className={`text-gray-900 font-black text-lg`}>{property.area}</span></div>
               <div className={`flex flex-col gap-2`}><span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Property Type</span><span className={`text-gray-900 font-black text-lg`}>{property.propertyType}</span></div>
               <div className={`flex flex-col gap-2`}><span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Status</span><span className={`bg-[#013220] text-white text-xs font-bold px-3 py-1 rounded w-max`}>{property.propertyStatus}</span></div>
@@ -131,7 +130,7 @@ export default function CommercialDetailClient({ property }: { property: Propert
                  <textarea 
                    rows={2} 
                    className={`w-full bg-gray-50 border border-gray-200 rounded-lg p-3 outline-none focus:border-[#013220] text-black placeholder:text-gray-400 font-medium resize-none`} 
-                   defaultValue={`I am interested in buying the commercial property: ` + property.title}
+                   defaultValue={`I am interested in the co-working space: ` + property.title}
                  ></textarea>
               </div>
               

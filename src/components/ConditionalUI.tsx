@@ -12,7 +12,12 @@ export default function ConditionalUI({ children }: { children: React.ReactNode 
     pathname === "/account" || 
     pathname === "/add-property" || 
     pathname.startsWith("/edit-property") ||
-    pathname === "/login"; // Agar aap login page se bhi hatana chahti hain toh
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/forgot-password" ||
+    pathname === "/reset-password" ||
+    pathname.startsWith("/admin") ||
+    pathname === "/alerts"; 
 
   return (
     <>

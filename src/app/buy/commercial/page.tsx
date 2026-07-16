@@ -47,7 +47,8 @@ export default async function CommercialPage() {
     dbProperties = await prisma.property.findMany({
       where: { 
         type: `For Sale`,
-        category: `Commercial` 
+        category: `Commercial`,
+        status: `APPROVED`
       },
       orderBy: { createdAt: `desc` }
     });

@@ -68,31 +68,31 @@ export default function DashboardClient() {
       tl.fromTo(titleRef.current, 
         { x: -30, opacity: 0 },
         { x: 0, opacity: 1, duration: 0.8, ease: "elastic.out(1, 0.7)" }, 
-        "-=.3"
+        "-=0.3"
       )
 
       tl.fromTo(cardsRef.current, 
         { y: 60, rotationX: -25, rotationY: 10, opacity: 0, transformPerspective: 1000, transformOrigin: "bottom center" },
         { y: 0, rotationX: 0, rotationY: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.4)" }, 
-        "-=.6"
+        "-=0.6"
       )
 
       tl.fromTo(graphContainerRef.current, 
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 
-        "-=.4"
+        "-=0.4"
       )
 
       tl.fromTo(barsRef.current, 
         { scaleY: 0, transformOrigin: "bottom" },
         { scaleY: 1, duration: 0.8, stagger: 0.1, ease: "elastic.out(1, 0.8)" }, 
-        "-=.4"
+        "-=0.4"
       )
 
       tl.fromTo(emptyStateRef.current, 
         { scale: 0.9, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }, 
-        "-=.5"
+        "-=0.5"
       )
 
     }, containerRef)
@@ -212,7 +212,7 @@ export default function DashboardClient() {
           </Link>
           <div className="w-px h-6 bg-gray-200 hidden md:block"></div>
           <div className="flex items-center gap-3 group cursor-pointer">
-            <span className="text-sm font-bold text-gray-700 hidden sm:block group-hover:text-[#013220] transition-colors">{userName}</span>
+            <span className="text-sm font-bold text-gray-700 group-hover:text-[#013220] transition-colors">{userName}</span>
             <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border border-gray-200 group-hover:border-[#013220] group-hover:bg-[#e8f0ec] transition-all duration-300">
                <svg className="w-5 h-5 text-gray-500 group-hover:text-[#013220] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
             </div>
@@ -266,24 +266,28 @@ export default function DashboardClient() {
             </div>
           </div>
 
-          <div className="h-72 w-full flex items-end justify-between gap-3 px-2 pb-8 border-b-2 border-gray-100 relative z-10">
-            {graphRenderData.data.map((item, index) => (
-              <div 
-                key={index}
-                ref={(el) => setBarRef(el, index)} 
-                className="w-full transition-all duration-300 rounded-t-lg relative group cursor-crosshair bg-[#e8f0ec] hover:bg-[#013220]"
-                style={{ height: `${item.heightPercentage}%` }}
-              >
-                <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs font-bold py-1.5 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap transform pointer-events-none">
-                  {item.count} Listings
-                </div>
+          <div className="overflow-x-auto w-full pb-2 custom-scrollbar">
+            <div className="min-w-[500px]">
+              <div className="h-72 w-full flex items-end justify-between gap-3 px-2 pb-8 border-b-2 border-gray-100 relative z-10">
+                {graphRenderData.data.map((item, index) => (
+                  <div 
+                    key={index}
+                    ref={(el) => setBarRef(el, index)} 
+                    className="w-full transition-all duration-300 rounded-t-lg relative group cursor-crosshair bg-[#e8f0ec] hover:bg-[#013220]"
+                    style={{ height: `${item.heightPercentage}%` }}
+                  >
+                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs font-bold py-1.5 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap transform pointer-events-none">
+                      {item.count} Listings
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="flex justify-between mt-4 text-sm font-bold text-gray-400 px-4">
-            {graphRenderData.labels.map((label, idx) => (
-              <span key={idx} className={graphFilter === "Week" && new Date().getDay() - 1 === idx ? "text-[#013220] bg-[#e8f0ec] px-3 py-1 rounded-md" : ""}>{label}</span>
-            ))}
+              <div className="flex justify-between mt-4 text-xs sm:text-sm font-bold text-gray-400 px-4">
+                {graphRenderData.labels.map((label, idx) => (
+                  <span key={idx} className={graphFilter === "Week" && new Date().getDay() - 1 === idx ? "text-[#013220] bg-[#e8f0ec] px-3 py-1 rounded-md" : ""}>{label}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -311,7 +315,7 @@ export default function DashboardClient() {
           ) : properties.length > 0 ? (
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {properties.map((prop: any) => (
-                <div key={prop.id} className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group/card relative">
+                <div key={prop.id} className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group/card relative">
                   
                   <div className="absolute top-6 right-6 flex gap-2 z-20 opacity-100 md:opacity-0 md:group-hover/card:opacity-100 transition-opacity duration-300">
                     <Link 
@@ -340,10 +344,20 @@ export default function DashboardClient() {
                     )}
                   </div>
 
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-lg">{prop.type}</span>
-                    <span className="text-lg font-black text-gray-900">PKR {prop.price}</span>
+                  <div className="flex flex-wrap justify-between items-center gap-3 mb-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-[11px] font-bold rounded-md whitespace-nowrap">{prop.type}</span>
+                      
+                      {prop.status === "APPROVED" ? (
+                        <span className="px-2.5 py-1 bg-green-100 text-green-700 text-[11px] font-bold rounded-md uppercase tracking-wide whitespace-nowrap">Approved</span>
+                      ) : (
+                        <span className="px-2.5 py-1 bg-yellow-100 text-yellow-700 text-[11px] font-bold rounded-md uppercase tracking-wide whitespace-nowrap">Pending</span>
+                      )}
+                    </div>
+                    
+                    <span className="text-lg font-black text-gray-900 whitespace-nowrap">PKR {prop.price}</span>
                   </div>
+                  
                   <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-1">{prop.title}</h3>
                   <p className="text-sm text-gray-500 mb-4 line-clamp-1">{prop.location}</p>
                   

@@ -162,7 +162,7 @@ export default function Services() {
     const formData = new FormData(form);
 
     // Append Web3Forms access key
-    formData.append("access_key", "aa704be0-d1e0-4db0-b375-de47c9d583db");
+    formData.append("access_key", "59b06ade-7408-49fb-91a0-846fe3cc2519");
     formData.append("from_name", "Qemaat Services Page");
     // Ensure subject is set if not explicitly filled
     if (!formData.get("subject")) {

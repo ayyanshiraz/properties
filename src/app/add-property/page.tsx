@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import gsap from "gsap"
-import Link from "next/link"
-import { createClient } from "@supabase/supabase-js"
+import React, { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ""
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function AddProperty() {
-  const formRef = useRef(null)
+  const formRef = useRef(null);
   
   const [formData, setFormData] = useState({
     title: "",
@@ -20,61 +20,72 @@ export default function AddProperty() {
     price: "",
     location: "",
     description: ""
-  })
+  });
 
   const [mediaFiles, setMediaFiles] = useState<{ images: FileList | null; videos: FileList | null }>({
     images: null,
     videos: null
-  })
+  });
 
-  const [showSuccessModal, setShowSuccessModal] = useState(false)
-  const [isUploading, setIsUploading] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     gsap.fromTo(
       formRef.current,
       { opacity: 0, y: 40 },
       { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
-    )
-  }, [])
+    );
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setMediaFiles({ ...mediaFiles, [e.target.name]: e.target.files })
+      setMediaFiles({ ...mediaFiles, [e.target.name]: e.target.files });
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsUploading(true)
+    e.preventDefault();
+    setIsUploading(true);
     
     try {
+      // 1. User login check karein
       const storedUserString = localStorage.getItem("user");
-      const storedUser = storedUserString ? JSON.parse(storedUserString) : {};
+      const storedUser = storedUserString ? JSON.parse(storedUserString) : null;
+
+      if (!storedUser || !storedUser.id) {
+        throw new Error("Aap login nahi hain. Please pehle login karein.");
+      }
 
       const imageFiles = mediaFiles.images ? Array.from(mediaFiles.images) : [];
       const videoFiles = mediaFiles.videos ? Array.from(mediaFiles.videos) : [];
 
+      // 2. Supabase Upload Function
       const uploadToSupabase = async (files: File[], folder: string) => {
-        const uploadedUrls: string[] = []
+        const uploadedUrls: string[] = [];
         for (const file of files) {
-          const fileExt = file.name.split(".").pop()
-          const fileName = Math.random().toString(36).substring(2) + "." + fileExt
-          const filePath = folder + "/" + fileName
-          const { error } = await supabase.storage.from("property-media").upload(filePath, file)
-          if (error) continue
-          const { data: publicUrlData } = supabase.storage.from("property-media").getPublicUrl(filePath)
-          uploadedUrls.push(publicUrlData.publicUrl)
+          const fileExt = file.name.split(".").pop();
+          const fileName = Math.random().toString(36).substring(2) + "." + fileExt;
+          const filePath = folder + "/" + fileName;
+          
+          const { error } = await supabase.storage.from("property-media").upload(filePath, file);
+          
+          if (error) {
+            throw new Error(`Media Upload Failed (${file.name}): ${error.message}`);
+          }
+          
+          const { data: publicUrlData } = supabase.storage.from("property-media").getPublicUrl(filePath);
+          uploadedUrls.push(publicUrlData.publicUrl);
         }
-        return uploadedUrls
-      }
+        return uploadedUrls;
+      };
 
-      const uploadedImageUrls = await uploadToSupabase(imageFiles, "images")
-      const uploadedVideoUrls = await uploadToSupabase(videoFiles, "videos")
+      const uploadedImageUrls = await uploadToSupabase(imageFiles, "images");
+      const uploadedVideoUrls = await uploadToSupabase(videoFiles, "videos");
 
       const payload = {
         ...formData,
@@ -83,29 +94,34 @@ export default function AddProperty() {
         userId: storedUser.id
       };
 
+      // 3. API Database Save
       const response = await fetch("/api/properties", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-      })
+      });
 
-      const result = await response.json()
-
-      if (result.success) {
-        setShowSuccessModal(true)
-        setFormData({ title: "", type: "For Sale", category: "Homes", area: "", price: "", location: "", description: "" })
-        setMediaFiles({ images: null, videos: null })
-      } else {
-        alert("System Error: Property save karte waqt koi masla pesh aaya.")
+      if (!response.ok) {
+        throw new Error(`Server Error (${response.status}): Database mein save nahi ho saka.`);
       }
 
-    } catch (error) {
-      console.error("Submission error:", error)
-      alert("Network request fail ho gayi.")
+      const result = await response.json();
+
+      if (result.success) {
+        setShowSuccessModal(true);
+        setFormData({ title: "", type: "For Sale", category: "Homes", area: "", price: "", location: "", description: "" });
+        setMediaFiles({ images: null, videos: null });
+      } else {
+        throw new Error("Property save karte waqt backend par masla aya.");
+      }
+
+    } catch (error: any) {
+      console.error("Submission error:", error);
+      alert("Error: " + (error.message || "Unknown error occurred."));
     } finally {
-      setIsUploading(false)
+      setIsUploading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative">
@@ -119,7 +135,7 @@ export default function AddProperty() {
               </svg>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Congratulations!</h3>
-            <p className="text-gray-600 mb-8">Your property has been successfully listed on Qemaat.</p>
+            <p className="text-gray-600 mb-8">Your property has been successfully listed and is pending admin approval.</p>
             <Link href="/account" className="block w-full bg-green-700 text-white rounded-lg px-4 py-3 font-semibold hover:bg-green-800 transition-colors shadow-md text-center">
               Go to Dashboard
             </Link>
@@ -201,5 +217,5 @@ export default function AddProperty() {
         </form>
       </div>
     </div>
-  )
+  );
 }

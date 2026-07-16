@@ -60,7 +60,7 @@ export default function SignupPage() {
   };
 
   return (
-    <main className={`min-h-screen w-full flex bg-[#f8fafc]`}>
+    <main className={`min-h-screen w-full flex bg-[#f8fafc] overflow-x-hidden`}>
       
       <div ref={leftPanelRef} className={`hidden lg:flex w-1/2 relative bg-[#013220] overflow-hidden items-center justify-center p-12 shadow-2xl z-10`}>
         <div className={`absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#025a3a] blur-[120px] opacity-60`}></div>
@@ -103,7 +103,7 @@ export default function SignupPage() {
               placeholder={`Name*`} 
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors`} 
+              className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors text-black`} 
               required 
             />
 
@@ -112,7 +112,7 @@ export default function SignupPage() {
               placeholder={`Email*`} 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors`} 
+              className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors text-black`} 
               required 
             />
             
@@ -121,7 +121,7 @@ export default function SignupPage() {
               placeholder={`Password*`} 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors`} 
+              className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors text-black`} 
               required 
             />
 
@@ -131,7 +131,7 @@ export default function SignupPage() {
                 placeholder={`Confirm Password*`} 
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors`} 
+                className={`w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#4caf50] transition-colors text-black`} 
                 required 
               />
               {confirmPassword.length > 0 && password !== confirmPassword && (
@@ -148,7 +148,7 @@ export default function SignupPage() {
                 type={`tel`} 
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className={`w-full px-3 py-3 text-[15px] outline-none`} 
+                className={`w-full px-3 py-3 text-[15px] outline-none text-black`} 
               />
             </div>
 

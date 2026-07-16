@@ -21,7 +21,7 @@ export default async function BuyPage() {
   let dbProperties: any[] = [];
   try {
     dbProperties = await prisma.property.findMany({
-      where: { type: `For Sale` },
+      where: { type: `For Sale`, status: `APPROVED` },
       orderBy: { createdAt: `desc` }
     });
   } catch (error) {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -10,49 +10,49 @@ gsap.registerPlugin(ScrollTrigger);
 const rentalProperties = [
   {
     id: 1,
-    title: `Furnished 2 Bed Apartment (Without Bills)`,
-    location: `Gulberg, Lahore`,
-    price: `PKR 160,000 / Month`,
-    image: `/rent/6.webp`,
-    badges: [`FEATURED`, `FOR RENT`],
-    link: `/rent/1`
+    title: "Furnished 2 Bed Apartment (Without Bills)",
+    location: "Gulberg, Lahore",
+    price: "PKR 160,000 / Month",
+    image: "/rent/6.webp",
+    badges: ["FEATURED", "FOR RENT"],
+    link: "/rent/1"
   },
   {
     id: 2,
-    title: `Non Furnished Apartment (Without Bills)`,
-    location: `Gulberg, Lahore`,
-    price: `PKR 150,000 / Month`,
-    image: `/rent/14.webp`,
-    badges: [`FEATURED`, `FOR RENT`],
-    link: `/rent/2`
+    title: "Non Furnished Apartment (Without Bills)",
+    location: "Gulberg, Lahore",
+    price: "PKR 150,000 / Month",
+    image: "/rent/14.webp",
+    badges: ["FEATURED", "FOR RENT"],
+    link: "/rent/2"
   },
   {
     id: 3,
-    title: `2 Bed Apartment in Zameen Aurum`,
-    location: `Gulberg, Lahore`,
-    price: `PKR 520,000 / Month`,
-    image: `/rent/8.webp`,
-    badges: [`FEATURED`, `FOR RENT`],
-    link: `/rent/3`
+    title: "2 Bed Apartment in Zameen Aurum",
+    location: "Gulberg, Lahore",
+    price: "PKR 520,000 / Month",
+    image: "/rent/8.webp",
+    badges: ["FEATURED", "FOR RENT"],
+    link: "/rent/3"
   },
   {
     id: 4,
-    title: `1 Kanal Portion on MM Alam Road`,
-    location: `MM Alam Road, Gulberg, Lahore`,
-    price: `PKR 250,000 / Month`,
-    image: `/rent/22.webp`,
-    badges: [`FEATURED`, `FOR RENT`],
-    link: `/rent/4`
+    title: "1 Kanal Portion on MM Alam Road",
+    location: "MM Alam Road, Gulberg, Lahore",
+    price: "PKR 250,000 / Month",
+    image: "/rent/22.webp",
+    badges: ["FEATURED", "FOR RENT"],
+    link: "/rent/4"
   },
-   {
-      id: 5,
-      title: `House for rent`,
-      location: `Cavlary ground cant Lahore`,
-      price:  `PKR 150,000 / Month`,
-      image: `/rent/46.webp`,
-      badges: [`FEATURED`, `FOR RENT`],
-      link: `/rent/5`
-    }
+  {
+    id: 5,
+    title: "House for rent",
+    location: "Cavlary ground cant Lahore",
+    price:  "PKR 150,000 / Month",
+    image: "/rent/46.webp",
+    badges: ["FEATURED", "FOR RENT"],
+    link: "/rent/5"
+  }
 ];
 
 export default function FeaturedRentals() {
@@ -61,34 +61,69 @@ export default function FeaturedRentals() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  const [dbRentals, setDbRentals] = useState<any[]>([]);
+
+  // Database se naye For Rent properties fetch karein
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        toggleActions: "play none none reverse"
+    const fetchNewRentals = async () => {
+      try {
+        const res = await fetch("/api/properties");
+        const result = await res.json();
+        if (result.success) {
+          const rentals = result.data.filter((p: any) => p.status === "APPROVED" && p.type === "For Rent");
+          const formatted = rentals.map((p: any) => ({
+            id: `db-${p.id}`,
+            title: p.title,
+            location: p.location,
+            price: `PKR ${p.price} / Month`, // Rent ke format ke mutabiq price
+            image: p.images && p.images.length > 0 ? p.images[0] : "/rent/6.webp",
+            badges: ["NEW", "FOR RENT"],
+            link: `/rent/${p.id}`
+          }));
+          setDbRentals(formatted);
+        }
+      } catch (error) {
+        console.error("Failed to fetch featured rentals:", error);
       }
-    });
-
-    // Header Fade Up
-    if (headerRef.current && headerRef.current.children) {
-      tl.fromTo(
-        Array.from(headerRef.current.children),
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" }
-      );
-    }
-
-    // 3D Horizon Fold Reveal for Cards
-    if (cardsRef.current && cardsRef.current.children) {
-      tl.fromTo(
-        Array.from(cardsRef.current.children),
-        { y: 100, opacity: 0, rotateX: -30, transformPerspective: 1000 },
-        { y: 0, opacity: 1, rotateX: 0, duration: 1.4, stagger: 0.2, ease: "expo.out" },
-        "-=0.6"
-      );
-    }
+    };
+    fetchNewRentals();
   }, []);
+
+  // Purani properties aur nayi database properties ko mila dein
+  const allRentals = [...rentalProperties, ...dbRentals];
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Header Fade Up
+      if (headerRef.current && headerRef.current.children) {
+        tl.fromTo(
+          Array.from(headerRef.current.children),
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" }
+        );
+      }
+
+      // 3D Horizon Fold Reveal for Cards
+      if (cardsRef.current && cardsRef.current.children) {
+        tl.fromTo(
+          Array.from(cardsRef.current.children),
+          { y: 100, opacity: 0, rotateX: -30, transformPerspective: 1000 },
+          { y: 0, opacity: 1, rotateX: 0, duration: 1.4, stagger: 0.2, ease: "expo.out" },
+          "-=0.6"
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [dbRentals]); // GSAP animation ko nayi properties load hone par update karein
 
   const slideLeft = () => {
     if (sliderRef.current) {
@@ -136,7 +171,7 @@ export default function FeaturedRentals() {
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             <div ref={cardsRef} className="flex gap-8">
-              {rentalProperties.map((property) => (
+              {allRentals.map((property) => (
                 <Link 
                   href={property.link}
                   key={property.id} 
@@ -157,10 +192,11 @@ export default function FeaturedRentals() {
                     
                     {/* Badges */}
                     <div className="absolute top-4 left-4 flex flex-col gap-2 z-20">
-                      {property.badges.map((badge, index) => {
+                      {property.badges.map((badge: string, index: number) => {
                         let bgColor = "bg-[#013220]";
                         if (badge === "FEATURED") bgColor = "bg-[#fbbf24] text-black";
                         else if (badge === "FOR RENT") bgColor = "bg-[#10b981]";
+                        else if (badge === "NEW") bgColor = "bg-red-600";
                         
                         return (
                           <span 
@@ -174,7 +210,7 @@ export default function FeaturedRentals() {
                     </div>
                   </div>
 
-                  {/* Card Content - Exact Match to Featured Properties */}
+                  {/* Card Content */}
                   <div className="p-6 relative z-20 bg-[#013220]">
                     {/* Metrics Row */}
                     <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
@@ -182,13 +218,11 @@ export default function FeaturedRentals() {
                         <svg className="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
-                        
                       </div>
                       <div className="flex items-center gap-2 text-white text-sm font-medium">
                         <svg className="w-5 h-5 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg>
-                        
                       </div>
                     </div>
 

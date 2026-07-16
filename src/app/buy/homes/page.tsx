@@ -53,7 +53,8 @@ export default async function HomesPage() {
     dbProperties = await prisma.property.findMany({
       where: { 
         type: `For Sale`,
-        category: `Homes` 
+        category: `Homes`,
+        status: `APPROVED`
       },
       orderBy: { createdAt: `desc` }
     });

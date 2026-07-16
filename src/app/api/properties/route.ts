@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
-import { prisma } from "../../../lib/prisma"
+import { NextResponse } from "next/server";
+import { prisma } from "../../../lib/prisma";
 
 export const dynamic = "force-dynamic";
 
@@ -12,20 +12,21 @@ export async function POST(request: Request) {
         title: body.title,
         type: body.type,
         category: body.category,
-        area: body.area, // Yeh line area ko database mein save karegi
+        area: body.area, 
         price: body.price,
         location: body.location,
         description: body.description,
         images: body.images,
         videos: body.videos,
-        userId: body.userId
+        userId: body.userId,
+        status: "PENDING"
       }
     });
 
     return NextResponse.json({ success: true, data: newProperty }, { status: 201 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ success: false }, { status: 500 });
+    console.error("Database Error:", error);
+    return NextResponse.json({ success: false, message: "Database Error" }, { status: 500 });
   }
 }
 
@@ -33,12 +34,12 @@ export async function GET() {
   try {
     const properties = await prisma.property.findMany({
       orderBy: {
-        createdAt: `desc`
+        createdAt: "desc"
       }
-    })
-    return NextResponse.json({ success: true, data: properties }, { status: 200 })
+    });
+    return NextResponse.json({ success: true, data: properties }, { status: 200 });
   } catch (error) {
-    console.error(`Fetch Error:`, error)
-    return NextResponse.json({ success: false, error: `Properties nahi milin` }, { status: 500 })
+    console.error("Fetch Error:", error);
+    return NextResponse.json({ success: false, message: "Properties nahi milin" }, { status: 500 });
   }
 }

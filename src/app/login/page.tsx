@@ -8,6 +8,7 @@ import gsap from "gsap";
 export default function LoginPage() {
   const [email, setEmail] = useState(``);
   const [password, setPassword] = useState(``);
+  const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState(``);
   const router = useRouter();
   
@@ -35,7 +36,7 @@ export default function LoginPage() {
       const response = await fetch(`/api/auth/login`, {
         method: `POST`,
         headers: { [`Content-Type`]: `application/json` },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, rememberMe }),
       });
 
       if (response.ok) {
@@ -52,7 +53,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main className={`min-h-screen w-full flex bg-[#f8fafc]`}>
+    <main className={`min-h-screen w-full flex bg-[#f8fafc] overflow-x-hidden`}>
       
       <div ref={leftPanelRef} className={`hidden lg:flex w-1/2 relative bg-[#013220] overflow-hidden items-center justify-center p-12 shadow-2xl z-10`}>
         <div className={`absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#025a3a] blur-[120px] opacity-60`}></div>
@@ -97,7 +98,7 @@ export default function LoginPage() {
                 placeholder={`hello@example.com`} 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full border-2 border-gray-100 bg-gray-50/50 rounded-xl px-4 py-3.5 text-[15px] outline-none focus:border-[#013220] focus:bg-white transition-all`} 
+                className={`w-full border-2 border-gray-100 bg-gray-50/50 rounded-xl px-4 py-3.5 text-[15px] outline-none focus:border-[#013220] focus:bg-white transition-all text-black`} 
                 required 
               />
             </div>
@@ -109,14 +110,19 @@ export default function LoginPage() {
                 placeholder={`••••••••`} 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className={`w-full border-2 border-gray-100 bg-gray-50/50 rounded-xl px-4 py-3.5 text-[15px] outline-none focus:border-[#013220] focus:bg-white transition-all`} 
+                className={`w-full border-2 border-gray-100 bg-gray-50/50 rounded-xl px-4 py-3.5 text-[15px] outline-none focus:border-[#013220] focus:bg-white transition-all text-black`} 
                 required 
               />
             </div>
 
             <div className={`flex justify-between items-center mt-1`}>
               <label className={`flex items-center gap-2 text-sm text-gray-600 cursor-pointer font-medium group`}>
-                <input type={`checkbox`} className={`w-4 h-4 rounded border-gray-300 text-[#013220] focus:ring-[#013220]`} />
+                <input 
+                  type={`checkbox`} 
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className={`w-4 h-4 rounded border-gray-300 text-[#013220] focus:ring-[#013220]`} 
+                />
                 <span className={`group-hover:text-gray-900 transition-colors`}>Remember Me</span>
               </label>
               <Link href={`/forgot-password`} className={`text-sm text-[#013220] font-bold hover:underline`}>

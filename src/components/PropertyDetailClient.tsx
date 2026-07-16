@@ -15,6 +15,7 @@ interface PropertyData {
   propertyType: string;
   propertyStatus: string;
   propertyId: string;
+  agentName?: string;
 }
 
 interface PropertyDetailClientProps {
@@ -250,7 +251,7 @@ export default function PropertyDetailClient({ property }: PropertyDetailClientP
                 <svg className={`w-8 h-8 text-white`} fill={`currentColor`} viewBox={`0 0 20 20`}><path fillRule={`evenodd`} d={`M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z`} clipRule={`evenodd`}></path></svg>
               </div>
               <div className={`flex flex-col gap-1`}>
-                <h3 className={`font-black text-xl text-gray-900`}>Qemaat Agent</h3>
+                <h3 className={`font-black text-xl text-gray-900`}>{property.agentName || `Qemaat Agent`}</h3>
                 <Link href={`#`} className={`text-sm text-[#013220] font-bold uppercase tracking-wider hover:underline`}>View All Listings</Link>
               </div>
             </div>
