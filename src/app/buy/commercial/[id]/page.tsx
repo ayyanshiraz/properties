@@ -32,7 +32,23 @@ export default async function CommercialDetailPage({ params }: { params: Promise
           const dbImages = dbProp.images || [];
           const dbVideos = dbProp.videos || [];
           const combinedMedia = [...dbImages, ...dbVideos];
-          propertyData = { id: dbProp.id.toString(), title: dbProp.title, location: dbProp.location, priceStr: `PKR ` + dbProp.price, area: dbProp.area || dbProp.category || `Not Specified`, image: combinedMedia.length > 0 ? combinedMedia[0] : `/buy/1.webp`, images: combinedMedia.length > 0 ? combinedMedia : [`/buy/1.webp`], description: dbProp.description, propertyType: dbProp.category || `Commercial`, propertyStatus: dbProp.type, propertyId: `bizbuy-` + dbProp.id + `805972`, agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent` };
+          propertyData = { 
+            id: dbProp.id.toString(), 
+            title: dbProp.title, 
+            location: dbProp.location, 
+            priceStr: `PKR ` + dbProp.price, 
+            area: dbProp.area || dbProp.category || `Not Specified`, 
+            image: combinedMedia.length > 0 ? combinedMedia[0] : `/buy/1.webp`, 
+            images: combinedMedia.length > 0 ? combinedMedia : [`/buy/1.webp`], 
+            description: dbProp.description, 
+            propertyType: dbProp.category || `Commercial`, 
+            propertyStatus: dbProp.type, 
+            propertyId: `bizbuy-` + dbProp.id + `805972`, 
+            agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`,
+            featuresList: dbProp.featuresList || [],
+            floorRates: dbProp.floorRates || null,
+            paymentPlans: dbProp.paymentPlans || null
+          };
         }
       }
     } catch (error) {

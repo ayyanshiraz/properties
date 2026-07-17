@@ -19,7 +19,10 @@ export default function AddProperty() {
     area: "",
     price: "",
     location: "",
-    description: ""
+    description: "",
+    featuresList: "",
+    floorRates: "",
+    paymentPlans: ""
   });
 
   const [mediaFiles, setMediaFiles] = useState<{ images: FileList | null; videos: FileList | null }>({
@@ -52,19 +55,34 @@ export default function AddProperty() {
     e.preventDefault();
     setIsUploading(true);
     
+    let parsedFloorRates = null;
+    let parsedPaymentPlans = null;
+    let parsedFeatures: string[] = [];
+    
+    if (formData.featuresList) {
+       parsedFeatures = formData.featuresList.split(",").map((f: string) => f.trim()).filter((f: string) => f.length > 0);
+    }
+    
     try {
-      // 1. User login check karein
+      if (formData.floorRates) parsedFloorRates = JSON.parse(formData.floorRates);
+      if (formData.paymentPlans) parsedPaymentPlans = JSON.parse(formData.paymentPlans);
+    } catch (err) {
+      alert("Invalid JSON format in Floor Rates or Payment Plans. Please ensure correct JSON.");
+      setIsUploading(false);
+      return;
+    }
+    
+    try {
       const storedUserString = localStorage.getItem("user");
       const storedUser = storedUserString ? JSON.parse(storedUserString) : null;
 
       if (!storedUser || !storedUser.id) {
-        throw new Error("Aap login nahi hain. Please pehle login karein.");
+        throw new Error("You must be logged in to add a property.");
       }
 
       const imageFiles = mediaFiles.images ? Array.from(mediaFiles.images) : [];
       const videoFiles = mediaFiles.videos ? Array.from(mediaFiles.videos) : [];
 
-      // 2. Supabase Upload Function
       const uploadToSupabase = async (files: File[], folder: string) => {
         const uploadedUrls: string[] = [];
         for (const file of files) {
@@ -74,9 +92,7 @@ export default function AddProperty() {
           
           const { error } = await supabase.storage.from("property-media").upload(filePath, file);
           
-          if (error) {
-            throw new Error(`Media Upload Failed (${file.name}): ${error.message}`);
-          }
+          if (error) throw new Error("Media Upload Failed: " + error.message);
           
           const { data: publicUrlData } = supabase.storage.from("property-media").getPublicUrl(filePath);
           uploadedUrls.push(publicUrlData.publicUrl);
@@ -91,25 +107,25 @@ export default function AddProperty() {
         ...formData,
         images: uploadedImageUrls,
         videos: uploadedVideoUrls,
-        userId: storedUser.id
+        userId: storedUser.id,
+        featuresList: parsedFeatures,
+        floorRates: parsedFloorRates,
+        paymentPlans: parsedPaymentPlans
       };
 
-      // 3. API Database Save
       const response = await fetch("/api/properties", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
-        throw new Error(`Server Error (${response.status}): Database mein save nahi ho saka.`);
-      }
+      if (!response.ok) throw new Error("Server Error: Database mein save nahi ho saka.");
 
       const result = await response.json();
 
       if (result.success) {
         setShowSuccessModal(true);
-        setFormData({ title: "", type: "For Sale", category: "Homes", area: "", price: "", location: "", description: "" });
+        setFormData({ title: "", type: "For Sale", category: "Homes", area: "", price: "", location: "", description: "", featuresList: "", floorRates: "", paymentPlans: "" });
         setMediaFiles({ images: null, videos: null });
       } else {
         throw new Error("Property save karte waqt backend par masla aya.");
@@ -135,7 +151,7 @@ export default function AddProperty() {
               </svg>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Congratulations!</h3>
-            <p className="text-gray-600 mb-8">Your property has been successfully listed and is pending admin approval.</p>
+            <p className="text-gray-600 mb-8">Your property has been successfully listed.</p>
             <Link href="/account" className="block w-full bg-green-700 text-white rounded-lg px-4 py-3 font-semibold hover:bg-green-800 transition-colors shadow-md text-center">
               Go to Dashboard
             </Link>
@@ -145,19 +161,19 @@ export default function AddProperty() {
 
       <div ref={formRef} className="max-w-4xl mx-auto bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
         <h1 className="text-3xl font-bold text-black mb-2 text-center">Add New Property</h1>
-        <p className="text-gray-500 text-center mb-10">Fill in the details below to list your property on Qemaat</p>
+        <p className="text-gray-500 text-center mb-10">Fill in the details below</p>
         
         <form onSubmit={handleSubmit} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Property Title</label>
-              <input type="text" name="title" value={formData.title} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 transition-colors text-black" placeholder="e.g. Modern 5 Marla House in DHA" required />
+              <input type="text" name="title" value={formData.title} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
             </div>
 
             <div className={formData.type === "For Sale" ? "" : "md:col-span-2"}>
               <label className="block text-sm font-medium text-gray-700 mb-2">Listing Type</label>
-              <select name="type" value={formData.type} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 bg-white transition-colors text-black">
+              <select name="type" value={formData.type} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none bg-white text-black">
                 <option value="For Sale">For Sale</option>
                 <option value="For Rent">For Rent</option>
                 <option value="Co-Working Space">Co-Working Space</option>
@@ -167,7 +183,7 @@ export default function AddProperty() {
             {formData.type === "For Sale" && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Property Category</label>
-                <select name="category" value={formData.category} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 bg-white transition-colors text-black">
+                <select name="category" value={formData.category} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none bg-white text-black">
                   <option value="Homes">Homes</option>
                   <option value="Plots">Plots</option>
                   <option value="Commercial">Commercial</option>
@@ -178,39 +194,54 @@ export default function AddProperty() {
             {formData.type === "For Sale" && (
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Area / Dimension</label>
-                <input type="text" name="area" value={formData.area} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 transition-colors text-black" placeholder="e.g. 5 Marla, 1 Kanal (59x150)" required />
+                <input type="text" name="area" value={formData.area} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
               </div>
             )}
             
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Price (PKR)</label>
-              <input type="text" name="price" value={formData.price} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 transition-colors text-black" placeholder="e.g. 1.5 Crore ya 15000000" required />
+              <input type="text" name="price" value={formData.price} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Complete Location</label>
-              <input type="text" name="location" value={formData.location} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 transition-colors text-black" placeholder="e.g. Ferozpur Road, Lahore" required />
+              <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+              <input type="text" name="location" value={formData.location} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Property Description</label>
-              <textarea name="description" value={formData.description} onChange={handleChange} rows={6} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 transition-colors text-black" placeholder="Highlight key features, nearby amenities, and property condition..." required />
+              <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+              <textarea name="description" value={formData.description} onChange={handleChange} rows={4} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Advanced: Features List (Comma separated)</label>
+              <textarea name="featuresList" value={formData.featuresList} onChange={handleChange} rows={2} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" placeholder="Feature 1, Feature 2, Feature 3" />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Advanced: Floor Rates (Valid JSON Array)</label>
+              <textarea name="floorRates" value={formData.floorRates} onChange={handleChange} rows={3} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" placeholder='[{"floor": "Ground Floor", "rate": "PKR 145,000"}]' />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Advanced: Payment Plans (Valid JSON Array)</label>
+              <textarea name="paymentPlans" value={formData.paymentPlans} onChange={handleChange} rows={3} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" placeholder='[{"title": "100 SQFT OFFICE", "value": "5,000,000"}]' />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Upload Pictures</label>
-              <input type="file" name="images" accept="image/*" multiple onChange={handleFileChange} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 text-black" />
+              <input type="file" name="images" accept="image/*" multiple onChange={handleFileChange} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none text-black" />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Upload Videos</label>
-              <input type="file" name="videos" accept="video/*" multiple onChange={handleFileChange} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 text-black" />
+              <input type="file" name="videos" accept="video/*" multiple onChange={handleFileChange} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none text-black" />
             </div>
 
           </div>
 
           <div className="pt-6">
-            <button type="submit" disabled={isUploading} className="w-full bg-green-700 text-white py-4 px-4 rounded-lg hover:bg-green-800 transition duration-300 font-semibold text-lg shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed">
+            <button type="submit" disabled={isUploading} className="w-full bg-green-700 text-white py-4 px-4 rounded-lg hover:bg-green-800 transition duration-300 font-semibold text-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed">
               {isUploading ? "Uploading Media and Saving..." : "List Property"}
             </button>
           </div>

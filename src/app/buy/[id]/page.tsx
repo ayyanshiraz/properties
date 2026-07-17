@@ -51,7 +51,10 @@ export default async function BuyDetailPage({ params }: { params: Promise<{ id: 
             propertyType: dbProp.category || `For Sale`,
             propertyStatus: dbProp.type,
             propertyId: `bizbuy-` + dbProp.id + `805972`,
-            agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`
+            agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`,
+            featuresList: dbProp.featuresList || [],
+            floorRates: dbProp.floorRates || null,
+            paymentPlans: dbProp.paymentPlans || null
           };
         }
       }

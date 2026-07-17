@@ -39,7 +39,10 @@ export default async function CoWorkingDetailPage({ params }: { params: Promise<
           propertyType: dbProp.category || `Co-Working Space`, 
           propertyStatus: dbProp.type, 
           propertyId: `bizcowork-` + dbProp.id + `805972`, 
-          agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent` 
+          agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`,
+          featuresList: dbProp.featuresList || [],
+          floorRates: dbProp.floorRates || null,
+          paymentPlans: dbProp.paymentPlans || null
         };
       }
     }

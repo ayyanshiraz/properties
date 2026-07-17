@@ -24,14 +24,12 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
     if (routeId === `1001`) {
       currentTitle = `Furnished 2 Bed Apartment (Without Bills)`;
       currentPrice = `PKR 160,000`;
-      currentLocation = `Gulberg, Lahore`;
       currentImage = `/rent/2.webp`;
       currentDesc = `This stunning furnished apartment offers a luxurious lifestyle right in the heart of Gulberg. Complete with premium fittings, spacious living areas, and easy access to local amenities. Ready for immediate transfer with multiple spacious balconies and bright airy interiors.`;
       currentImages = [`/rent/4.webp`, `/rent/8.webp`, `/rent/9.webp`, `/rent/10.webp`, `/rent/11.webp`, `/rent/12.webp`, `/rent/video1.mp4`]; 
     } else if (routeId === `1003`) {
       currentTitle = `2 Bed Apartment in Zameen Aurum (Modern Furnished | Prime Location)`;
       currentPrice = `PKR 520,000`;
-      currentLocation = `Gulberg, Lahore`;
       currentImage = `/rent/22.webp`;
       currentDesc = `Rental Terms: Monthly Rent: PKR 520,000 (including of Utilities/Tax/Bills/CAM/STR charges). This is 30 days Rental Charges. Modern furnished prime location apartment in Zameen Aurum. Enjoy the vibrant city life with complete peace of mind.`;
       currentImages = [`/rent/22.webp`, `/rent/6.webp`, `/rent/13.webp`, `/rent/21.webp`, `/rent/23.webp`, `/rent/25.webp`]; 
@@ -96,7 +94,10 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             propertyType: dbProp.category || `Residential`,
             propertyStatus: dbProp.type,
             propertyId: `bizlux-` + dbProp.id + `905972`,
-            agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`
+            agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`,
+            featuresList: dbProp.featuresList || [],
+            floorRates: dbProp.floorRates || null,
+            paymentPlans: dbProp.paymentPlans || null
           };
         }
       }

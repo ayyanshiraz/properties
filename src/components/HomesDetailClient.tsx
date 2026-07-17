@@ -17,6 +17,9 @@ interface PropertyData {
   propertyStatus: string;
   propertyId: string;
   agentName?: string;
+  featuresList?: string[];
+  floorRates?: any;
+  paymentPlans?: any;
 }
 
 export default function HomesDetailClient({ property }: { property: PropertyData }) {
@@ -81,6 +84,92 @@ export default function HomesDetailClient({ property }: { property: PropertyData
             <div className={`flex items-center gap-4`}><div className={`w-2 h-8 bg-[#013220] rounded-full`}></div><h2 className={`text-3xl font-black text-gray-900 tracking-tight`}>Description</h2></div>
             <p className={`text-gray-600 leading-relaxed text-xl font-light bg-white p-8 rounded-2xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)]`}>{property.description}</p>
           </div>
+
+          {property.featuresList && property.featuresList.length > 0 && (
+            <div className={`flex flex-col gap-8`}>
+              <div className={`flex items-center gap-4`}>
+                <div className={`w-2 h-8 bg-[#013220] rounded-full`}></div>
+                <h2 className={`text-3xl font-black text-gray-900 tracking-tight`}>Project Highlights</h2>
+              </div>
+              <div className={`bg-white border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] p-8 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4`}>
+                {property.featuresList.map((feature, idx) => (
+                  <div key={idx} className={`flex items-start gap-3`}>
+                    <svg className={`w-6 h-6 text-[#013220] shrink-0`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={`2`} d={`M5 13l4 4L19 7`}></path></svg>
+                    <span className={`text-gray-700 font-medium`}>{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {property.floorRates && property.floorRates.length > 0 && (
+            <div className={`flex flex-col gap-8`}>
+              <div className={`flex items-center gap-4`}>
+                <div className={`w-2 h-8 bg-[#013220] rounded-full`}></div>
+                <h2 className={`text-3xl font-black text-gray-900 tracking-tight`}>Pricing Overview</h2>
+              </div>
+              <div className={`bg-white border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] rounded-2xl overflow-hidden`}>
+                <table className={`w-full text-left border-collapse`}>
+                  <thead>
+                    <tr className={`bg-[#013220] text-white`}>
+                      <th className={`p-4 font-bold text-lg`}>Floor</th>
+                      <th className={`p-4 font-bold text-lg`}>Rate (Per Sq Ft)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {property.floorRates.map((rate: any, idx: number) => (
+                      <tr key={idx} className={`border-b border-gray-100 hover:bg-gray-50 transition-colors`}>
+                        <td className={`p-4 text-gray-800 font-bold`}>{rate.floor}</td>
+                        <td className={`p-4 text-[#013220] font-black`}>{rate.rate}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {property.paymentPlans && property.paymentPlans.length > 0 && (
+            <div className={`flex flex-col gap-8`}>
+              <div className={`flex items-center gap-4`}>
+                <div className={`w-2 h-8 bg-[#013220] rounded-full`}></div>
+                <h2 className={`text-3xl font-black text-gray-900 tracking-tight`}>Payment Plans & ROI</h2>
+              </div>
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-6`}>
+                {property.paymentPlans.map((plan: any, idx: number) => (
+                  <div key={idx} className={`bg-white border border-[#013220]/20 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden`}>
+                    <div className={`absolute top-0 left-0 w-full h-1.5 bg-[#013220]`}></div>
+                    <h3 className={`text-xl font-black text-[#013220] mb-4 text-center border-b border-gray-100 pb-4`}>{plan.title}</h3>
+                    
+                    <div className={`flex justify-between items-center py-2 border-b border-gray-50`}>
+                      <span className={`text-sm font-bold text-gray-500 uppercase`}>Space Value</span>
+                      <span className={`font-black text-gray-900`}>PKR {plan.value}</span>
+                    </div>
+                    <div className={`flex justify-between items-center py-2 border-b border-gray-50`}>
+                      <span className={`text-sm font-bold text-gray-500 uppercase`}>Down Payment (25%)</span>
+                      <span className={`font-black text-gray-900`}>PKR {plan.downPayment}</span>
+                    </div>
+                    <div className={`flex justify-between items-center py-2 border-b border-gray-50`}>
+                      <span className={`text-sm font-bold text-gray-500 uppercase`}>48 Monthly Installments</span>
+                      <span className={`font-black text-gray-900`}>PKR {plan.installments}</span>
+                    </div>
+                    
+                    <div className={`mt-4 bg-[#e8f0ec] p-4 rounded-xl`}>
+                      <p className={`text-xs font-bold text-[#013220] text-center mb-2 tracking-widest uppercase`}>R.O.I Calculation</p>
+                      <div className={`flex justify-between text-sm`}>
+                        <span className={`font-semibold text-gray-700`}>Expected Profit:</span>
+                        <span className={`font-black text-[#013220]`}>PKR {plan.roiProfit}</span>
+                      </div>
+                      <div className={`flex justify-between text-sm mt-1`}>
+                        <span className={`font-semibold text-gray-700`}>Annual Return:</span>
+                        <span className={`font-black text-[#013220]`}>{plan.roiPercent}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className={`flex flex-col gap-8`}>
             <div className={`flex items-center gap-4`}><div className={`w-2 h-8 bg-[#013220] rounded-full`}></div><h2 className={`text-3xl font-black text-gray-900 tracking-tight`}>Location Map</h2></div>

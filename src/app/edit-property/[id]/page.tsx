@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import gsap from "gsap"
-import Link from "next/link"
-import { useParams } from "next/navigation"
-import { createClient } from "@supabase/supabase-js"
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ""
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function EditProperty() {
   const params = useParams();
@@ -23,7 +23,10 @@ export default function EditProperty() {
     area: "",
     price: "",
     location: "",
-    description: ""
+    description: "",
+    featuresList: "",
+    floorRates: "",
+    paymentPlans: ""
   });
 
   const [existingImages, setExistingImages] = useState<string[]>([]);
@@ -56,13 +59,14 @@ export default function EditProperty() {
             area: propertyToEdit.area || "",
             price: propertyToEdit.price || "",
             location: propertyToEdit.location || "",
-            description: propertyToEdit.description || ""
+            description: propertyToEdit.description || "",
+            featuresList: propertyToEdit.featuresList ? propertyToEdit.featuresList.join(", ") : "",
+            floorRates: propertyToEdit.floorRates ? JSON.stringify(propertyToEdit.floorRates) : "",
+            paymentPlans: propertyToEdit.paymentPlans ? JSON.stringify(propertyToEdit.paymentPlans) : ""
           });
           
           setExistingImages(propertyToEdit.images || []);
           setExistingVideos(propertyToEdit.videos || []);
-        } else {
-          console.error("Data load hone mein masla hai");
         }
       } catch (error) {
         console.error("Error loading property details:", error);
@@ -85,39 +89,56 @@ export default function EditProperty() {
   }, [isLoading]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setMediaFiles({ ...mediaFiles, [e.target.name]: e.target.files })
+      setMediaFiles({ ...mediaFiles, [e.target.name]: e.target.files });
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsUploading(true)
+    e.preventDefault();
+    setIsUploading(true);
+
+    let parsedFloorRates = null;
+    let parsedPaymentPlans = null;
+    let parsedFeatures: string[] = []; 
+
+    if (formData.featuresList) {
+       parsedFeatures = formData.featuresList.split(",").map((f: string) => f.trim()).filter((f: string) => f.length > 0);
+    }
+    
+    try {
+      if (formData.floorRates) parsedFloorRates = JSON.parse(formData.floorRates);
+      if (formData.paymentPlans) parsedPaymentPlans = JSON.parse(formData.paymentPlans);
+    } catch (err) {
+      alert("Invalid JSON format in Floor Rates or Payment Plans. Please ensure correct JSON.");
+      setIsUploading(false);
+      return;
+    }
     
     try {
       const imageFiles = mediaFiles.images ? Array.from(mediaFiles.images) : [];
       const videoFiles = mediaFiles.videos ? Array.from(mediaFiles.videos) : [];
 
       const uploadToSupabase = async (files: File[], folder: string) => {
-        const uploadedUrls: string[] = []
+        const uploadedUrls: string[] = [];
         for (const file of files) {
-          const fileExt = file.name.split(".").pop()
-          const fileName = Math.random().toString(36).substring(2) + "." + fileExt
-          const filePath = folder + "/" + fileName
-          const { error } = await supabase.storage.from("property-media").upload(filePath, file)
-          if (error) continue
-          const { data: publicUrlData } = supabase.storage.from("property-media").getPublicUrl(filePath)
-          uploadedUrls.push(publicUrlData.publicUrl)
+          const fileExt = file.name.split(".").pop();
+          const fileName = Math.random().toString(36).substring(2) + "." + fileExt;
+          const filePath = folder + "/" + fileName;
+          const { error } = await supabase.storage.from("property-media").upload(filePath, file);
+          if (error) continue;
+          const { data: publicUrlData } = supabase.storage.from("property-media").getPublicUrl(filePath);
+          uploadedUrls.push(publicUrlData.publicUrl);
         }
-        return uploadedUrls
-      }
+        return uploadedUrls;
+      };
 
-      const newImageUrls = await uploadToSupabase(imageFiles, "images")
-      const newVideoUrls = await uploadToSupabase(videoFiles, "videos")
+      const newImageUrls = await uploadToSupabase(imageFiles, "images");
+      const newVideoUrls = await uploadToSupabase(videoFiles, "videos");
 
       const finalImages = newImageUrls.length > 0 ? newImageUrls : existingImages;
       const finalVideos = newVideoUrls.length > 0 ? newVideoUrls : existingVideos;
@@ -125,30 +146,33 @@ export default function EditProperty() {
       const payload = {
         ...formData,
         images: finalImages,
-        videos: finalVideos
+        videos: finalVideos,
+        featuresList: parsedFeatures,
+        floorRates: parsedFloorRates,
+        paymentPlans: parsedPaymentPlans
       };
 
       const response = await fetch("/api/properties/" + propertyId, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-      })
+      });
 
-      const result = await response.json()
+      const result = await response.json();
 
       if (result.success) {
-        setShowSuccessModal(true)
+        setShowSuccessModal(true);
       } else {
-        alert("System Error: Property update karte waqt koi masla pesh aaya.")
+        alert("System Error: Property update karte waqt koi masla pesh aaya.");
       }
 
     } catch (error) {
-      console.error("Submission error:", error)
-      alert("Network request fail ho gayi.")
+      console.error("Submission error:", error);
+      alert("Network request fail ho gayi.");
     } finally {
-      setIsUploading(false)
+      setIsUploading(false);
     }
-  }
+  };
 
   if (isLoading) {
     return (
@@ -169,7 +193,7 @@ export default function EditProperty() {
               </svg>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">Updated!</h3>
-            <p className="text-gray-600 mb-8">Your property has been successfully updated on Qemaat.</p>
+            <p className="text-gray-600 mb-8">Your property has been successfully updated.</p>
             <Link href="/account" className="block w-full bg-green-700 text-white rounded-lg px-4 py-3 font-semibold hover:bg-green-800 transition-colors shadow-md text-center">
               Back to Dashboard
             </Link>
@@ -179,18 +203,17 @@ export default function EditProperty() {
 
       <div ref={formRef} className="max-w-4xl mx-auto bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">Edit Property</h1>
-        <p className="text-gray-500 text-center mb-10">Update the details of your property below</p>
         
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-8 mt-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Property Title</label>
-              <input type="text" name="title" value={formData.title} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 text-black" required />
+              <input type="text" name="title" value={formData.title} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
             </div>
 
             <div className={formData.type === "For Sale" ? "" : "md:col-span-2"}>
               <label className="block text-sm font-medium text-gray-700 mb-2">Listing Type</label>
-              <select name="type" value={formData.type} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 bg-white text-black">
+              <select name="type" value={formData.type} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none bg-white text-black">
                 <option value="For Sale">For Sale</option>
                 <option value="For Rent">For Rent</option>
                 <option value="Co-Working Space">Co-Working Space</option>
@@ -200,7 +223,7 @@ export default function EditProperty() {
             {formData.type === "For Sale" && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Property Category</label>
-                <select name="category" value={formData.category} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 bg-white text-black">
+                <select name="category" value={formData.category} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none bg-white text-black">
                   <option value="Homes">Homes</option>
                   <option value="Plots">Plots</option>
                   <option value="Commercial">Commercial</option>
@@ -211,23 +234,38 @@ export default function EditProperty() {
             {formData.type === "For Sale" && (
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">Area / Dimension</label>
-                <input type="text" name="area" value={formData.area} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 text-black" required />
+                <input type="text" name="area" value={formData.area} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
               </div>
             )}
             
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Price (PKR)</label>
-              <input type="text" name="price" value={formData.price} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 text-black" required />
+              <input type="text" name="price" value={formData.price} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Complete Location</label>
-              <input type="text" name="location" value={formData.location} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 text-black" required />
+              <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+              <input type="text" name="location" value={formData.location} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Property Description</label>
-              <textarea name="description" value={formData.description} onChange={handleChange} rows={6} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none focus:ring-1 focus:ring-green-600 text-black" required />
+              <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+              <textarea name="description" value={formData.description} onChange={handleChange} rows={4} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Advanced: Features List (Comma separated)</label>
+              <textarea name="featuresList" value={formData.featuresList} onChange={handleChange} rows={2} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Advanced: Floor Rates (Valid JSON Array)</label>
+              <textarea name="floorRates" value={formData.floorRates} onChange={handleChange} rows={3} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Advanced: Payment Plans (Valid JSON Array)</label>
+              <textarea name="paymentPlans" value={formData.paymentPlans} onChange={handleChange} rows={3} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" />
             </div>
 
             <div>
@@ -242,12 +280,12 @@ export default function EditProperty() {
           </div>
 
           <div className="pt-6">
-            <button type="submit" disabled={isUploading} className="w-full bg-green-700 text-white py-4 px-4 rounded-lg hover:bg-green-800 transition duration-300 font-semibold text-lg shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed">
+            <button type="submit" disabled={isUploading} className="w-full bg-green-700 text-white py-4 px-4 rounded-lg hover:bg-green-800 transition duration-300 font-semibold text-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed">
               {isUploading ? "Updating Media and Saving..." : "Update Property"}
             </button>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }

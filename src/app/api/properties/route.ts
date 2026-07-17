@@ -19,7 +19,10 @@ export async function POST(request: Request) {
         images: body.images,
         videos: body.videos,
         userId: body.userId,
-        status: "PENDING"
+        status: "PENDING",
+        featuresList: body.featuresList || [],
+        floorRates: body.floorRates || null,
+        paymentPlans: body.paymentPlans || null
       }
     });
 

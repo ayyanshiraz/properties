@@ -33,7 +33,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         location: body.location,
         description: body.description,
         images: body.images,
-        videos: body.videos
+        videos: body.videos,
+        featuresList: body.featuresList || [],
+        floorRates: body.floorRates || null,
+        paymentPlans: body.paymentPlans || null
       }
     });
     
