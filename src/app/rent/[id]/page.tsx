@@ -20,6 +20,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
     let currentImage = `/rent/3.webp`;
     let currentDesc = `This stunning non furnished apartment offers a blank canvas to create your perfect home right in the heart of Gulberg. Features spacious living areas and easy access to local amenities. Enjoy the vibrant city life with complete peace of mind. Just steps away from the main commercial zones and premium facilities.`;
     let currentImages = [`/rent/3.webp`, `/rent/4.webp`, `/rent/5.webp`, `/rent/6.webp`, `/rent/19.webp`, `/rent/video2.mp4` ]; 
+    let currentArea = `Not Specified`;
 
     if (routeId === `1001`) {
       currentTitle = `Furnished 2 Bed Apartment (Without Bills)`;
@@ -61,6 +62,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
       title: currentTitle,
       location: currentLocation,
       priceStr: currentPrice,
+      area: currentArea,
       image: currentImage,
       images: currentImages, 
       description: currentDesc,
@@ -88,10 +90,11 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
             title: dbProp.title,
             location: dbProp.location,
             priceStr: `PKR ` + dbProp.price,
+            area: dbProp.area && dbProp.area.trim() !== "" ? dbProp.area : `Not Specified`,
             image: combinedMedia.length > 0 ? combinedMedia[0] : `/rent/6.webp`,
             images: combinedMedia.length > 0 ? combinedMedia : [`/rent/6.webp`],
             description: dbProp.description,
-            propertyType: dbProp.category || `Residential`,
+            propertyType: dbProp.category || `Not Specified`,
             propertyStatus: dbProp.type,
             propertyId: `bizlux-` + dbProp.id + `905972`,
             agentName: dbProp.user ? dbProp.user.name : `Qemaat Agent`,
@@ -112,6 +115,7 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
       title: `Property Not Found`,
       location: `Unknown`,
       priceStr: `N/A`,
+      area: `N/A`,
       image: `/rent/6.webp`,
       images: [`/rent/6.webp`],
       description: `This property is no longer available.`,

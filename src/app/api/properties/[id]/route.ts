@@ -29,6 +29,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         title: body.title,
         type: body.type,
         category: body.category,
+        area: body.area, // <-- Yeh line missing thi, ab Area save hoga!
         price: body.price,
         location: body.location,
         description: body.description,

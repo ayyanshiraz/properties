@@ -9,6 +9,7 @@ interface PropertyData {
   title: string;
   location: string;
   priceStr: string;
+  area: string;
   image: string;
   images?: string[]; 
   description: string;
@@ -156,6 +157,12 @@ export default function PropertyDetailClient({ property }: PropertyDetailClientP
               <div className={`flex flex-col gap-2`}>
                 <span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Rent Price</span>
                 <span className={`text-[#013220] font-black text-lg`}>{property.priceStr}</span>
+              </div>
+              <div className={`flex flex-col gap-2`}>
+                <span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Area Dimension</span>
+                <span className={`text-gray-900 font-black text-lg`}>
+                  {property.area && property.area !== "N/A" ? property.area : "Not Specified"}
+                </span>
               </div>
               <div className={`flex flex-col gap-2`}>
                 <span className={`text-gray-400 text-sm font-bold uppercase tracking-wider`}>Property Type</span>
@@ -340,8 +347,8 @@ export default function PropertyDetailClient({ property }: PropertyDetailClientP
                 <svg className={`w-8 h-8 text-white`} fill={`currentColor`} viewBox={`0 0 20 20`}><path fillRule={`evenodd`} d={`M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z`} clipRule={`evenodd`}></path></svg>
               </div>
               <div className={`flex flex-col gap-1`}>
-                <h3 className={`font-black text-xl text-gray-900`}>{property.agentName || `Qemaat Agent`}</h3>
-                <Link href={`#`} className={`text-sm text-[#013220] font-bold uppercase tracking-wider hover:underline`}>View All Listings</Link>
+                <h3 className={`font-black text-xl text-gray-900`}>Qemaat Agent</h3>
+                <Link href={`https://wa.me/923334888324`} target="_blank" rel="noopener noreferrer" className={`text-sm text-[#013220] font-bold uppercase tracking-wider hover:underline`}>Contact Us</Link>
               </div>
             </div>
 
@@ -370,9 +377,9 @@ export default function PropertyDetailClient({ property }: PropertyDetailClientP
                  ></textarea>
               </div>
               
-              <button type={`button`} className={`w-full bg-gradient-to-r from-[#013220] to-[#011a11] hover:from-[#011a11] hover:to-black text-white font-black text-lg py-3.5 rounded-lg transition-all duration-300 shadow-[0_10px_20px_rgba(1,50,32,0.3)] hover:shadow-[0_15px_30px_rgba(1,50,32,0.5)] hover:-translate-y-1 mt-2 uppercase tracking-widest`}>
+              <a href={`https://wa.me/923334888324`} target="_blank" rel="noopener noreferrer" className={`block text-center w-full bg-gradient-to-r from-[#013220] to-[#011a11] hover:from-[#011a11] hover:to-black text-white font-black text-lg py-3.5 rounded-lg transition-all duration-300 shadow-[0_10px_20px_rgba(1,50,32,0.3)] hover:shadow-[0_15px_30px_rgba(1,50,32,0.5)] hover:-translate-y-1 mt-2 uppercase tracking-widest`}>
                 Request Information
-              </button>
+              </a>
             </form>
 
           </div>

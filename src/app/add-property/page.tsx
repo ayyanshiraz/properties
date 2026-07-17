@@ -9,6 +9,12 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+interface SortableImage {
+  id: string;
+  file: File;
+  preview: string;
+}
+
 export default function AddProperty() {
   const formRef = useRef(null);
   
@@ -25,10 +31,11 @@ export default function AddProperty() {
     paymentPlans: ""
   });
 
-  const [mediaFiles, setMediaFiles] = useState<{ images: FileList | null; videos: FileList | null }>({
-    images: null,
-    videos: null
-  });
+  const [videoFiles, setVideoFiles] = useState<FileList | null>(null);
+  
+  // Naya Drag & Drop Image State
+  const [images, setImages] = useState<SortableImage[]>([]);
+  const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -45,10 +52,57 @@ export default function AddProperty() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setMediaFiles({ ...mediaFiles, [e.target.name]: e.target.files });
+      setVideoFiles(e.target.files);
     }
+  };
+
+  // Image Selection Handler
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      const newImages = filesArray.map(file => ({
+        id: Math.random().toString(36).substring(2, 9),
+        file,
+        preview: URL.createObjectURL(file)
+      }));
+      setImages(prev => [...prev, ...newImages]);
+    }
+    // Reset input so same files can be selected again if needed
+    e.target.value = "";
+  };
+
+  const removeImage = (idToRemove: string) => {
+    setImages(prev => prev.filter(img => img.id !== idToRemove));
+  };
+
+  // Drag and Drop Handlers
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    setDraggedIdx(index);
+    e.dataTransfer.effectAllowed = "move";
+    // For Firefox compatibility
+    e.dataTransfer.setData("text/html", index.toString());
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    
+    if (draggedIdx === null || draggedIdx === index) return;
+    
+    const newImages = [...images];
+    const draggedItem = newImages[draggedIdx];
+    
+    newImages.splice(draggedIdx, 1);
+    newImages.splice(index, 0, draggedItem);
+    
+    setImages(newImages);
+    setDraggedIdx(index);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIdx(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -80,10 +134,8 @@ export default function AddProperty() {
         throw new Error("You must be logged in to add a property.");
       }
 
-      const imageFiles = mediaFiles.images ? Array.from(mediaFiles.images) : [];
-      const videoFiles = mediaFiles.videos ? Array.from(mediaFiles.videos) : [];
-
-      const uploadToSupabase = async (files: File[], folder: string) => {
+      // Upload Images exactly in the sorted order
+      const uploadFilesToSupabase = async (files: File[], folder: string) => {
         const uploadedUrls: string[] = [];
         for (const file of files) {
           const fileExt = file.name.split(".").pop();
@@ -91,7 +143,6 @@ export default function AddProperty() {
           const filePath = folder + "/" + fileName;
           
           const { error } = await supabase.storage.from("property-media").upload(filePath, file);
-          
           if (error) throw new Error("Media Upload Failed: " + error.message);
           
           const { data: publicUrlData } = supabase.storage.from("property-media").getPublicUrl(filePath);
@@ -100,8 +151,11 @@ export default function AddProperty() {
         return uploadedUrls;
       };
 
-      const uploadedImageUrls = await uploadToSupabase(imageFiles, "images");
-      const uploadedVideoUrls = await uploadToSupabase(videoFiles, "videos");
+      const filesToUpload = images.map(img => img.file);
+      const uploadedImageUrls = await uploadFilesToSupabase(filesToUpload, "images");
+      
+      const vFiles = videoFiles ? Array.from(videoFiles) : [];
+      const uploadedVideoUrls = await uploadFilesToSupabase(vFiles, "videos");
 
       const payload = {
         ...formData,
@@ -126,7 +180,8 @@ export default function AddProperty() {
       if (result.success) {
         setShowSuccessModal(true);
         setFormData({ title: "", type: "For Sale", category: "Homes", area: "", price: "", location: "", description: "", featuresList: "", floorRates: "", paymentPlans: "" });
-        setMediaFiles({ images: null, videos: null });
+        setImages([]);
+        setVideoFiles(null);
       } else {
         throw new Error("Property save karte waqt backend par masla aya.");
       }
@@ -171,7 +226,7 @@ export default function AddProperty() {
               <input type="text" name="title" value={formData.title} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
             </div>
 
-            <div className={formData.type === "For Sale" ? "" : "md:col-span-2"}>
+            <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Listing Type</label>
               <select name="type" value={formData.type} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none bg-white text-black">
                 <option value="For Sale">For Sale</option>
@@ -180,23 +235,19 @@ export default function AddProperty() {
               </select>
             </div>
 
-            {formData.type === "For Sale" && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Property Category</label>
-                <select name="category" value={formData.category} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none bg-white text-black">
-                  <option value="Homes">Homes</option>
-                  <option value="Plots">Plots</option>
-                  <option value="Commercial">Commercial</option>
-                </select>
-              </div>
-            )}
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Property Category (Homes / Plots / Commercial)</label>
+              <select name="category" value={formData.category} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none bg-white text-black">
+                <option value="Homes">Homes</option>
+                <option value="Plots">Plots</option>
+                <option value="Commercial">Commercial</option>
+              </select>
+            </div>
 
-            {formData.type === "For Sale" && (
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Area / Dimension</label>
-                <input type="text" name="area" value={formData.area} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" required />
-              </div>
-            )}
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Area / Dimension (Optional)</label>
+              <input type="text" name="area" value={formData.area} onChange={handleChange} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" />
+            </div>
             
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Price (PKR)</label>
@@ -228,22 +279,54 @@ export default function AddProperty() {
               <textarea name="paymentPlans" value={formData.paymentPlans} onChange={handleChange} rows={3} className="block w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-green-600 focus:outline-none text-black" placeholder='[{"title": "100 SQFT OFFICE", "value": "5,000,000"}]' />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Upload Pictures</label>
-              <input type="file" name="images" accept="image/*" multiple onChange={handleFileChange} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none text-black" />
+            {/* Interactive Image Upload Section */}
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Upload & Order Pictures</label>
+              <input type="file" accept="image/*" multiple onChange={handleImageSelect} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none text-black mb-4" />
+              
+              {images.length > 0 && (
+                <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-3 font-semibold">Drag and drop images to change their display order. The first image will be the cover.</p>
+                  <div className="flex flex-wrap gap-4">
+                    {images.map((img, index) => (
+                      <div 
+                        key={img.id}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, index)}
+                        onDragOver={(e) => handleDragOver(e, index)}
+                        onDragEnd={handleDragEnd}
+                        className={`relative w-24 h-24 rounded-lg overflow-hidden border-2 cursor-grab active:cursor-grabbing ${draggedIdx === index ? 'border-green-500 opacity-50' : 'border-gray-300 hover:border-green-500'}`}
+                      >
+                        <img src={img.preview} alt="preview" className="w-full h-full object-cover" />
+                        <div className="absolute top-1 left-1 bg-black/60 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                          {index + 1}
+                        </div>
+                        <button 
+                          type="button" 
+                          onClick={() => removeImage(img.id)}
+                          className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div>
+            <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">Upload Videos</label>
-              <input type="file" name="videos" accept="video/*" multiple onChange={handleFileChange} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none text-black" />
+              <input type="file" accept="video/*" multiple onChange={handleVideoChange} className="block w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-green-600 focus:outline-none text-black" />
             </div>
 
           </div>
 
           <div className="pt-6">
-            <button type="submit" disabled={isUploading} className="w-full bg-green-700 text-white py-4 px-4 rounded-lg hover:bg-green-800 transition duration-300 font-semibold text-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed">
+            <button type="submit" disabled={isUploading || images.length === 0} className="w-full bg-green-700 text-white py-4 px-4 rounded-lg hover:bg-green-800 transition duration-300 font-semibold text-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed">
               {isUploading ? "Uploading Media and Saving..." : "List Property"}
             </button>
+            {images.length === 0 && <p className="text-red-500 text-xs text-center mt-2 font-bold">Please select at least one image to list.</p>}
           </div>
         </form>
       </div>

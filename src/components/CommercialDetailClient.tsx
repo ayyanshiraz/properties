@@ -62,7 +62,7 @@ export default function CommercialDetailClient({ property }: { property: Propert
             <div className={`text-sm text-gray-500 font-bold uppercase tracking-wider flex flex-wrap items-center gap-3`}>
               <Link href={`/`} className={`hover:text-[#013220] transition-colors`}>Home</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
               <Link href={`/buy`} className={`hover:text-[#013220] transition-colors`}>Buy</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
-              <Link href={`/buy/commercial`} className={`hover:text-[#013220] transition-colors`}>Commercial</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
+              <Link href={`/commercial`} className={`hover:text-[#013220] transition-colors`}>Commercial</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
               <span className={`text-[#013220] truncate`}>{property.title}</span>
             </div>
             <h1 className={`text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight`}>{property.title}</h1>
@@ -201,7 +201,10 @@ export default function CommercialDetailClient({ property }: { property: Propert
           <div ref={sidebarRef} className={`sticky top-28 bg-white border border-gray-100 shadow-[0_20px_60px_rgba(0,0,0,0.06)] rounded-2xl p-6 flex flex-col gap-6`}>
             <div className={`flex items-center gap-4 border-b border-gray-100 pb-5`}>
               <div className={`w-16 h-16 bg-gradient-to-br from-[#013220] to-[#011a11] rounded-full flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform cursor-pointer`}><svg className={`w-8 h-8 text-white`} fill={`currentColor`} viewBox={`0 0 20 20`}><path fillRule={`evenodd`} d={`M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z`} clipRule={`evenodd`}></path></svg></div>
-              <div className={`flex flex-col gap-1`}><h3 className={`font-black text-xl text-gray-900`}>{property.agentName || `Qemaat Agent`}</h3><Link href={`#`} className={`text-sm text-[#013220] font-bold uppercase tracking-wider hover:underline`}>Contact Us</Link></div>
+              <div className={`flex flex-col gap-1`}>
+                <h3 className={`font-black text-xl text-gray-900`}>Qemaat Agent</h3>
+                <Link href={`https://wa.me/923334888324`} target="_blank" rel="noopener noreferrer" className={`text-sm text-[#013220] font-bold uppercase tracking-wider hover:underline`}>Contact Us</Link>
+              </div>
             </div>
 
             <form className={`flex flex-col gap-4`}>
@@ -224,9 +227,9 @@ export default function CommercialDetailClient({ property }: { property: Propert
                  ></textarea>
               </div>
               
-              <button type={`button`} className={`w-full bg-gradient-to-r from-[#013220] to-[#011a11] hover:to-black text-white font-black text-lg py-3.5 rounded-lg shadow-lg mt-2 uppercase`}>
+              <a href={`https://wa.me/923334888324`} target="_blank" rel="noopener noreferrer" className={`block text-center w-full bg-gradient-to-r from-[#013220] to-[#011a11] hover:to-black text-white font-black text-lg py-3.5 rounded-lg shadow-lg mt-2 uppercase`}>
                 Request Information
-              </button>
+              </a>
             </form>
 
           </div>
