@@ -1,6 +1,6 @@
 `use client`;
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -11,28 +11,6 @@ export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (contentRef.current && contentRef.current.children) {
-      gsap.fromTo(
-        Array.from(contentRef.current.children),
-        { y: 80, opacity: 0, rotateX: -20, transformPerspective: 1000 },
-        {
-          y: 0,
-          opacity: 1,
-          rotateX: 0,
-          duration: 1.5,
-          stagger: 0.15,
-          ease: `expo.out`,
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: `top 90%`,
-            toggleActions: `play none none reverse`
-          }
-        }
-      );
-    }
-  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!footerRef.current || !glowRef.current) return;

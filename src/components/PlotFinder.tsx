@@ -29,16 +29,16 @@ export default function PlotFinder({ dbProperties = [] }: PlotFinderProps) {
   const [displayedMarkers, setDisplayedMarkers] = useState<any[]>([]);
 
   const markerData = [
-    { top: "30%", left: "25%", label: "2 Kanal Commercial Building", link: "/buy/commercial/1" },
-    { top: "45%", left: "45%", label: "2 Kanal Commercial House Kothi", link: "/buy/homes/2" },
-    { top: "60%", left: "35%", label: "Furnished 2 Bed Apartment", link: "/rent/1" },
-    { top: "50%", left: "70%", label: "Non Furnished Apartment", link: "/rent/2" },
-    { top: "75%", left: "55%", label: "Zameen Aurum Apartment", link: "/rent/3" },
-    { top: "40%", left: "60%", label: "1 Kanal Portion MM Alam", link: "/rent/4" },
-    { top: "65%", left: "25%", label: "3.5 Marla House Ferozpur", link: "/buy/homes/3" },
-    { top: "80%", left: "40%", label: "6 Marla Shiraz Villas", link: "/buy/homes/4" },
-    { top: "35%", left: "35%", label: "1 Kanal 3 Marla Commercial", link: "/buy/commercial/5" },
-    { top: "20%", left: "50%", label: "House for rent Cavalry Ground", link: "/rent/5" },
+    { top: "30%", left: "25%", label: "2 Kanal Commercial Building", link: "/buy/commercial/2001" },
+    { top: "45%", left: "45%", label: "2 Kanal Commercial House Kothi", link: "/buy/homes/2002" },
+    { top: "60%", left: "35%", label: "Furnished 2 Bed Apartment", link: "/rent/1001" },
+    { top: "50%", left: "70%", label: "Non Furnished Apartment", link: "/rent/1002" },
+    { top: "75%", left: "55%", label: "Zameen Aurum Apartment", link: "/rent/1003" },
+    { top: "40%", left: "60%", label: "1 Kanal Portion MM Alam", link: "/rent/1004" },
+    { top: "65%", left: "25%", label: "3.5 Marla House Ferozpur", link: "/buy/homes/2003" },
+    { top: "80%", left: "40%", label: "6 Marla Shiraz Villas", link: "/buy/homes/2004" },
+    { top: "35%", left: "35%", label: "1 Kanal 3 Marla Commercial", link: "/buy/commercial/2005" },
+    { top: "20%", left: "50%", label: "House for rent Cavalry Ground", link: "/rent/1005" },
     { top: "85%", left: "20%", label: "Commercial property Valencia", link: "/rent/1006" },
     { top: "55%", left: "80%", label: "34 Marla Home Gulberg", link: "/buy/homes/2006" }
   ];

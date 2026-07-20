@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const properties = [
   {
-    id: `1`,
+    id: `2001`,
     title: `2 Kanal Commercial Building`,
     location: `Mehmood Kasuri Road, Gulberg, Lahore`,
     price: `100 Crore`,
@@ -17,10 +17,10 @@ const properties = [
     area: `2 Kanal (59x150)`,
     image: `/buy/1.webp`,
     badges: [`FEATURED`, `FOR SALE`],
-    link: `/buy/1`
+    link: `/buy/2001`
   },
   {
-    id: `2`,
+    id: `2002`,
     title: `2 Kanal Commercial House Kothi`,
     location: `Mehmood Kasuri Road, Gulberg, Lahore`,
     price: `90 Crore`,
@@ -28,10 +28,10 @@ const properties = [
     area: `2 Kanal (59x150)`,
     image: `/buy/2.webp`,
     badges: [`FEATURED`, `FOR SALE`],
-    link: `/buy/2`
+    link: `/buy/2002`
   },
   {
-    id: `3`,
+    id: `2003`,
     title: `3.5 Marla House`,
     location: `Main Ferozpur Road, Lahore`,
     price: `1.25 Crore`,
@@ -39,10 +39,10 @@ const properties = [
     area: `3.5 Marla (26 ft front)`,
     image: `/buy/9.webp`,
     badges: [`FEATURED`, `FOR SALE`],
-    link: `/buy/3`
+    link: `/buy/2003`
   },
   {
-    id: `4`,
+    id: `2004`,
     title: `6 Marla Shiraz Villas House`,
     location: `Shiraz Villas, Main Walton Road, Lahore`,
     price: `3 Crore`,
@@ -50,10 +50,10 @@ const properties = [
     area: `6 Marla (25 ft front)`,
     image: `/buy/8.webp`,
     badges: [`FEATURED`, `FOR SALE`],
-    link: `/buy/4`
+    link: `/buy/2004`
   },
   {
-    id: `5`,
+    id: `2005`,
     title: `1 Kanal 3 Marla Commercial Building`,
     location: `Mehmood Kasuri Road, Gulberg, Lahore`,
     price: `90 Crore`,
@@ -61,8 +61,17 @@ const properties = [
     area: `1 Kanal 3 Marla`,
     image: `/buy/1.webp`,
     badges: [`FEATURED`, `FOR SALE`],
-    link: `/buy/5`
-  }
+    link: `/buy/2005`
+  },
+  { id: `2006`,
+    title: `34 Marla House in Prime Location Gulberg`,
+    location: `Gulberg, Lahore`,
+    price: `16 Crore`,
+    beds: `Residential`,
+    area: `34 Marla`,
+    image: `/buy/14.webp`,
+    badges: [`FEATURED`, `FOR SALE`],
+    link: `/buy/2006`}
 ];
 
 export default function FeaturedProperties() {
@@ -171,20 +180,20 @@ export default function FeaturedProperties() {
 
           <div 
             ref={sliderRef}
-            className={`flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-10 pt-4 px-4 -mx-4 relative z-20`}
+            className={`flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-10 pt-4 px-4 -mx-4 relative z-20 items-stretch`}
             style={{ scrollbarWidth: `none`, msOverflowStyle: `none` }}
           >
-            <div ref={cardsRef} className={`flex gap-6`}>
+            <div ref={cardsRef} className={`flex gap-6 items-stretch`}>
               {allProperties.map((property) => (
                 <Link 
                   href={property.link}
                   key={property.id} 
-                  className={`min-w-[340px] md:min-w-[400px] bg-[#013220] rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(1,50,32,0.12)] transition-all duration-500 snap-center group/card cursor-pointer border border-[#013220] transform hover:-translate-y-3 relative`}
+                  className={`w-[340px] md:w-[400px] shrink-0 h-full flex flex-col bg-[#013220] rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(1,50,32,0.12)] transition-all duration-500 snap-center group/card cursor-pointer border border-[#013220] transform hover:-translate-y-3 relative`}
                 >
                   
                   <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-[150%] group-hover/card:translate-x-[150%] transition-transform duration-[1200ms] ease-in-out z-40 pointer-events-none`}></div>
 
-                  <div className={`relative h-[240px] w-full overflow-hidden`}>
+                  <div className={`relative h-[240px] w-full shrink-0 overflow-hidden`}>
                     <img 
                       src={property.image} 
                       alt={`Property`} 
@@ -212,7 +221,7 @@ export default function FeaturedProperties() {
                     </div>
                   </div>
 
-                  <div className={`p-6 relative z-20 bg-[#013220]`}>
+                  <div className={`p-6 relative z-20 bg-[#013220] flex flex-col flex-grow`}>
                     <div className={`flex items-center justify-between border-b border-white/10 pb-4 mb-4`}>
                       <div className={`flex items-center gap-2 text-white text-sm font-medium`}>
                         <svg className={`w-5 h-5 text-[#10b981]`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}>
@@ -233,7 +242,7 @@ export default function FeaturedProperties() {
                       <span className={`text-xl font-black text-white`}>PKR {property.price}</span>
                     </div>
 
-                    <div>
+                    <div className={`mt-auto`}>
                       <h3 className={`text-lg font-bold text-white mb-1 truncate`}>
                         {property.title}
                       </h3>

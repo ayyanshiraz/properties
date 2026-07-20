@@ -302,7 +302,7 @@ export default function HomeClient({ dbProperties = [] }: HomeClientProps) {
       return;
     }
     if (purpose === "rent" && trimmedLocation.includes("cavalry")) {
-      router.push("/rent/5");
+      router.push("/rent/1005");
       return;
     }
     

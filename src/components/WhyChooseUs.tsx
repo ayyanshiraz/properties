@@ -113,7 +113,7 @@ export default function WhyChooseUs() {
         <div className="w-full lg:w-1/2 relative flex flex-col gap-6">
           {/* Mobile Label Layout */}
           <span className="lg:hidden inline-block bg-[#013220]/10 text-[#013220] px-4 py-1.5 rounded-full text-[12px] font-bold tracking-widest uppercase shadow-sm self-start">
-            Why Choose Pakistan Property Real Estate?
+            Why Choose Qemaat Real Estate?
           </span>
           <div 
             ref={imageWrapperRef}
@@ -138,11 +138,11 @@ export default function WhyChooseUs() {
         <div ref={textRef} className="w-full lg:w-1/2 flex flex-col items-start">
           {/* Desktop Label Layout */}
           <span className="hidden lg:inline-block bg-[#013220]/10 text-[#013220] px-4 py-1.5 rounded-full text-[12px] font-bold tracking-widest uppercase mb-6 shadow-sm">
-            Why Choose Pakistan Property Real Estate?
+            Why Choose Qemaat Real Estate?
           </span>
           
           <h2 className="text-4xl lg:text-5xl font-bold text-[#013220] leading-[1.15] mb-6">
-            Pakistan Property Real Estate is your ultimate gateway to finding the perfect property.
+            Qemaat Real Estate is your ultimate gateway to finding the perfect property.
           </h2>
           
           <p className="text-gray-600 leading-relaxed mb-10 text-base md:text-lg">

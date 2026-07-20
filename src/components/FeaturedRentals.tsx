@@ -9,49 +9,58 @@ gsap.registerPlugin(ScrollTrigger);
 
 const rentalProperties = [
   {
-    id: 1,
+    id: 1001,
     title: "Furnished 2 Bed Apartment (Without Bills)",
     location: "Gulberg, Lahore",
     price: "PKR 160,000 / Month",
     image: "/rent/6.webp",
     badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/1"
+    link: "/rent/1001"
   },
   {
-    id: 2,
+    id: 1002,
     title: "Non Furnished Apartment (Without Bills)",
     location: "Gulberg, Lahore",
     price: "PKR 150,000 / Month",
     image: "/rent/14.webp",
     badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/2"
+    link: "/rent/1002"
   },
   {
-    id: 3,
+    id: 1003,
     title: "2 Bed Apartment in Zameen Aurum",
     location: "Gulberg, Lahore",
     price: "PKR 520,000 / Month",
     image: "/rent/8.webp",
     badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/3"
+    link: "/rent/1003"
   },
   {
-    id: 4,
+    id: 1004,
     title: "1 Kanal Portion on MM Alam Road",
     location: "MM Alam Road, Gulberg, Lahore",
     price: "PKR 250,000 / Month",
     image: "/rent/22.webp",
     badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/4"
+    link: "/rent/1004"
   },
   {
-    id: 5,
+    id: 1005,
     title: "House for rent",
     location: "Cavlary ground cant Lahore",
     price:  "PKR 150,000 / Month",
     image: "/rent/46.webp",
     badges: ["FEATURED", "FOR RENT"],
-    link: "/rent/5"
+    link: "/rent/1005"
+  },
+  {
+    id: 1006,
+    title: "Commercial rent property main bolevard valenciaa",
+    location: "Main Boulevard Valencia",
+    price:  "PKR  650,000 / Month",
+    image: "/rent/87.webp",
+    badges: ["FEATURED", "FOR RENT"],
+    link: "/rent/1006"
   }
 ];
 
@@ -167,22 +176,22 @@ export default function FeaturedRentals() {
           {/* Scrollable Track */}
           <div 
             ref={sliderRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-10 pt-4 px-4 -mx-4 relative z-20"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-10 pt-4 px-4 -mx-4 relative z-20 items-stretch"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            <div ref={cardsRef} className="flex gap-8">
+            <div ref={cardsRef} className="flex gap-8 items-stretch">
               {allRentals.map((property) => (
                 <Link 
                   href={property.link}
                   key={property.id} 
-                  className="min-w-[340px] md:min-w-[400px] bg-[#013220] rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(1,50,32,0.12)] transition-all duration-500 snap-center group/card cursor-pointer border border-[#013220] transform hover:-translate-y-3 relative"
+                  className="w-[340px] md:w-[400px] shrink-0 h-full flex flex-col bg-[#013220] rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(1,50,32,0.12)] transition-all duration-500 snap-center group/card cursor-pointer border border-[#013220] transform hover:-translate-y-3 relative"
                 >
                   
                   {/* Flat 2D Light Glare Sweep Effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-[150%] group-hover/card:translate-x-[150%] transition-transform duration-[1200ms] ease-in-out z-40 pointer-events-none"></div>
 
                   {/* Image Container */}
-                  <div className="relative h-[240px] w-full overflow-hidden">
+                  <div className="relative h-[240px] w-full shrink-0 overflow-hidden">
                     <img 
                       src={property.image} 
                       alt="Property" 
@@ -211,7 +220,7 @@ export default function FeaturedRentals() {
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-6 relative z-20 bg-[#013220]">
+                  <div className="p-6 relative z-20 bg-[#013220] flex flex-col flex-grow">
                     {/* Metrics Row */}
                     <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
                       <div className="flex items-center gap-2 text-white text-sm font-medium">
@@ -232,8 +241,8 @@ export default function FeaturedRentals() {
                       <span className="text-xl font-black text-white">{property.price}</span>
                     </div>
 
-                    {/* Title & Location */}
-                    <div>
+                    {/* Title & Location (Pushed to bottom naturally if needed, or kept consistent) */}
+                    <div className="mt-auto">
                       <h3 className="text-lg font-bold text-white mb-1 truncate">
                         {property.title}
                       </h3>
