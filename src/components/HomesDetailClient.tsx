@@ -62,7 +62,7 @@ export default function HomesDetailClient({ property }: { property: PropertyData
             <div className={`text-sm text-gray-500 font-bold uppercase tracking-wider flex flex-wrap items-center gap-3`}>
               <Link href={`/`} className={`hover:text-[#013220] transition-colors`}>Home</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
               <Link href={`/buy`} className={`hover:text-[#013220] transition-colors`}>Buy</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
-              <Link href={`/homes`} className={`hover:text-[#013220] transition-colors`}>Homes</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
+              <Link href={`/buy/homes`} className={`hover:text-[#013220] transition-colors`}>Homes</Link><svg className={`w-4 h-4 text-gray-400`} fill={`none`} stroke={`currentColor`} viewBox={`0 0 24 24`}><path strokeLinecap={`round`} strokeLinejoin={`round`} strokeWidth={2} d={`M9 5l7 7-7 7`}></path></svg>
               <span className={`text-[#013220] truncate`}>{property.title}</span>
             </div>
             <h1 className={`text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight`}>{property.title}</h1>
