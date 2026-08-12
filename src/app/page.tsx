@@ -9,6 +9,9 @@ export const metadata = {
   title: "Qemaat - Sell Buy Rent Homes",
   description: "Find the best residential and commercial properties across Lahore. Your trusted real estate portal.",
   keywords: "properties in pakistan, buy house lahore, rent apartment lahore, real estate",
+  alternates: {
+    canonical: 'https://www.qemaat.com',
+    },
 };
 
 export default async function HomePage() {
